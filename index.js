@@ -11,8 +11,9 @@ const conn = maria.createConnection({
   port: 3306,
   user: 'root',
   password: 'TheoHernandez19!',
-  database : 'aitrading_db'
-})
+  database: 'aitrading_db'
+});
+// db연결 포트번호, user이름 비번 바쑤면 됨 
 
 app.set('port', process.env.PORT || 3333);
 
