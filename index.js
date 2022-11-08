@@ -8,12 +8,11 @@ const app = express();
 
 const conn = maria.createConnection({
   host: 'localhost',
-  port: 3306,
+  port: 3000,
   user: 'root',
-  password: 'TheoHernandez19!',
+  password: 'pass',
   database: 'aitrading_db'
 });
-// db연결 포트번호, user이름 비번 바쑤면 됨 
 
 app.set('port', process.env.PORT || 3333);
 
