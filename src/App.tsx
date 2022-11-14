@@ -1,4 +1,6 @@
+import Sample from "./components/Sample";
+
 const App = () => {
-  return <div>Hello Hojin</div>;
+  return <div><Sample/></div>;
 }
 export default App;
