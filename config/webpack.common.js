@@ -14,6 +14,20 @@ module.exports = {
         exclude: /node_modules/,
       },
     ],
+    rules: [
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: "/public/img/[name].[hash:8].[ext]",
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({

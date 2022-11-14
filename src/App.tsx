@@ -1,6 +1,12 @@
-import Sample from "./components/Sample";
+
 
 const App = () => {
-  return <div><Sample/></div>;
+  return (
+    <>
+    <div>
+      <h1>d</h1>
+    </div>
+    </>
+  )
 }
 export default App;
