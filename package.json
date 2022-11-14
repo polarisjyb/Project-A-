@@ -1,21 +1,22 @@
 {
-  "name": "react-webpack5-typescript",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/polarisjyb/Project-A-.git",
-  "author": "<evia_a@naver.com>",
-  "license": "MIT",
+  "browserslist": [
+    "ie 11"
+  ],
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js"
   },
-  "browserslist": [
-    "ie 11"
-  ],
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "yarn": "^1.22.19"
   },
+  "name": "Project-A-",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/polarisjyb/Project-A-.git",
+  "author": "jyb <polarislsj@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.20.2",
@@ -25,8 +26,8 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "babel-loader": "^9.1.0",
-    "core-js": "^3.26.0",
-    "css-loader": "^6.7.1",
+    "core-js": "^3.26.1",
+    "css-loader": "^6.7.2",
     "css-minimizer-webpack-plugin": "^4.2.2",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",

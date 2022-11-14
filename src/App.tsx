@@ -1,7 +1,4 @@
-import Test from "./components/Test";
-
 const App = () => {
-  return <Test/>;
+  return <div>Hello Hojin</div>;
 }
-
 export default App;
