@@ -1,4 +1,10 @@
+
 const Sample = () => {
-  return <h1>샘플 입니다</h1>
+  return (
+    <div>
+        
+      <h1>부엉 샘플</h1>
+    </div>
+  )
 }
 export default Sample;
