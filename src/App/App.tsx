@@ -1,8 +1,9 @@
+import Header from "@/components/Header";
 
 const App = () => {
   return (
     <div>
-      <img src="/img/logo.png" alt="logo" />
+      <Header></Header>
       <h1>부엉</h1>
     </div>
   )
