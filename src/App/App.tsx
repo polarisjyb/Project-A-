@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "@/components/Header";
-import Main from "@/components/Main";
-import Header2 from "@/components/Header2";
+import Header from "@/components/youngbin/Header";
+import Main from "@/components/youngbin/Main";
+import Header2 from "@/components/youngbin/Header2";
 
 const App = () => {
   return (
