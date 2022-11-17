@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 const HeaderBox = styled.div`
   width: 1480px;
-  height: 450px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
