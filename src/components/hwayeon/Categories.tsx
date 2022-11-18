@@ -3,23 +3,23 @@ import { NavLink } from 'react-router-dom';
 
 const categories = [
   {
-    name: 'total',
+    name: 'code',
     text: '종합 검색'
   },
   {
-    name: 'yeongbin',
+    name: 'code/yeongbin',
     text: '전략별'
   },
   {
-    name: 'yeonju',
+    name: 'code/yeonju',
     text: '전략별'
   },
   {
-    name: 'minho',
+    name: 'code/minho',
     text: '전략별'
   },
   {
-    name: 'hwayeon',
+    name: 'code/hwayeon',
     text: '전략별'
   },
 ]
