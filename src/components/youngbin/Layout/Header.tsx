@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-
+import Search from "./SearchBox";
 
 const HeaderBox = styled.div`
   width: 100%;
@@ -24,6 +24,7 @@ const Header = () => {
       <HeaderBox>
         <HeaderLogo src="/img/logo.png" alt="logo" />
       </HeaderBox>
+      <Search placeholder="Enter a Stock Name.." />
       <Outlet />
     </>
   );
