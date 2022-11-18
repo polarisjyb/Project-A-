@@ -13,8 +13,8 @@ const HeaderBox = styled.div`
 `;
 
 const HeaderLogo = styled.img`
-  width: 200px;
-  height: 146px;
+  width: 135px;
+  height: 140px;
 `
 
 
