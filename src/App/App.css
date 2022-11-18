@@ -5,20 +5,3 @@
   font-weight: normal;
   font-style: normal;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  width: 1920px;
-}
-
-#root {
-  width: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
