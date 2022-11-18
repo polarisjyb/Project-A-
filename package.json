@@ -19,7 +19,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
     "react-router-dom": "^6.4.3",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "styled-reset": "^4.4.2"
   },
   "name": "Project-A-",
   "version": "1.0.0",
