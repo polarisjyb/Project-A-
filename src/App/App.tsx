@@ -3,7 +3,7 @@ import { Reset } from "styled-reset";
 import Header from "@/components/youngbin/Header";
 import Main from "@/components/youngbin/Main";
 import Header2 from "@/components/youngbin/Header2";
-import ResultListfrom "@/components/yeonju/ResultList";
+import ResultList from "@/components/yeonju/ResultList";
 
 const App = () => {
   return (

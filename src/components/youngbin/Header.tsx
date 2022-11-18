@@ -1,12 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Header = () => {
-  return(
+  return (
     <div>
       <img src="/img/logo.png" alt="logo" />
     </div>
-
-  )
-}
+  );
+};
 
 export default Header;

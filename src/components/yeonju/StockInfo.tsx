@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// 메인 크기 지정
 const MainBox = styled.div`
   height: 140px;
   display: flex;
@@ -7,6 +8,11 @@ const MainBox = styled.div`
   font-family: "GmarketSansMedium";
 `;
 
+/* 
+검색 결과 나오는 정보를 좌측 정보와 우측 정보로 나눠 마크업하였다.
+*/
+
+// 좌측 정보
 const StockBox1 = styled.div`
   width: 600px;
   display: flex;
@@ -36,6 +42,7 @@ const StockBox1 = styled.div`
   }
 `;
 
+// 우측 정보
 const StockBox2 = styled.div`
   width: 600px;
   height: 90px;
@@ -59,6 +66,10 @@ const StockBox2 = styled.div`
     }
   }
 `;
+/*
+주식의 정보 종가 / 종가별 증감 표시
+시가 / 고가 / 저가 / 종가 표시
+*/
 
 const StockInfo = () => {
   return (

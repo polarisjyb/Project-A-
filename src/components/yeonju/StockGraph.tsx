@@ -6,6 +6,7 @@ const GraphBox = styled.div`
   background-color: lightgray;
 `;
 
+// 이곳에 캔들차트를 만들어주면 됩니다
 const StockGraph = () => {
   return (
     <GraphBox>
