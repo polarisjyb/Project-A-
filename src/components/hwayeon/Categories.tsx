@@ -35,9 +35,16 @@ const CategoriesBlock = styled.div`
     width: 100%;
     overflow-x: auto;
   }
+  @font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
 `;
 
 const Category = styled(NavLink)`
+  font-family: 'GmarketSansMedium';
   font-size: 1.125rem;
   cursor: pointer;
   white-space: pre;

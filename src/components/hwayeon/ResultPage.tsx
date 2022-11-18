@@ -1,15 +1,14 @@
-import { useParams } from 'react-router-dom';
 import Categories from './Categories';
-import ResultList from './ResultList';
+import Total from './Total';
+import Strategy from './Strategy';
 
 const ReusultPage = () => {
-  const params = useParams();
-  const category = params.category || 'all';
 
   return(
     <>
       <Categories />
-      <ResultList category={category}/>
+      <Total />
+      <Strategy />
     </>
   )
 }
