@@ -5,9 +5,9 @@ def dbconn():
     conn = maria.connect(
       host='localhost',
       user='root',
-      password='pass',
+      password='root',
       database='aitrading_db',
-      port = 3000,
+      port = 3307,
       charset='utf8',
       cursorclass = maria.cursors.DictCursor,
     )
