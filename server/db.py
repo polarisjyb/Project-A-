@@ -9,15 +9,9 @@ def dbconn():
         user='root',
         password='pass',
         database='aitrading_db',
-<<<<<<< HEAD
         port=3000,
         charset='utf8',
         cursorclass=maria.cursors.DictCursor,
-=======
-        port = 3000,
-        charset='utf8',
-        cursorclass = maria.cursors.DictCursor,
->>>>>>> 41ac81aad9a49ed1bc1627f5b01f2531253bc19f
     )
     return conn
 
@@ -36,10 +30,6 @@ def code_to_data(code):
     conn.close()
     return results
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 41ac81aad9a49ed1bc1627f5b01f2531253bc19f
 def code_to_name(code):
     conn = dbconn()
     cur = conn.cursor()
