@@ -1,7 +1,10 @@
+import {useState, useEffect} from 'react'
+import axios from 'axios';
 import styled from "styled-components";
 
 // react에서 제공하는 icon 불러오기
 import {BsSearch} from "react-icons/bs";
+
 
 // 검색창 전체 레이아웃
 const SearchBox = styled.div`
@@ -21,9 +24,12 @@ const SearchInputs = styled.div`
       background: inherit;
       border: 0;
       font-size: 35px;
-      text-align: center;
+      
       :: placeholder{
         color: #b8b8b8;
+      }
+      :focus {
+        outline: none;
       }
     }
 `
@@ -43,7 +49,7 @@ const DataResult = styled.div`
 
 `
 
-const Search = ({placeholder}: { placeholder : any}, {data}: { data : any}) => {
+const Search = ({placeholder}: { placeholder : any}) => {
 
   return(
     <SearchBox>
