@@ -9,12 +9,13 @@ app.config['JSON_AS_ASCII'] = False
 @app.route('/')
 def main():
     return 'Hello, World!'
-  
+
 @app.route('/<code>')
 def get_data(code):
     name = code_to_name(code)
     data = code_to_data(code)
     return [name, data]
+
   
 @app.route('/companylist')
 def allCompanyList():
