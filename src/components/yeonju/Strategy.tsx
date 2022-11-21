@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Hwayeon from "../hwayeon/Hwayeon";
 
 const Main = styled.div`
   width: 1180px;
@@ -6,6 +7,10 @@ const Main = styled.div`
   border: 1px solid black;
 `;
 const Strategy = () => {
-  return <Main></Main>;
+  return (
+  <Main>
+    <Hwayeon />
+  </Main>
+  )
 };
 export default Strategy;

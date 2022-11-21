@@ -1,7 +1,10 @@
 from flask import Flask
-from db import code_to_data, code_to_name
+from db import code_to_data, code_to_name, all_company_name, companylist_rank
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+app.config['JSON_AS_ASCII'] = False
 
 @app.route('/')
 def main():

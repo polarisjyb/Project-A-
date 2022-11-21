@@ -11,6 +11,7 @@ def dbconn():
         charset='utf8',
         cursorclass = maria.cursors.DictCursor,
     )
+
     return conn
 
 def code_to_data(code):
@@ -23,7 +24,7 @@ def code_to_data(code):
     sql = 'SELECT * FROM '+ company["TABLE_NAME"] +' ORDER BY day DESC' 
     # 테이블에 등록된 날짜가 가장 최근 것부터 불러온다 
     cur.execute(sql)
-    results = cur.fetchmany(50)
+    results = cur.fetchmany(100)
     conn.close()
     return results
 

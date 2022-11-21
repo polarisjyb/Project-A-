@@ -1020,6 +1020,11 @@
   resolved "https://registry.npmjs.org/@emotion/unitless/-/unitless-0.7.5.tgz"
   integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
+"@fontsource/dm-sans@^4.5.9":
+  "integrity" "sha512-qaFvSBJhoeley1A9myRUUuHbm9sz7ADyC2WodezBzdFSPs2VD/p5WPPwtpVE8b1SglQrOPAnxA7s3fH5zOtiMQ=="
+  "resolved" "https://registry.npmjs.org/@fontsource/dm-sans/-/dm-sans-4.5.9.tgz"
+  "version" "4.5.9"
+
 "@jest/schemas@^29.0.0":
   version "29.0.0"
   resolved "https://registry.npmjs.org/@jest/schemas/-/schemas-29.0.0.tgz"

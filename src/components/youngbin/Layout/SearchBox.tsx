@@ -1,21 +1,9 @@
+import {useState, useEffect} from 'react'
+import axios from 'axios';
 import styled from "styled-components";
-import BookData from "./Data.json"
 
 // react에서 제공하는 icon 불러오기
 import {BsSearch} from "react-icons/bs";
-
-export interface data {
-  BookData: [{
-    author: string,
-    country: string,
-    imageLink: string,
-    language: string,
-    link: string,
-    pages: number,
-    title: string,
-    year: number,
-  }]
-}
 
 
 // 검색창 전체 레이아웃
@@ -36,9 +24,12 @@ const SearchInputs = styled.div`
       background: inherit;
       border: 0;
       font-size: 35px;
-      text-align: center;
+      
       :: placeholder{
         color: #b8b8b8;
+      }
+      :focus {
+        outline: none;
       }
     }
 `
@@ -58,10 +49,8 @@ const DataResult = styled.div`
 
 `
 
-const Search = ({placeholder}: { placeholder : any}, {data}: { data : any}) => {
+const Search = ({placeholder}: { placeholder : any}) => {
 
-  let obj = JSON.parse(JSON.stringify(BookData));
-  console.log(obj)
   return(
     <SearchBox>
       <SearchInputs>
@@ -70,11 +59,6 @@ const Search = ({placeholder}: { placeholder : any}, {data}: { data : any}) => {
         </SearchIcon>        
         <input type="text" placeholder={placeholder} />
       </SearchInputs>
-      <DataResult>
-        {/* {obj.map((value : any, index : string) => {
-          return <div key={index}> {value.title} </div>;
-        })} */}
-      </DataResult>
     </SearchBox>
   );
 }

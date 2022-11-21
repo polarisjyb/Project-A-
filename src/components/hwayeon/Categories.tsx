@@ -30,9 +30,9 @@ const CategoriesBlock = styled.div`
   padding: 1rem;
   width: 1480px;
   margin: 0 auto;
-  border-top: 2px solid #000;
-  border-left: 2px solid #000;
-  border-right: 2px solid #000;
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
   @media screen and (max-width: 768px) {
     width: 100%;
     overflow-x: auto;
