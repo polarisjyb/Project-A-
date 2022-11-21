@@ -45,6 +45,7 @@ def all_company_name():
     conn.close()
     return results
 
+# 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
 def companylist_rank():
     conn = dbconn()
     cur = conn.cursor()
@@ -52,7 +53,11 @@ def companylist_rank():
     cur.execute(sql)
     results = cur.fetchall()
     
-    voidArray = []
+    # 빈 배열에 results 값을 넣어서 다시 for in 문으로 돌립니다.
+    # 시가, 고가, 저가, 종가, 거래량을 최신 일자 기준으로 모든 종목의 market 과 code를 문자열로 지정하고
+    # 어떤 종목이 오더라도 값이 출력되도록 했습니다.
+    # append는 자바스크립트 배열 메서드 push 라고 생각하시면 됩니다.
+    rankArray = []
     for i in range(len(results)):
         market = results[i]['market']
         code = results[i]['code']
@@ -60,10 +65,10 @@ def companylist_rank():
         cur.execute(sqlNext)
         resultsTwo = cur.fetchall()
         if(resultsTwo):
-            voidArray.append(resultsTwo)
+            rankArray.append(resultsTwo)
             
-    print(voidArray)
+    print(rankArray)
 
     conn.close()
-    return voidArray
+    return rankArray
 
