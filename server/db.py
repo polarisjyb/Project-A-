@@ -23,7 +23,7 @@ def code_to_data(code):
     sql = 'SELECT * FROM '+ company["TABLE_NAME"] +' ORDER BY day DESC' 
     # 테이블에 등록된 날짜가 가장 최근 것부터 불러온다 
     cur.execute(sql)
-    results = cur.fetchmany(50)
+    results = cur.fetchmany(100)
     conn.close()
     return results
   
@@ -35,3 +35,35 @@ def code_to_name(code):
     results = cur.fetchall()
     conn.close()
     return results
+
+def all_company_name():
+    conn = dbconn()
+    cur = conn.cursor()
+    sql = 'SELECT * FROM `aitrading_db`.`companylist`'
+    cur.execute(sql)
+    results = cur.fetchall()
+    conn.close()
+    return results
+
+def companylist_rank():
+    conn = dbconn()
+    cur = conn.cursor()
+    sql = 'SELECT market, code, name FROM `aitrading_db`.`companylist`'
+    cur.execute(sql)
+    results = cur.fetchall()
+    
+    voidArray = []
+    for i in range(len(results)):
+        market = results[i]['market']
+        code = results[i]['code']
+        sqlNext = f'SELECT open, high, low, close, volume FROM {market}_{code}_d ORDER BY DAY DESC, `day` ASC LIMIT 1'
+        cur.execute(sqlNext)
+        resultsTwo = cur.fetchall()
+        if(resultsTwo):
+            voidArray.append(resultsTwo)
+            
+    print(voidArray)
+
+    conn.close()
+    return voidArray
+
