@@ -3,13 +3,13 @@ import pymysql as maria
 # MySQL Connection 연결
 def dbconn():
     conn = maria.connect(
-      host='localhost',
-      user='root',
-      password='pass',
-      database='aitrading_db',
-      port = 3000,
-      charset='utf8',
-      cursorclass = maria.cursors.DictCursor,
+        host='localhost',
+        user='root',
+        password='pass',
+        database='aitrading_db',
+        port = 3000,
+        charset='utf8',
+        cursorclass = maria.cursors.DictCursor,
     )
     return conn
 
@@ -26,7 +26,7 @@ def code_to_data(code):
     results = cur.fetchmany(50)
     conn.close()
     return results
-  
+
 def code_to_name(code):
     conn = dbconn()
     cur = conn.cursor()

@@ -1,14 +1,12 @@
 import Categories from './Categories';
-import Total from './Total';
-import Strategy from './Strategy';
+import ResultList from '../yeonju/ResultList';
 
 const ReusultPage = () => {
 
   return(
     <>
       <Categories />
-      <Total />
-      <Strategy />
+      <ResultList />
     </>
   )
 }
