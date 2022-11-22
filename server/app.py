@@ -16,5 +16,15 @@ def get_data(code):
     data = code_to_data(code)
     return [name, data]
 
+@app.route('/companylist')
+def allCompanyList():
+    data = all_company_name()
+    return data
+
+@app.route('/rank')
+def companylistRank():
+    data = companylist_rank()
+    return data
+
 if __name__ == '__main__':
     app.run(debug=True)

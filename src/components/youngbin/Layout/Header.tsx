@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import styled from "styled-components";
 import Search from "./SearchBox";
 
@@ -10,19 +10,27 @@ const HeaderBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  & a {
+    a:hover {
+      cursor: pointer;
+      color: ${({ theme }) => theme.orange};
+    }
+  }
 `;
 
 const HeaderLogo = styled.img`
   width: 135px;
   height: 140px;
-`
-
+`;
 
 const Header = () => {
   return (
     <>
       <HeaderBox>
-        <HeaderLogo src="/img/logo.png" alt="logo" />
+        <Link to="/">
+          <HeaderLogo src="/img/logo.png" alt="logo" />
+        </Link>
       </HeaderBox>
       <Search placeholder="Enter a Stock Name.." />
       <Outlet />
