@@ -14,31 +14,51 @@ export interface StockObject {
 } 
 
 export default () => {
-  const [stockCode, setStockCode] = useState<string>('000250');
   const [data, setData] = useState<StockObject[]>([]);
+  const [query, setQuery] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:5000/${stockCode}`
-        );
-        setData(response.data);
-        console.log(response);
-      } catch(err) {
-        console.log(err);
-      }
+    const fetchData = async () => {
+      const result = await axios(
+        `http://127.0.0.1:5000/${search}`
+      );
+      setData(result.data);
+      console.log(result)
+      console.log(result.data[0][0].name);
+      console.log(result.data[1][0].high);
+      console.log(result.data[1][0].low);
+      console.log(result.data[1][0].open);
+      console.log(result.data[1][0].close);
+      console.log(result.data[1][0].volume);
+      console.log(result.data[1][0]);
     };
-    getData();
-  }, [stockCode]);
+    fetchData();
+    // 검색 시에만 data fetching을 요구해야 하므로 객체에는 search을 넣음
+  }, [search]);
 
+  console.log(data);
+  
   return (
-    <ul>
-      {data.map((items) => (
-        <>
-          <li key={items.name}>${items.name}</li>
-        </>
-      ))}
-    </ul>
+    <>
+      <input
+        type="text"
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+      />
+      <button type="button" onClick={() => setSearch(query)}>
+        Search
+      </button>
+        
+          {/* {data.map((value: any) => {
+            return (
+              <ul key={value}>
+                <li>{value[1][0].close}</li>
+              </ul>
+            )
+            })
+        } */}
+        
+    </>
   );
 }
