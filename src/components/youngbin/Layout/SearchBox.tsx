@@ -25,7 +25,7 @@ const SearchInputs = styled.div`
       border: 0;
       font-size: 35px;
       
-      :: placeholder{
+      :placeholder{
         color: #b8b8b8;
       }
       :focus {

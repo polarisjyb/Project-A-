@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 // 메인 크기 지정
@@ -71,7 +73,28 @@ const StockBox2 = styled.div`
 시가 / 고가 / 저가 / 종가 표시
 */
 
+export interface Companylist {
+  code: string;
+  market: string;
+  name: string;
+}
+
 const StockInfo = () => {
+  const [data, setData] = useState<Companylist[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        let response = await axios.get(`http://127.0.0.1:5000/companylist/`);
+        setData(response.data);
+        console.log(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getData();
+  }, []);
+
   return (
     <MainBox>
       <StockBox1>
