@@ -31,6 +31,7 @@ def code_to_data(code):
     conn.close()
     return results
 
+
 def code_to_name(code):
     conn = dbconn()
     cur = conn.cursor()
@@ -52,25 +53,26 @@ def all_company_name():
 
 # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
 
+
 """
     1. 회사
     2. 금일 종목
     3. 전일 종목
-
     회사 = [{알파}, {브라보}]
     금일 = [{A}, {B}]
     전일 = [{1}, {2}]
     
     결과 = [{알파, A, 1}], [{브라보, B, 2}]
 """
-    
+
+
 def companylist_rank():
     conn = dbconn()
     cur = conn.cursor()
     sql = 'SELECT market, code, name FROM `aitrading_db`.`companylist`'
     cur.execute(sql)
     results = cur.fetchmany(100)
-    
+
     # 주가 종목의 최신 일자, 전일자 정보 ( 시가, 고가, 저가, 종가, day, code )
     rankArray = []
 
@@ -81,45 +83,50 @@ def companylist_rank():
     for i in range(len(results)):
         market = results[i]['market']
         code = results[i]['code']
-        
+
         # 1번 이미 데이터에는 컬럼 추가가 끝난 상태이므로 실행 안해도 됩니다.
         # 각 d(day)로 끝나는 테이블에 CODE 라는 컬럼을 추가해서 그 안에 테이블 명 에 있는 code 값을 모든 행에 대입한다.
         # ex) kospi_000100_d 라는 테이블에 CODE 컬럼 추가 및 그 CODE 컬럼 안에 테이블 명 코드, 000100을 추가.
-        # sqlNext = f' ALTER TABLE {market}_{code}_d ADD code VARCHAR(15) DEFAULT "{code}" '
-        
+        # sqlNext = f' ALTER TABLE {market}_{code}_m ADD code VARCHAR(15) DEFAULT "{code}" '
+
         # 2번 최신 일자, 전일자( 2022-01-28 일과 2022-01-27일 ) 사이에 있는 day 값의 code가 companylist의 code와 일치하는 행을 합쳐서 그 행의 정보를 가져옵니다.
-        sqlNext = f'SELECT companylist.code AS code, market, name, high, low, close, volume, day FROM {market}_{code}_d AS api INNER JOIN companylist ON companylist.code = api.code WHERE day BETWEEN date("2022-01-27") AND date("2022-01-28")+1 ORDER BY day DESC LIMIT 2'
+        sqlNext = f'SELECT companylist.code AS code, market, name, open, high, low, close, volume, day FROM {market}_{code}_d AS api INNER JOIN companylist ON companylist.code = api.code WHERE day BETWEEN date("2022-01-27") AND date("2022-01-28")+1 ORDER BY day DESC LIMIT 2'
         cur.execute(sqlNext)
         resultsTwo = cur.fetchall()
         # print(resultsTwo)
         if (resultsTwo):
             rankArray.append(resultsTwo)
-    # print(rankArray)
-    
+
+    print("연결중")
+
     # conn.commit() 은 동적으로 실제 DB 테이블에 반영하는 메서드 입니다.
     # ALTER 문으로 새로운 컬럼을 생성해줬기 때문에, '이 메서드를 사용해서 내가 가지고 있는 DB 테이블에 적용한다' 라는 뜻이라고 보시면 됩니다.
-    # 실제 SQL 파일 실행 소프트웨어(HeidiSQL, MYSQL 등)의 전체 테이블을 감싸는 DB를 클릭후 쿼리문에 COMMIT; 이라 작성후 F5를 눌러서 새로 고침 하거나 다시 실행하면 반영이 됩니다.  
-    conn.commit()    
+    # 실제 SQL 파일 실행 소프트웨어(HeidiSQL, MYSQL 등)의 전체 테이블을 감싸는 DB를 클릭후 쿼리문에 COMMIT; 이라 작성후 F5를 눌러서 새로 고침 하거나 다시 실행하면 반영이 됩니다.
+    conn.commit()
     conn.close()
-    
+
     # 출력되는 값과 데이터 확인
     # print(rankArray[0])
     # print(rankArray[0][0])
     # print(type(rankArray))
-    # print(type(rankArray[0]['close'])) 
+
     # print(type(rankArray[0][0]))
     # print(type(rankArray[0][0]['day']))
     # print(rankArray[0][0]['day'])
-    
+
     #  json 형식으로 가져오기
-    
+
+    # return rankArray
+
+    # str 형식으로 가져오기
+    # return str(rankArray)
     test = jsonify(rankArray)
     print(test)
     return test
-    
+
     # str 형식으로 가져오기
     # return str(rankArray)
-    
+
     """
         #  영빈 생각
         
@@ -140,9 +147,6 @@ def companylist_rank():
         # sqlNext = f' SELECT day, open, high, low, close, volume, RECENT FROM {market}_{code}_d WHERE RECENT = "2" ORDER BY NO DESC LIMIT 1 '
     """
 
-
-
-        
     # LIMIT 1 값으로 주었을 때는 정상(?) 조인이 됨.. LIMIT 2 값으로 주게 되면 엉망진창..
     # for i in range(len(results)):
     #     market = results[i]['market']
