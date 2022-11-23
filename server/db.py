@@ -51,27 +51,20 @@ def all_company_name():
     conn.close()
     return results
 
+# code 입력시 /code 페이지에 해당 코드의 주식데이터 출력
 
-def company_info(code):
+
+def stock_info(code):
     conn = dbconn()
     cur = conn.cursor()
-    sql = 'SELECT market, code, name FROM `aitrading_db`.`companylist `WHERE code LIKE "'+code+'"'
-    cur.execute(sql)
+    sql1 = f'SELECT companylist.code, name , market, open, high, low, close, volume, day  FROM aitrading_db.kosdak_{code}_d AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 2;'
+    # companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
+    # code, name, market, open, high, low, close, volume, day를 불러온다.
+    # 조건은 최신순으로 두개만 불러온다.
+    cur.execute(sql1)
     result = cur.fetchall()
-    infoArray = []
-    for i in range(len(result)):
-        market = result[i]['market']
-        code = result[i]['code']
-        sql2 = f'SELECT companylist.code As code, market, name, open, high, low, close, volume, day FROM {market}_{code}_d AS api INNER JOIN companylist ON companylist.code = api.code WHERE code LIKE "'+code+'" '
-        sql = f'SELECT companylist.code, name , market, open, high, low, close, volume, day  FROM aitrading_db.{market}_{code}_d AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code;'
-        cur.execute(sql2)
-        results = cur.fetchall()
-        if (results):
-            infoArray.append(results)
-    print("주식 정보 연결")
-    conn.commit()
     conn.close()
-    return infoArray
+    return result
 
 
 # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력

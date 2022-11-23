@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from db import code_to_data, code_to_name, all_company_name, companylist_rank, company_info
+from db import code_to_data, code_to_name, all_company_name, companylist_rank, stock_info
 
 app = Flask(__name__)
 CORS(app)
@@ -33,8 +33,8 @@ def companylistRank():
 
 
 @app.route('/<code>')
-def code():
-    data = company_info()
+def info(code):
+    data = stock_info(code)
     return data
 
 
