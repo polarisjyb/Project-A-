@@ -74,58 +74,74 @@ const StockBox2 = styled.div`
 */
 
 export interface Companylist {
+  close: string;
   code: string;
+  day: string;
+  high: number;
+  low: number;
   market: string;
   name: string;
+  volume: number;
 }
 
 const StockInfo = () => {
   const [data, setData] = useState<Companylist[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        let response = await axios.get(`http://127.0.0.1:5000/companylist/`);
-        setData(response.data);
-        console.log(response.data);
-      } catch (err) {
-        console.log(err);
-      }
+      let response = await axios.get(`http://127.0.0.1:5000/rank`);
+      console.log(response.data[0][0].name);
+      setData(response.data[0]);
+      setLoading(false);
     };
     getData();
   }, []);
 
+  if (loading) {
+    return <h1>로딩중입니다!</h1>;
+  }
+
+  if (data === undefined) {
+    return <h1>데이터 로딩에 실패했습니다.</h1>;
+  }
+
   return (
     <MainBox>
-      <StockBox1>
-        <div>
-          <h1>삼성전자</h1>
-          <h2>62000</h2>
-          <div>
-            <img src="/img/Polygon 1.svg" alt="" />
-            <p>200</p>
-          </div>
-        </div>
-      </StockBox1>
-
-      <StockBox2>
-        <div>
-          <div>
-            <p>전일</p>
-            <p>61000</p>
-            <p>고가</p>
-            <p>62000</p>
-          </div>
-          <div>
+      {loading ? (
+        <h1>로딩중입니다!</h1>
+      ) : (
+        <>
+          <StockBox1>
             <div>
-              <p>시가</p>
-              <p>61000</p>
-              <p>저가</p>
-              <p>62000</p>
+              <h1>{data[0].name}</h1>
+              <h2>{data[0].close}</h2>
+              <div>
+                <img src="/img/Polygon 1.svg" alt="" />
+                <p>200</p>
+              </div>
             </div>
-          </div>
-        </div>
-      </StockBox2>
+          </StockBox1>
+          <StockBox2>
+            <div>
+              <div>
+                <p>종가</p>
+                <p>{data[0].close}</p>
+                <p>고가</p>
+                <p>62000</p>
+              </div>
+              <div>
+                <div>
+                  <p>시가</p>
+                  <p>61000</p>
+                  <p>저가</p>
+                  <p>62000</p>
+                </div>
+              </div>
+            </div>
+          </StockBox2>
+        </>
+      )}
     </MainBox>
   );
 };

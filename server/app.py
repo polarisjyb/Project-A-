@@ -1,8 +1,6 @@
 from flask import Flask
-from db import code_to_data, code_to_name, all_company_name, companylist_rank, code_to_code, markets
+from db import code_to_data, code_to_name, all_company_name, companylist_rank
 from flask_cors import CORS
-import certifi
-ca = certifi.where()
 
 app = Flask(__name__)
 CORS(app)
@@ -17,9 +15,8 @@ def main():
 @app.route('/<code>')
 def get_data(code):
     name = code_to_name(code)
-    name_code = code_to_code(code)
     data = code_to_data(code)
-    return [name, name_code, data]
+    return [name, data]
 
 
 @app.route('/companylist')
@@ -31,12 +28,6 @@ def allCompanyList():
 @app.route('/rank')
 def companylistRank():
     data = companylist_rank()
-    return data
-
-
-@app.route('/market')
-def market():
-    data = markets()
     return data
 
 
