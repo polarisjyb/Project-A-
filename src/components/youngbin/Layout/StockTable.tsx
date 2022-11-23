@@ -1,5 +1,5 @@
-import {useState, useEffect} from 'react'
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
 
 const StockList = styled.div`
@@ -7,6 +7,7 @@ const StockList = styled.div`
   height: 1215px;
   background: #e4e4e4;
   border-radius: 20px;
+  font-family: "GmarketSansMedium";
   & > table {
     width: 100%;
     margin: 50px 0px;
@@ -32,8 +33,7 @@ const StockList = styled.div`
       }
     }
   }
-
-`
+`;
 export interface StockObject {
   close: string;
   day: string;
@@ -44,19 +44,18 @@ export interface StockObject {
   open: string;
   volume: string;
   [index: number]: any;
-} 
+}
 
 const StockTable = () => {
-  const [StockCode, setSTockCode] = useState<string>('000440');
+  const [StockCode, setSTockCode] = useState<string>("000440");
   const [data, setData] = useState<StockObject[]>([]);
-  let test = []
+  let test = [];
   useEffect(() => {
-      const getDatas = async () => {
-          try {
+    const getDatas = async () => {
+      try {
         let response = await axios.get(`http://127.0.0.1:5000/${StockCode}`);
         setData(response.data);
-        console.log(response)
-
+        console.log(response);
       } catch (err) {
         console.log(err);
       }
@@ -70,13 +69,13 @@ const StockTable = () => {
   //     .then(res => {
   //       // console.log(res);
   //       console.log(res.data);
-        
+
   //       // 종목 이름 : 중앙에너비스
   //       console.log(res.data[0])
-  
+
   //       // 2022년 1월 28일 기준 데이터 종가,고가,저가,시가, 거래량, 날짜 다 들어 있음.
   //       console.log(res.data[1][0]);
-        
+
   //       // 거래량
   //       console.log(res.data[1][i].volume);
   //     })
@@ -84,16 +83,13 @@ const StockTable = () => {
   //       console.log(err);
   //     })
   //   });
-    
-    
-    
 
   // const [StockCode, setSTockCode] = useState<string>('000440');
   // const [data, getData] = useState<StockObject[]>([]);
-  
+
   // useEffect(() => {
-    //   const getDatas = async () => {
-      //     try {
+  //   const getDatas = async () => {
+  //     try {
   //       let response = await axios.get(`http://127.0.0.1:5000/${StockCode}`);
   //       getData(response.data);
   //       console.log
@@ -110,10 +106,6 @@ const StockTable = () => {
 
   // console.log(data[1])
 
-
-
-  
-
   return (
     <StockList>
       <table>
@@ -129,9 +121,8 @@ const StockTable = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item:any) => {
-
-            return(
+          {data.map((item: any) => {
+            return (
               <tr key={item}>
                 <td>1</td>
                 <td>삼성전자</td>
@@ -141,9 +132,8 @@ const StockTable = () => {
                 <td>{item[0].close}</td>
                 <td>{item[0].volume}</td>
               </tr>
-            )
-          })
-          }
+            );
+          })}
         </tbody>
       </table>
     </StockList>

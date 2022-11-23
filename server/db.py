@@ -1,5 +1,5 @@
 import pymysql as maria
-import json
+from flask import jsonify
 
 # MySQL Connection 연결
 
@@ -90,13 +90,14 @@ def companylist_rank():
         # sqlNext = f' ALTER TABLE {market}_{code}_m ADD code VARCHAR(15) DEFAULT "{code}" '
 
         # 2번 최신 일자, 전일자( 2022-01-28 일과 2022-01-27일 ) 사이에 있는 day 값의 code가 companylist의 code와 일치하는 행을 합쳐서 그 행의 정보를 가져옵니다.
-        sqlNext = f'SELECT companylist.code AS code, market, name, high, low, close, volume, day FROM {market}_{code}_d AS api INNER JOIN companylist ON companylist.code = api.code WHERE day BETWEEN date("2022-01-27") AND date("2022-01-28")+1 ORDER BY day DESC LIMIT 2'
+        sqlNext = f'SELECT companylist.code AS code, market, name, open, high, low, close, volume, day FROM {market}_{code}_d AS api INNER JOIN companylist ON companylist.code = api.code WHERE day BETWEEN date("2022-01-27") AND date("2022-01-28")+1 ORDER BY day DESC LIMIT 2'
         cur.execute(sqlNext)
         resultsTwo = cur.fetchall()
         # print(resultsTwo)
         if (resultsTwo):
             rankArray.append(resultsTwo)
-    print(rankArray)
+
+    print("연결중")
 
     # conn.commit() 은 동적으로 실제 DB 테이블에 반영하는 메서드 입니다.
     # ALTER 문으로 새로운 컬럼을 생성해줬기 때문에, '이 메서드를 사용해서 내가 가지고 있는 DB 테이블에 적용한다' 라는 뜻이라고 보시면 됩니다.
@@ -108,17 +109,23 @@ def companylist_rank():
     # print(rankArray[0])
     # print(rankArray[0][0])
     # print(type(rankArray))
-    # print(type(rankArray[0]))
+
     # print(type(rankArray[0][0]))
     # print(type(rankArray[0][0]['day']))
     # print(rankArray[0][0]['day'])
 
     #  json 형식으로 가져오기
+
     # return rankArray
 
     # str 형식으로 가져오기
     # return str(rankArray)
-    return rankArray
+    test = jsonify(rankArray)
+    print(test)
+    return test
+
+    # str 형식으로 가져오기
+    # return str(rankArray)
 
     """
         #  영빈 생각

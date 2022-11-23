@@ -82,6 +82,7 @@ export interface Companylist {
   market: string;
   name: string;
   volume: number;
+  open: number;
 }
 
 const StockInfo = () => {
@@ -128,14 +129,14 @@ const StockInfo = () => {
                 <p>종가</p>
                 <p>{data[0].close}</p>
                 <p>고가</p>
-                <p>62000</p>
+                <p>{data[0].high}</p>
               </div>
               <div>
                 <div>
                   <p>시가</p>
-                  <p>61000</p>
+                  <p>{data[0].open}</p>
                   <p>저가</p>
-                  <p>62000</p>
+                  <p>{data[0].low}</p>
                 </div>
               </div>
             </div>
