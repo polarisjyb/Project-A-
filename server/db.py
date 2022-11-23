@@ -1,5 +1,5 @@
 import pymysql as maria
-import json
+from flask import jsonify
 
 # MySQL Connection 연결
 
@@ -69,7 +69,7 @@ def companylist_rank():
     cur = conn.cursor()
     sql = 'SELECT market, code, name FROM `aitrading_db`.`companylist`'
     cur.execute(sql)
-    results = cur.fetchall()
+    results = cur.fetchmany(100)
     
     # 주가 종목의 최신 일자, 전일자 정보 ( 시가, 고가, 저가, 종가, day, code )
     rankArray = []
@@ -94,7 +94,7 @@ def companylist_rank():
         # print(resultsTwo)
         if (resultsTwo):
             rankArray.append(resultsTwo)
-    print(rankArray)
+    # print(rankArray)
     
     # conn.commit() 은 동적으로 실제 DB 테이블에 반영하는 메서드 입니다.
     # ALTER 문으로 새로운 컬럼을 생성해줬기 때문에, '이 메서드를 사용해서 내가 가지고 있는 DB 테이블에 적용한다' 라는 뜻이라고 보시면 됩니다.
@@ -106,16 +106,19 @@ def companylist_rank():
     # print(rankArray[0])
     # print(rankArray[0][0])
     # print(type(rankArray))
-    # print(type(rankArray[0])) 
+    # print(type(rankArray[0]['close'])) 
     # print(type(rankArray[0][0]))
     # print(type(rankArray[0][0]['day']))
     # print(rankArray[0][0]['day'])
     
     #  json 형식으로 가져오기
-    # return rankArray
+    
+    test = jsonify(rankArray)
+    print(test)
+    return test
     
     # str 형식으로 가져오기
-    return str(rankArray)
+    # return str(rankArray)
     
     """
         #  영빈 생각
