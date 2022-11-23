@@ -77,26 +77,33 @@ def companylist_rank():
     cur = conn.cursor()
     sql = 'SELECT market, code, name FROM `aitrading_db`.`companylist`'
     cur.execute(sql)
-    results = cur.fetchall()
+    results = cur.fetchmany(50)
 
     # 빈 배열에 results 값을 넣어서 다시 for in 문으로 돌립니다.
     # 시가, 고가, 저가, 종가, 거래량을 최신 일자 기준으로 모든 종목의 market 과 code를 문자열로 지정하고
     # 어떤 종목이 오더라도 값이 출력되도록 했습니다.
     # append는 자바스크립트 배열 메서드 push 라고 생각하시면 됩니다.
     rankArray = []
+    stockArray = []
     for i in range(len(results)):
         market = results[i]['market']
         code = results[i]['code']
+<<<<<<< HEAD
 
         sqlNext = f'SELECT open, high, low, close, volume FROM {market}_{code}_d ORDER BY DAY DESC, `day` ASC LIMIT 1'
 
+=======
+        sqlNext = f'SELECT day, open, high, low, close, volume FROM {market}_{code}_d ORDER BY DAY DESC LIMIT 2'
+>>>>>>> 02816bd7982f34926e22bf9a8a802acfccf2c43d
         cur.execute(sqlNext)
         resultsTwo = cur.fetchall()
         if (resultsTwo):
-            rankArray.append(resultsTwo)
-
-    print(rankArray)
-
+            rankArray.extend(resultsTwo)
+        #     for j in zip(results, rankArray):
+        #         print(j)
+        # stockArray.append(j)
+    print(results)
+    # print(rankArray)
     conn.close()
     return rankArray
 
