@@ -69,7 +69,7 @@ def companylist_rank():
     cur = conn.cursor()
     sql = 'SELECT market, code, name FROM `aitrading_db`.`companylist`'
     cur.execute(sql)
-    results = cur.fetchmany(100)
+    results = cur.fetchall()
     
     # 주가 종목의 최신 일자, 전일자 정보 ( 시가, 고가, 저가, 종가, day, code )
     rankArray = []
