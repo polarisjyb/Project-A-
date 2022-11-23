@@ -111,7 +111,7 @@ def markets():  # 함수이름
     for i in range(len(result)):  # for문 돌려서
         code = result[i]["code"]  # 종목 코드 변수에담음
         market = result[i]["market"]  # 종목 마켓(kospi kosdak)을 담아줌
-        sql_join = f'SELECT companylist.code AS code,market,name,high,low,close,volume,day FROM {market}_{code}_d AS api INNER JOIN companylist ON companylist.code = api.code'
+        sql_join = f'SELECT companylist.code AS code,market,name,high,low,close,volume,day FROM {market}_{code}_d INNER JOIN companylist ON companylist.code = api.code'
         cur.execute(sql_join)  # market과 code 매개변수를 뚫어줘서 변수에 담음값을 돌려서 for문을돌리고
         res2 = cur.fetchall()  # 리스트를 res2에담은후
         data_stack.append(res2)  # 빈배열에 담아줌
