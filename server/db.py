@@ -57,7 +57,7 @@ def all_company_name():
 def stock_info(code):
     conn = dbconn()
     cur = conn.cursor()
-    sql1 = f'SELECT companylist.code, name , market, open, high, low, close, volume, day  FROM aitrading_db.kosdak_{code}_d AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 2;'
+    sql1 = f'SELECT companylist.code, name , market, open, high, low, close, volume, day  FROM aitrading_db.kospi_{code}_d AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 2;'
     # companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
     # code, name, market, open, high, low, close, volume, day를 불러온다.
     # 조건은 최신순으로 두개만 불러온다.
