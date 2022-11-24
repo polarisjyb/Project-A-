@@ -22,7 +22,7 @@ export default function CandleChart() {
       }).catch((e) => {
         console.error(e);
       })
-  });
+  },[Data]);
   // const fetchDatas = async () => {
   //   try {
   //     setData([]);
