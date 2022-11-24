@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export interface StockObject {
+export interface Companylist {
   close: string;
+  code: string;
   day: string;
-  high: string;
-  low: string;
+  high: number;
+  low: number;
   market: string;
   name: string;
-  open: string;
-  volume: string;
-  [index: number]: any;
-} 
+  volume: number;
+  open: number;
+}
 
 export default () => {
-  const [data, setData] = useState<StockObject[]>([]);
+  const [data, setData] = useState<Companylist[]>([]);
   const [query, setQuery] = useState("");
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +29,14 @@ export default () => {
     fetchData();
     // 검색 시에만 data fetching을 요구해야 하므로 객체에는 search을 넣음
   }, [search]);
+
+  if (loading) {
+    return <h1>로딩중입니다!</h1>;
+  }
+
+  if (data === undefined) {
+    return <h1>데이터 로딩에 실패했습니다.</h1>;
+  }
 
   return (
     <>

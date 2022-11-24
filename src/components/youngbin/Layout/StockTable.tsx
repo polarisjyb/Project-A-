@@ -1,12 +1,14 @@
-import {useState, useEffect} from 'react'
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StockList = styled.div`
   width: 1480px;
-  height: 1215px;
+  height: auto;
   background: #e4e4e4;
   border-radius: 20px;
+  font-family: "GmarketSansMedium";
   & > table {
     width: 100%;
     margin: 50px 0px;
@@ -14,6 +16,7 @@ const StockList = styled.div`
     & > thead {
       & > tr {
         & > th {
+          width: 250px;
           font-size: 32px;
           font-weight: 500;
           line-height: 24px;
@@ -21,8 +24,16 @@ const StockList = styled.div`
       }
     }
     & > tbody {
+      text-align: center;
       & > tr {
         margin-bottom: 20px;
+        & > a {
+          width: 250px;
+          font-size: 24px;
+          text-align: center;
+          color: #4c506b;
+          text-decoration: none;
+        }
         & > td {
           width: 250px;
           font-size: 24px;
@@ -32,87 +43,56 @@ const StockList = styled.div`
       }
     }
   }
-
-`
-export interface StockObject {
+`;
+// export interface StockObject {
+//   close: string;
+//   day: string;
+//   high: string;
+//   low: string;
+//   market: string;
+//   name: string;
+//   open: string;
+//   volume: string;
+//   [index: number]: any;
+// }
+export interface Companylist {
   close: string;
+  code: string;
   day: string;
-  high: string;
-  low: string;
+  high: number;
+  low: number;
   market: string;
   name: string;
-  open: string;
-  volume: string;
-  [index: number]: any;
-} 
+  volume: number;
+  open: number;
+}
 
 const StockTable = () => {
-  const [StockCode, setSTockCode] = useState<string>('000440');
-  const [data, setData] = useState<StockObject[]>([]);
-  let test = []
+  // const [StockCode, setSTockCode] = useState<string>("000440");
+  // const [data, setData] = useState<StockObject[]>([]);
+  const [data, setData] = useState<Companylist[]>([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-      const getDatas = async () => {
-          try {
-        let response = await axios.get(`http://127.0.0.1:5000/${StockCode}`);
+    const getDatas = async () => {
+      try {
+        let response = await axios.get(`http://127.0.0.1:5000/rank`);
         setData(response.data);
-        console.log(response)
-
+        setLoading(false);
+        console.log(response);
       } catch (err) {
         console.log(err);
       }
     };
     getDatas();
-  }, [StockCode]);
+  }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://127.0.0.1:5000/${StockCode}`)
-  //     .then(res => {
-  //       // console.log(res);
-  //       console.log(res.data);
-        
-  //       // 종목 이름 : 중앙에너비스
-  //       console.log(res.data[0])
-  
-  //       // 2022년 1월 28일 기준 데이터 종가,고가,저가,시가, 거래량, 날짜 다 들어 있음.
-  //       console.log(res.data[1][0]);
-        
-  //       // 거래량
-  //       console.log(res.data[1][i].volume);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  //   });
-    
-    
-    
+  if (loading) {
+    return <h1>로딩중입니다!</h1>;
+  }
 
-  // const [StockCode, setSTockCode] = useState<string>('000440');
-  // const [data, getData] = useState<StockObject[]>([]);
-  
-  // useEffect(() => {
-    //   const getDatas = async () => {
-      //     try {
-  //       let response = await axios.get(`http://127.0.0.1:5000/${StockCode}`);
-  //       getData(response.data);
-  //       console.log
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getDatas();
-  // }, [StockCode]);
-
-  // console.log(data);
-
-  // console.dir(data[1])
-
-  // console.log(data[1])
-
-
-
-  
+  if (data === undefined) {
+    return <h1>데이터 로딩에 실패했습니다.</h1>;
+  }
 
   return (
     <StockList>
@@ -129,21 +109,22 @@ const StockTable = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item:any) => {
-
-            return(
+          {data.map((item: any, index) => {
+            return (
               <tr key={item}>
-                <td>1</td>
-                <td>삼성전자</td>
-                <td>{item[0].open}</td>
-                <td>{item[0].high}</td>
-                <td>{item[0].low}</td>
-                <td>{item[0].close}</td>
-                <td>{item[0].volume}</td>
+                  <td>{index + 1}</td>
+                  <Link to={`/code/${item[0].code}`}>
+                    <td>{item[0].name}</td>
+                  </Link>
+                  <td>{item[0].open}</td>
+                  <td>{item[0].high}</td>
+                  <td>{item[0].low}</td>
+                  <td>{item[0].close}</td>
+                  <td>{item[0].volume}</td>
+                
               </tr>
-            )
-          })
-          }
+            );
+          })}
         </tbody>
       </table>
     </StockList>

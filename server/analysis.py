@@ -10,8 +10,8 @@ def calculate_avg(code):
         avg = (datas[i]['open'] + datas[i]['high'] + datas[i]['low'] + datas[i]['close']) / 4 
         temp.append(avg)
     return (sum(temp)/100)
-  
-  
+
+
 def today_price(code):
     datas = code_to_data(code)
     return datas[0]['open']    
@@ -30,5 +30,5 @@ def proposal_result(code):
         print("매도")
     else:
         print("판단이 어렵습니다.")
-  
+
 proposal_result('003300')
