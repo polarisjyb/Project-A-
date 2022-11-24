@@ -24,9 +24,9 @@ def code_to_data(code):
     # 입력받은 코드와 일치하는 테이블명 조회
     cur.execute(sql)
     company = cur.fetchone()
-    sql = 'SELECT * FROM ' + company["TABLE_NAME"] + ' ORDER BY DAY DESC'
+    sql2 = 'SELECT * FROM ' + company["TABLE_NAME"] + ' ORDER BY DAY DESC'
     # 테이블에 등록된 날짜가 가장 최근 것부터 불러온다
-    cur.execute(sql)
+    cur.execute(sql2)
     results = cur.fetchmany(100)
     conn.close()
     return results
@@ -48,6 +48,23 @@ def all_company_name():
     sql = 'SELECT * FROM `aitrading_db`.`companylist`'
     cur.execute(sql)
     results = cur.fetchall()
+
+# def all_company_name(code):
+#     conn = dbconn()
+#     cur = conn.cursor()
+#     if code == 'all':
+#         sql = 'SELECT name, code FROM `aitrading_db`.`companyList`'
+#         cur.execute(sql)
+#         results = cur.fetchall()
+#     elif code == 'random':
+#         sql = 'SELECT name, code FROM `aitrading_db`.`companyList` WHERE market = "KOSPI" ORDER BY RAND()'
+#         cur.execute(sql)
+#         results = cur.fetchmany(100)
+#     else:
+#         sql = f'SELECT name, code FROM `aitrading_db`.`companyList` WHERE code LIKE "%{code}%"'
+#         cur.execute(sql)
+#         results = cur.fetchmay(100)
+        
     conn.close()
     return results
 
