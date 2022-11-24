@@ -5,19 +5,19 @@ import styled from "styled-components";
 const StockList = styled.div`
   width: 1480px;
   height: 1215px;
-  background: #e4e4e4;
   border-radius: 20px;
   font-family: "GmarketSansMedium";
   & > table {
     width: 100%;
     margin: 50px 0px;
-    border-spacing: 15px;
+    text-align: center;
+    border-spacing: 0px;
     & > thead {
       & > tr {
         & > th {
+          padding: 20px;
           font-size: 32px;
-          font-weight: 500;
-          line-height: 24px;
+          border-bottom: 1px solid black;
         }
       }
     }
@@ -25,26 +25,14 @@ const StockList = styled.div`
       & > tr {
         margin-bottom: 20px;
         & > td {
-          width: 250px;
           font-size: 24px;
-          text-align: center;
+          padding: 7px;
           color: #4c506b;
         }
       }
     }
   }
 `;
-// export interface StockObject {
-//   close: string;
-//   day: string;
-//   high: string;
-//   low: string;
-//   market: string;
-//   name: string;
-//   open: string;
-//   volume: string;
-//   [index: number]: any;
-// }
 export interface Companylist {
   close: string;
   code: string;
@@ -58,8 +46,6 @@ export interface Companylist {
 }
 
 const StockTable = () => {
-  // const [StockCode, setSTockCode] = useState<string>("000440");
-  // const [data, setData] = useState<StockObject[]>([]);
   const [data, setData] = useState<Companylist[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -101,8 +87,9 @@ const StockTable = () => {
         <tbody>
           {data.map((item: any) => {
             return (
-              <tr key={item}>
-                <td>1</td>
+              
+              <tr key= {item}>
+                <td>{item[0].market}</td>
                 <td>{item[0].name}</td>
                 <td>{item[0].open}</td>
                 <td>{item[0].high}</td>
