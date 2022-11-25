@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { useLocation } from "react-router-dom";
@@ -10,31 +11,33 @@ export default function CandleChart() {
   useLocation();
   // console.log(useLocation());
   const code = location.pathname.split("/")[2];
-  // console.log(code);
+  console.log(code);
   const [Data, setData] = useState([]);
-  useEffect(() => {
-    fetch(`http://127.0.0.1:5000/chart/${code}`)
-      .then((res) => res.json())
-      .then((res: any) => {
-        // console.log(res);
-        setData(res);
-      }).catch((e) => {
-        console.error(e);
-      })
-  },[Data]);
-  // const fetchDatas = async () => {
-  //   try {
-  //     setData([]);
-  //     const res = await axios.get("http://127.0.0.1:5000/code/005930");
-  //     console.log(res.data);
-  //     setData(res.data);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
+
   // useEffect(() => {
-  //   fetchDatas();
-  // }, []);
+  //   fetch(`http://127.0.0.1:5000/chart/${code}`)
+  //     .then((res) => res.json())
+  //     .then((res: any) => {
+  //       // console.log(res);
+  //       setData(res);
+  //     }).catch((e) => {
+  //       console.error(e);
+  //     })
+  // },[Data]);
+
+  const fetchDatas = async () => {
+    try {
+      setData([]);
+      const res = await axios.get(`http://127.0.0.1:5000/chart/${code}`);
+      console.log(res.data);
+      setData(res.data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  useEffect(() => {
+    fetchDatas();
+  }, []);
 
   // console.log(Data);
 
@@ -66,10 +69,17 @@ export default function CandleChart() {
     day: ""
   }
   Data.map((i: typeof company, index) => {
+    // console.log(index);
     // const avg: number = (i.open + i.close + i.high + i.low) / 4;
     const pushArr: any = [i.day, i.low, i.open, i.close, i.high];
     // const pushArr: any = [i.day, i.volume/10000, 0, i.volume, i.high, i.open, i.close, i.low, avg];
-    chartData.push(pushArr);
+    if (index === 0) {
+      chartData.push(pushArr);
+      console.log(index);
+    } else if (index % 7 === 6) {
+      chartData.push(pushArr);
+      console.log(index);
+    }
   });
   //console.log(chartData);
 

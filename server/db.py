@@ -105,7 +105,7 @@ def data_for_chart(chart):
     company = cur.fetchone()
     sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
     cur.execute(sql)
-    results = cur.fetchmany(10)
+    results = cur.fetchmany(42)
     conn.close()
     return results
 
