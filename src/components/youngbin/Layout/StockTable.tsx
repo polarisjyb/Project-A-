@@ -33,42 +33,78 @@ const StockList = styled.div`
     }
   }
 `;
-export interface Companylist {
+export interface StockObject {
   close: string;
-  code: string;
   day: string;
-  high: number;
-  low: number;
+  high: string;
+  low: string;
   market: string;
   name: string;
-  volume: number;
-  open: number;
+  open: string;
+  volume: string;
+  [index: number]: any;
 }
 
 const StockTable = () => {
-  const [data, setData] = useState<Companylist[]>([]);
   const [loading, setLoading] = useState(true);
+  const [StockCode, setSTockCode] = useState<string>("000440");
+  const [data, setData] = useState<StockObject[]>([]);
+  let test = [];
   useEffect(() => {
     const getDatas = async () => {
       try {
-        let response = await axios.get(`http://127.0.0.1:5000/rank`);
+        let response = await axios.get(`http://127.0.0.1:5000/${StockCode}`);
         setData(response.data);
-        setLoading(false);
         console.log(response);
       } catch (err) {
         console.log(err);
       }
     };
     getDatas();
-  }, []);
+  }, [StockCode]);
 
-  if (loading) {
-    return <h1>로딩중입니다!</h1>;
-  }
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://127.0.0.1:5000/${StockCode}`)
+  //     .then(res => {
+  //       // console.log(res);
+  //       console.log(res.data);
 
-  if (data === undefined) {
-    return <h1>데이터 로딩에 실패했습니다.</h1>;
-  }
+  //       // 종목 이름 : 중앙에너비스
+  //       console.log(res.data[0])
+
+  //       // 2022년 1월 28일 기준 데이터 종가,고가,저가,시가, 거래량, 날짜 다 들어 있음.
+  //       console.log(res.data[1][0]);
+
+  //       // 거래량
+  //       console.log(res.data[1][i].volume);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  //   });
+
+  // const [StockCode, setSTockCode] = useState<string>('000440');
+  // const [data, getData] = useState<StockObject[]>([]);
+
+  // useEffect(() => {
+  //   const getDatas = async () => {
+  //     try {
+  //       let response = await axios.get(`http://127.0.0.1:5000/${StockCode}`);
+  //       getData(response.data);
+  //       console.log
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getDatas();
+  // }, [StockCode]);
+
+  // console.log(data);
+
+  // console.dir(data[1])
+
+  // console.log(data[1])
 
   return (
     <StockList>
@@ -87,7 +123,6 @@ const StockTable = () => {
         <tbody>
           {data.map((item: any) => {
             return (
-              
               <tr key= {item}>
                 <td>{item[0].market}</td>
                 <td>{item[0].name}</td>
