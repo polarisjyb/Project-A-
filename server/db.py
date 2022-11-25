@@ -64,7 +64,7 @@ def all_company_name():
 #         sql = f'SELECT name, code FROM `aitrading_db`.`companyList` WHERE code LIKE "%{code}%"'
 #         cur.execute(sql)
 #         results = cur.fetchmay(100)
-        
+
     conn.close()
     return results
 
@@ -87,7 +87,7 @@ def stock_info(code):
 def yj_strategy(code):
     conn = dbconn()
     cur = conn.cursor()
-    sql1 = f'SELECT companylist.code, name , market, volume, day FROM aitrading_db.kospi_{code}_m AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 4;'
+    sql1 = f'SELECT companylist.code, name , market, volume, day FROM aitrading_db.kospi_{code}_m AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 5;'
     # companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
     # code, name, market, open, high, low, close, volume, day를 불러온다.
     # 조건은 최신순으로 두개만 불러온다.

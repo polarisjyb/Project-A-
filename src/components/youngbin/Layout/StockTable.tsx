@@ -1,19 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-<<<<<<< HEAD
 import { Link, Navigate } from "react-router-dom";
-import ReusultPage from "@/components/hwayeon/ResultPage";
 
 const StockList = styled.div`
   width: 1480px;
   background: #e4e4e4;
-=======
-const StockList = styled.div`
-  width: 1480px;
-  height: 1215px;
-  background: #E4E4E4;
->>>>>>> ff94eb711472a0932be18e2aff6037ee39e2d315
   border-radius: 20px;
   font-family: "GmarketSansMedium";
   a:hover,
@@ -50,12 +42,7 @@ const StockList = styled.div`
         & > td {
           width: 250px;
           font-size: 24px;
-<<<<<<< HEAD
           color: #4c506b;
-=======
-          text-align: center;
-          color: #4C506B;
->>>>>>> ff94eb711472a0932be18e2aff6037ee39e2d315
         }
       }
     }
@@ -83,10 +70,11 @@ export interface Companylist {
   volume: number;
   open: number;
 }
+
 const StockTable = () => {
   // const [StockCode, setSTockCode] = useState<string>("000440");
   // const [data, setData] = useState<StockObject[]>([]);
-  const [data, setData] = useState<Companylist[]>([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getDatas = async () => {
@@ -101,27 +89,15 @@ const StockTable = () => {
     };
     getDatas();
   }, []);
+
   if (loading) {
     return <h1>로딩중입니다!</h1>;
   }
+
   if (data === undefined) {
     return <h1>데이터 로딩에 실패했습니다.</h1>;
   }
-<<<<<<< HEAD
-  interface dataType {
-    close: number;
-    code: string;
-    day: string;
-    high: number;
-    low: number;
-    market: string;
-    name: string;
-    open: number;
-    volume: number;
-  }
 
-=======
->>>>>>> ff94eb711472a0932be18e2aff6037ee39e2d315
   return (
     <StockList>
       <table>
@@ -157,4 +133,5 @@ const StockTable = () => {
     </StockList>
   );
 };
+
 export default StockTable;
