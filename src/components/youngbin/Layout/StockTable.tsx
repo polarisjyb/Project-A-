@@ -1,23 +1,22 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
 const StockList = styled.div`
   width: 1480px;
   height: 1215px;
+  background: #E4E4E4;
   border-radius: 20px;
   font-family: "GmarketSansMedium";
   & > table {
     width: 100%;
     margin: 50px 0px;
-    text-align: center;
-    border-spacing: 0px;
+    border-spacing: 15px;
     & > thead {
       & > tr {
         & > th {
-          padding: 20px;
           font-size: 32px;
-          border-bottom: 1px solid black;
+          font-weight: 500;
+          line-height: 24px;
         }
       }
     }
@@ -25,87 +24,61 @@ const StockList = styled.div`
       & > tr {
         margin-bottom: 20px;
         & > td {
+          width: 250px;
           font-size: 24px;
-          padding: 7px;
-          color: #4c506b;
+          text-align: center;
+          color: #4C506B;
         }
       }
     }
   }
 `;
-export interface StockObject {
+// export interface StockObject {
+//   close: string;
+//   day: string;
+//   high: string;
+//   low: string;
+//   market: string;
+//   name: string;
+//   open: string;
+//   volume: string;
+//   [index: number]: any;
+// }
+export interface Companylist {
   close: string;
+  code: string;
   day: string;
-  high: string;
-  low: string;
+  high: number;
+  low: number;
   market: string;
   name: string;
-  open: string;
-  volume: string;
-  [index: number]: any;
+  volume: number;
+  open: number;
 }
-
 const StockTable = () => {
+  // const [StockCode, setSTockCode] = useState<string>("000440");
+  // const [data, setData] = useState<StockObject[]>([]);
+  const [data, setData] = useState<Companylist[]>([]);
   const [loading, setLoading] = useState(true);
-  const [StockCode, setSTockCode] = useState<string>("000440");
-  const [data, setData] = useState<StockObject[]>([]);
-  let test = [];
   useEffect(() => {
     const getDatas = async () => {
       try {
-        let response = await axios.get(`http://127.0.0.1:5000/${StockCode}`);
+        let response = await axios.get(`http://127.0.0.1:5000/rank`);
         setData(response.data);
+        setLoading(false);
         console.log(response);
       } catch (err) {
         console.log(err);
       }
     };
     getDatas();
-  }, [StockCode]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://127.0.0.1:5000/${StockCode}`)
-  //     .then(res => {
-  //       // console.log(res);
-  //       console.log(res.data);
-
-  //       // 종목 이름 : 중앙에너비스
-  //       console.log(res.data[0])
-
-  //       // 2022년 1월 28일 기준 데이터 종가,고가,저가,시가, 거래량, 날짜 다 들어 있음.
-  //       console.log(res.data[1][0]);
-
-  //       // 거래량
-  //       console.log(res.data[1][i].volume);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  //   });
-
-  // const [StockCode, setSTockCode] = useState<string>('000440');
-  // const [data, getData] = useState<StockObject[]>([]);
-
-  // useEffect(() => {
-  //   const getDatas = async () => {
-  //     try {
-  //       let response = await axios.get(`http://127.0.0.1:5000/${StockCode}`);
-  //       getData(response.data);
-  //       console.log
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getDatas();
-  // }, [StockCode]);
-
-  // console.log(data);
-
-  // console.dir(data[1])
-
-  // console.log(data[1])
-
+  }, []);
+  if (loading) {
+    return <h1>로딩중입니다!</h1>;
+  }
+  if (data === undefined) {
+    return <h1>데이터 로딩에 실패했습니다.</h1>;
+  }
   return (
     <StockList>
       <table>
@@ -123,8 +96,8 @@ const StockTable = () => {
         <tbody>
           {data.map((item: any) => {
             return (
-              <tr key= {item}>
-                <td>{item[0].market}</td>
+              <tr key={item}>
+                <td>1</td>
                 <td>{item[0].name}</td>
                 <td>{item[0].open}</td>
                 <td>{item[0].high}</td>
@@ -139,5 +112,4 @@ const StockTable = () => {
     </StockList>
   );
 };
-
 export default StockTable;
