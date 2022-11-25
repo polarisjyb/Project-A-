@@ -1,50 +1,54 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { Link, Navigate } from "react-router-dom";
+import ReusultPage from "@/components/hwayeon/ResultPage";
 
 const StockList = styled.div`
   width: 1480px;
   height: 1215px;
-  background: #e4e4e4;
+  background: #E4E4E4;
   border-radius: 20px;
   font-family: "GmarketSansMedium";
+  a:hover,
+  a:visited,
+  a:link,
+  a:active {
+    color: #4c506b;
+    text-decoration: none;
+    
+  }
+  a:hover {
+    color: #a00;
+  }
+
   & > table {
     width: 100%;
-    margin: 50px 0px;
+    padding: 50px 0px;
     border-spacing: 15px;
     & > thead {
       & > tr {
         & > th {
           font-size: 32px;
           font-weight: 500;
-          line-height: 24px;
         }
       }
     }
     & > tbody {
+      font-size: 24px;
+      text-align: center;
       & > tr {
         margin-bottom: 20px;
         & > td {
-          width: 250px;
-          font-size: 24px;
-          text-align: center;
+          
           color: #4c506b;
+
         }
       }
     }
   }
 `;
-// export interface StockObject {
-//   close: string;
-//   day: string;
-//   high: string;
-//   low: string;
-//   market: string;
-//   name: string;
-//   open: string;
-//   volume: string;
-//   [index: number]: any;
-// }
+
 export interface Companylist {
   close: string;
   code: string;
@@ -56,11 +60,8 @@ export interface Companylist {
   volume: number;
   open: number;
 }
-
 const StockTable = () => {
-  // const [StockCode, setSTockCode] = useState<string>("000440");
-  // const [data, setData] = useState<StockObject[]>([]);
-  const [data, setData] = useState<Companylist[]>([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getDatas = async () => {
@@ -75,11 +76,9 @@ const StockTable = () => {
     };
     getDatas();
   }, []);
-
   if (loading) {
     return <h1>로딩중입니다!</h1>;
   }
-
   if (data === undefined) {
     return <h1>데이터 로딩에 실패했습니다.</h1>;
   }
@@ -99,11 +98,13 @@ const StockTable = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item: any) => {
+          {data.map((item: any, idx) => {
             return (
               <tr key={item}>
-                <td>1</td>
-                <td>{item[0].name}</td>
+                <td>{idx + 1}</td>
+                <Link to={`/code/${item[0].code}`}>
+                  <td>{item[0].name}</td>
+                </Link>
                 <td>{item[0].open}</td>
                 <td>{item[0].high}</td>
                 <td>{item[0].low}</td>
@@ -117,5 +118,4 @@ const StockTable = () => {
     </StockList>
   );
 };
-
 export default StockTable;

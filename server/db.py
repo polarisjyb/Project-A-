@@ -24,9 +24,9 @@ def code_to_data(code):
     # 입력받은 코드와 일치하는 테이블명 조회
     cur.execute(sql)
     company = cur.fetchone()
-    sql = 'SELECT * FROM ' + company["TABLE_NAME"] + ' ORDER BY DAY DESC'
+    sql2 = 'SELECT * FROM ' + company["TABLE_NAME"] + ' ORDER BY DAY DESC'
     # 테이블에 등록된 날짜가 가장 최근 것부터 불러온다
-    cur.execute(sql)
+    cur.execute(sql2)
     results = cur.fetchmany(100)
     conn.close()
     return results
@@ -48,8 +48,53 @@ def all_company_name():
     sql = 'SELECT * FROM `aitrading_db`.`companylist`'
     cur.execute(sql)
     results = cur.fetchall()
+
+# def all_company_name(code):
+#     conn = dbconn()
+#     cur = conn.cursor()
+#     if code == 'all':
+#         sql = 'SELECT name, code FROM `aitrading_db`.`companyList`'
+#         cur.execute(sql)
+#         results = cur.fetchall()
+#     elif code == 'random':
+#         sql = 'SELECT name, code FROM `aitrading_db`.`companyList` WHERE market = "KOSPI" ORDER BY RAND()'
+#         cur.execute(sql)
+#         results = cur.fetchmany(100)
+#     else:
+#         sql = f'SELECT name, code FROM `aitrading_db`.`companyList` WHERE code LIKE "%{code}%"'
+#         cur.execute(sql)
+#         results = cur.fetchmay(100)
+        
     conn.close()
     return results
+
+# code 입력시 /code 페이지에 해당 코드의 주식데이터 출력
+
+
+def stock_info(code):
+    conn = dbconn()
+    cur = conn.cursor()
+    sql1 = f'SELECT companylist.code, name , market, open, high, low, close, volume, day  FROM aitrading_db.kospi_{code}_d AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 2;'
+    # companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
+    # code, name, market, open, high, low, close, volume, day를 불러온다.
+    # 조건은 최신순으로 두개만 불러온다.
+    cur.execute(sql1)
+    result = cur.fetchall()
+    conn.close()
+    return result
+
+
+def yj_strategy(code):
+    conn = dbconn()
+    cur = conn.cursor()
+    sql1 = f'SELECT companylist.code, name , market, volume, day FROM aitrading_db.kospi_{code}_m AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 4;'
+    # companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
+    # code, name, market, open, high, low, close, volume, day를 불러온다.
+    # 조건은 최신순으로 두개만 불러온다.
+    cur.execute(sql1)
+    result = cur.fetchall()
+    conn.close()
+    return result
 
 def data_for_chart(chart):
     conn = dbconn()
@@ -65,8 +110,6 @@ def data_for_chart(chart):
     return results
 
 # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
-
-
 """
     1. 회사
     2. 금일 종목

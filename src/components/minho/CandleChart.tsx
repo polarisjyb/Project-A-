@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
+import { useLocation } from "react-router-dom";
+import IntefaceCompany from "./InterfaceCompany";
 
-interface company {
-  no: number;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number;
-  day: string;
-}
+
+
 
 export default function CandleChart() {
+  useLocation();
+  // console.log(useLocation());
+  const code = location.pathname.split("/")[2];
+  // console.log(code);
   const [Data, setData] = useState([]);
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/chart/005930")
+    fetch(`http://127.0.0.1:5000/chart/${code}`)
       .then((res) => res.json())
       .then((res: any) => {
         // console.log(res);
@@ -57,8 +56,16 @@ export default function CandleChart() {
   //     // { id: "avg", type: "number",  role: "interval", label: "평균가"},
   //   ],
   // ];
-
-  Data.map((i: company, index) => {
+  const company: IntefaceCompany = {
+    no: 0,
+    open: 0,
+    high: 0,
+    low: 0,
+    close: 0,
+    volume: 0,
+    day: ""
+  }
+  Data.map((i: typeof company, index) => {
     // const avg: number = (i.open + i.close + i.high + i.low) / 4;
     const pushArr: any = [i.day, i.low, i.open, i.close, i.high];
     // const pushArr: any = [i.day, i.volume/10000, 0, i.volume, i.high, i.open, i.close, i.low, avg];
