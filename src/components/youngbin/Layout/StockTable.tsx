@@ -5,7 +5,6 @@ import { Link, Navigate } from "react-router-dom";
 
 const StockList = styled.div`
   width: 1480px;
-  height: 1215px;
   background: #E4E4E4;
   border-radius: 20px;
   font-family: "GmarketSansMedium";
