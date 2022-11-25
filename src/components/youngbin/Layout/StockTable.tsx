@@ -102,7 +102,7 @@ const StockTable = () => {
         <tbody>
           {data.map((item: any, idx) => {
             return (
-              <tr key={item}>
+              <tr key={idx}>
                 <td>{idx + 1}</td>
                 <Link to={`/code/${item[0].code}`}>
                   <td>{item[0].name}</td>
