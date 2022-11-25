@@ -39,8 +39,7 @@ const StockList = styled.div`
       & > tr {
         margin-bottom: 20px;
         & > td {
-
-          width: 250px;
+          
           font-size: 24px;
           color: #4c506b;
         }

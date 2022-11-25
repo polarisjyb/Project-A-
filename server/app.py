@@ -46,7 +46,7 @@ def companylistRank():
 #     data = all_company_name('random')
 #     return data
 
-"""
+
 
 @app.route('/<code>')
 def info(code):
