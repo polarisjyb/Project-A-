@@ -46,13 +46,6 @@ def companylistRank():
 #     data = all_company_name('random')
 #     return data
 
-<<<<<<< HEAD
-# code에 따른 주식 정보를 불러온다.
-
-=======
-"""
->>>>>>> 2a7f1de17ad1091adaeec359983e488e60adcd7f
-
 @app.route('/<code>')
 def info(code):
     data = stock_info(code)

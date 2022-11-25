@@ -15,10 +15,6 @@ const StockList = styled.div`
   a:active {
     color: #4c506b;
     text-decoration: none;
-<<<<<<< HEAD
-=======
-    
->>>>>>> 2a7f1de17ad1091adaeec359983e488e60adcd7f
   }
   a:hover {
     color: #a00;
@@ -42,13 +38,7 @@ const StockList = styled.div`
       text-align: center;
       & > tr {
         margin-bottom: 20px;
-<<<<<<< HEAD
-        & td {
-=======
         & > td {
-
-          width: 250px;
->>>>>>> 2a7f1de17ad1091adaeec359983e488e60adcd7f
           font-size: 24px;
           color: #4c506b;
         }

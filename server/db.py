@@ -133,6 +133,10 @@ def companylist_rank():
         # ex) kospi_000100_d 라는 테이블에 CODE 컬럼 추가 및 그 CODE 컬럼 안에 테이블 명 코드, 000100을 추가.
         # sqlNext = f' ALTER TABLE {market}_{code}_m ADD code VARCHAR(15) DEFAULT "{code}" '
 
+        # 테이블에서 CODE 라는 컬럼 삭제
+        # sqlNext = f' ALTER TABLE {market}_{code}_m DROP code '
+
+
         # 2번 최신 일자, 전일자( 2022-01-28 일과 2022-01-27일 ) 사이에 있는 day 값의 code가 companylist의 code와 일치하는 행을 합쳐서 그 행의 정보를 가져옵니다.
         sqlNext = f'SELECT companylist.code AS code, market, name, open, high, low, close, volume, day FROM {market}_{code}_d AS api INNER JOIN companylist ON companylist.code = api.code WHERE day BETWEEN date("2022-01-27") AND date("2022-01-28")+1 ORDER BY day DESC LIMIT 2'
         cur.execute(sqlNext)
