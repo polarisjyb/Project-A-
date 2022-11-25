@@ -5,7 +5,8 @@ import { Link, Navigate } from "react-router-dom";
 
 const StockList = styled.div`
   width: 1480px;
-  background: #e4e4e4;
+  height: 1215px;
+  background: #E4E4E4;
   border-radius: 20px;
   font-family: "GmarketSansMedium";
   a:hover,
@@ -14,6 +15,10 @@ const StockList = styled.div`
   a:active {
     color: #4c506b;
     text-decoration: none;
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 2a7f1de17ad1091adaeec359983e488e60adcd7f
   }
   a:hover {
     color: #a00;
@@ -22,14 +27,13 @@ const StockList = styled.div`
 
   & > table {
     width: 100%;
-    margin: 50px 0px;
+    padding: 50px 0px;
     border-spacing: 15px;
     & > thead {
       & > tr {
         & > th {
           font-size: 32px;
           font-weight: 500;
-          line-height: 24px;
         }
       }
     }
@@ -38,7 +42,13 @@ const StockList = styled.div`
       text-align: center;
       & > tr {
         margin-bottom: 20px;
+<<<<<<< HEAD
         & td {
+=======
+        & > td {
+
+          width: 250px;
+>>>>>>> 2a7f1de17ad1091adaeec359983e488e60adcd7f
           font-size: 24px;
           color: #4c506b;
         }
@@ -46,17 +56,7 @@ const StockList = styled.div`
     }
   }
 `;
-// export interface StockObject {
-//   close: string;
-//   day: string;
-//   high: string;
-//   low: string;
-//   market: string;
-//   name: string;
-//   open: string;
-//   volume: string;
-//   [index: number]: any;
-// }
+
 export interface Companylist {
   close: string;
   code: string;
@@ -70,8 +70,6 @@ export interface Companylist {
 }
 
 const StockTable = () => {
-  // const [StockCode, setSTockCode] = useState<string>("000440");
-  // const [data, setData] = useState<StockObject[]>([]);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
