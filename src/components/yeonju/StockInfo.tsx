@@ -21,16 +21,17 @@ const StockBox1 = styled.div`
   padding-bottom: 70px;
   align-items: flex-end;
   & > div:nth-child(1) {
-    width: 350px;
-    height: 50px;
+    height: 30px;
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+
     & > h1 {
+      padding-right: 15px;
       font-size: 36px;
     }
     & > h2 {
       font-size: 32px;
+      padding-right: 15px;
     }
     & > div {
       display: flex;
@@ -52,7 +53,6 @@ const StockBox2 = styled.div`
   justify-content: flex-end;
   & div {
     width: 500px;
-    height: 90px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -73,40 +73,22 @@ const StockBox2 = styled.div`
 시가 / 고가 / 저가 / 종가 표시
 */
 
-export interface Companylist {
-  close: string;
-  code: string;
-  day: string;
-  high: number;
-  low: number;
-  market: string;
-  name: string;
-  volume: number;
-  open: number;
-}
-
-const StockInfo = () => {
-  const [data, setData] = useState<Companylist[]>([]);
+const StockInfo = ({ stockData }: any) => {
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    const getData = async () => {
-      let response = await axios.get(`http://127.0.0.1:5000/rank`);
-      console.log(response.data[0][0].name);
-      setData(response.data[0]);
+    if (Object.keys(stockData).length > 0) {
       setLoading(false);
-    };
-    getData();
-  }, []);
+    }
+  }, [stockData]);
 
   if (loading) {
-    return <h1>로딩중입니다!</h1>;
+    return <h1>로딩중입니다</h1>;
   }
 
-  if (data === undefined) {
+  if (stockData === undefined) {
     return <h1>데이터 로딩에 실패했습니다.</h1>;
   }
-
+  const num = stockData[0].close - stockData[1].close;
   return (
     <MainBox>
       {loading ? (
@@ -115,28 +97,35 @@ const StockInfo = () => {
         <>
           <StockBox1>
             <div>
-              <h1>{data[0].name}</h1>
-              <h2>{data[0].close}</h2>
-              <div>
-                <img src="/img/Polygon 1.svg" alt="" />
-                <p>200</p>
-              </div>
+              <h1>{stockData[0].name}</h1>
+              <h2>{stockData[0].close}</h2>
+              {num >= 0 ? (
+                <div>
+                  <img src="/img/Polygon 1.svg" alt="" />
+                  <p>{num}</p>
+                </div>
+              ) : (
+                <div>
+                  <img src="/img/Polygon2.svg" alt="" />
+                  <p>{Math.abs(num)}</p>
+                </div>
+              )}
             </div>
           </StockBox1>
           <StockBox2>
             <div>
               <div>
                 <p>종가</p>
-                <p>{data[0].close}</p>
+                <p>{stockData[0].close}</p>
                 <p>고가</p>
-                <p>{data[0].high}</p>
+                <p>{stockData[0].high}</p>
               </div>
               <div>
                 <div>
                   <p>시가</p>
-                  <p>{data[0].open}</p>
+                  <p>{stockData[0].open}</p>
                   <p>저가</p>
-                  <p>{data[0].low}</p>
+                  <p>{stockData[0].low}</p>
                 </div>
               </div>
             </div>

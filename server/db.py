@@ -68,9 +68,36 @@ def all_company_name():
     conn.close()
     return results
 
+# code 입력시 /code 페이지에 해당 코드의 주식데이터 출력
+
+
+def stock_info(code):
+    conn = dbconn()
+    cur = conn.cursor()
+    sql1 = f'SELECT companylist.code, name , market, open, high, low, close, volume, day  FROM aitrading_db.kospi_{code}_d AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 2;'
+    # companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
+    # code, name, market, open, high, low, close, volume, day를 불러온다.
+    # 조건은 최신순으로 두개만 불러온다.
+    cur.execute(sql1)
+    result = cur.fetchall()
+    conn.close()
+    return result
+
+
+def yj_strategy(code):
+    conn = dbconn()
+    cur = conn.cursor()
+    sql1 = f'SELECT companylist.code, name , market, volume, day FROM aitrading_db.kospi_{code}_m AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 4;'
+    # companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
+    # code, name, market, open, high, low, close, volume, day를 불러온다.
+    # 조건은 최신순으로 두개만 불러온다.
+    cur.execute(sql1)
+    result = cur.fetchall()
+    conn.close()
+    return result
+
+
 # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
-
-
 """
     1. 회사
     2. 금일 종목
