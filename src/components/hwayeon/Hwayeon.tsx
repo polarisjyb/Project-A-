@@ -22,7 +22,7 @@ export default () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
-        `http://127.0.0.1:5000/${search}`
+        `http://127.0.0.1:5000/code/${search}`
       );
       setData(result.data);
     };
