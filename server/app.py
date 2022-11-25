@@ -40,11 +40,16 @@ def companylistRank():
 #     data = all_company_name('random')
 #     return data
 
+# code에 따른 주식 정보를 불러온다.
+
 
 @app.route('/<code>')
 def info(code):
     data = stock_info(code)
     return data
+
+# code에 따른 주식 정보를 불러온다.
+# momth별 데이터 5개를 불러오도록 하였다.
 
 
 @app.route('/yj/<code>')
