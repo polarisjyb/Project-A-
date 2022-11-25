@@ -128,7 +128,7 @@ def companylist_rank():
     sql = 'SELECT market, code, name FROM `aitrading_db`.`companylist`'
     cur.execute(sql)
     results = cur.fetchmany(100)
-    print(results)
+    # print(results)
     # 주가 종목의 최신 일자, 전일자 정보 ( 시가, 고가, 저가, 종가, day, code )
     rankArray = []
 
@@ -181,7 +181,7 @@ def companylist_rank():
     # str 형식으로 가져오기
     # return str(rankArray)
     test = jsonify(rankArray)
-    print(test)
+    # print(test)
     return test
 
     # str 형식으로 가져오기
