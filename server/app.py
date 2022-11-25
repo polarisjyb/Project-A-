@@ -11,24 +11,49 @@ app.config['JSON_AS_ASCII'] = False
 def main():
     return 'Hello, World!'
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ff94eb711472a0932be18e2aff6037ee39e2d315
 # @app.route('/<code>')
 # def get_data(code):
 #     name = code_to_name(code)
 #     data = code_to_data(code)
 #     return [name, data]
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> ff94eb711472a0932be18e2aff6037ee39e2d315
 
 @app.route('/companylist')
 def allCompanyList():
     data = all_company_name()
     return data
 
+<<<<<<< HEAD
 
 @app.route('/rank')
 def companylistRank():
     data = companylist_rank()
 
+=======
+# @app.route('/companylist')
+# def allCompanyList():
+#     data = all_company_name('all')
+#     return data
+
+# @app.route('/companylist/random')
+# def randomCompanyList():
+#     data = all_company_name('random')
+#     return data
+  
+  
+  
+@app.route('/rank')
+def companylistRank():
+    data = companylist_rank()
+>>>>>>> ff94eb711472a0932be18e2aff6037ee39e2d315
     return data
 
 
