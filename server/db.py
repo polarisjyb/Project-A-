@@ -96,6 +96,18 @@ def yj_strategy(code):
     conn.close()
     return result
 
+def data_for_chart(chart):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_d"'
+    cur.execute(sql)
+    company = cur.fetchone()
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    cur.execute(sql)
+    results = cur.fetchmany(42)
+    conn.close()
+    return results
 
 # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
 """
@@ -131,7 +143,7 @@ def companylist_rank():
         # 1번 이미 데이터에는 컬럼 추가가 끝난 상태이므로 실행 안해도 됩니다.
         # 각 d(day)로 끝나는 테이블에 CODE 라는 컬럼을 추가해서 그 안에 테이블 명 에 있는 code 값을 모든 행에 대입한다.
         # ex) kospi_000100_d 라는 테이블에 CODE 컬럼 추가 및 그 CODE 컬럼 안에 테이블 명 코드, 000100을 추가.
-        # sqlNext = f' ALTER TABLE {market}_{code}_m ADD code VARCHAR(15) DEFAULT "{code}" '
+        # sqlNext = f' ALTER TABLE {market}_{code}_d ADD code VARCHAR(15) DEFAULT "{code}" '
 
         # 테이블에서 CODE 라는 컬럼 삭제
         # sqlNext = f' ALTER TABLE {market}_{code}_m DROP code '
@@ -209,4 +221,8 @@ def companylist_rank():
     #     #         print(j)
     #     # stockArray.append(j)
     # print(rankArray)
+
     # conn.commit()
+
+
+
