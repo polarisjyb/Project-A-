@@ -15,10 +15,10 @@ const StockList = styled.div`
   a:active {
     color: #4c506b;
     text-decoration: none;
-    
   }
   a:hover {
     color: #a00;
+    font-weight: 600;
   }
 
   & > table {
@@ -39,7 +39,6 @@ const StockList = styled.div`
       & > tr {
         margin-bottom: 20px;
         & > td {
-          
           font-size: 24px;
           color: #4c506b;
         }
@@ -113,6 +112,11 @@ const StockTable = () => {
                 <td>{item[0].close}</td>
                 <td>{item[0].volume}</td>
               </tr>
+              /* link to 를 이용해서 주식 종목 이름을 클릭하면  {`/code/${item[0].code}`} 주소로 이동하게 된다.
+              여기서, 클릭하면 해당 종목의 코드가 주소가 되서 페이지 이동이 된다. 
+              app.tsx 가보면, code/:key로 해당 코드르 key값으로 받게됩니다.
+              link to가 된 resultPage.tsx로 가봅시다!
+              */
             );
           })}
         </tbody>

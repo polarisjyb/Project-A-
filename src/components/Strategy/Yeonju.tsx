@@ -47,6 +47,21 @@ export interface stockinfo {
   name: string;
   volume: number;
 }
+
+/*
+해당 주식 페이지의 해당 주식의 코드에 따른 추천이 필요하므로,
+해당 주식 코드에 알맞는 주식의 데이터를 불러왔어야하는데,
+여기서 주식 코드를 url에서 얻어왔다
+url의 정보를 얻기 위해선,
+useLocation()을 사용했는데, useLocation()을 콘솔에 찍어보면, url의 정보가 나온다
+그 정보에서 코드 값만 code에 할당시킨 후
+axios를 이용해 해당 코드값 주소에 데이터를 불러온다.
+
+불러온 데이터를 infoData에 담아주었다.
+
+여기도 데이터를 불러오기전에 로딩중 처리를 해줌
+*/
+
 const Yeonju = () => {
   const [infoData, SetInfoData] = useState<stockinfo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -54,7 +69,6 @@ const Yeonju = () => {
 
   useEffect(() => {
     let code = location.pathname.split("/")[2];
-    console.log(code);
     const getData = async () => {
       let response = await axios.get(`http://127.0.0.1:5000/yj/${code}`);
       SetInfoData(response.data);
@@ -63,17 +77,6 @@ const Yeonju = () => {
     getData();
   }, []);
 
-  // console.log(infoData[0].volume); // 2022.2
-  // console.log(infoData[1].volume); // 2022.1
-  // console.log(infoData[2].volume); // 2021.12
-  // console.log(infoData[3].volume); // 2021.11
-  /*
-  (1 + 2 + 3)/3  < 0  
-  매수를추천합니다
-  (1 + 2 + 3)/3  > 0  
-  매도를 추천합니다.
-  
-  */
   if (loading) {
     return <h1>로딩중입니다!</h1>;
   }
@@ -87,8 +90,14 @@ const Yeonju = () => {
   const volume_3 = infoData[3].volume;
   const volume_4 = infoData[4].volume;
   const average = (volume_2 + volume_3 + volume_4) / 3;
-  console.log(volume_1);
-  console.log(average);
+  /*
+  받아온 데이터에서 달마다의 거래량 정보가 있어서,
+  3개월의 평균거래량과 최근 한달의 거래량을 비교해서, 
+  최근 한달의 거래량이 평균 거래량보다 적을 시, 매도를 추천하고
+  많을 시, 매수를 추천하도록 했습니다
+  
+  위 내용을 삼항연산자를 이용해 페이지의 내용이 달라지도록 하였습니다.
+  */
 
   return (
     <Main>
