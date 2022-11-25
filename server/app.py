@@ -25,11 +25,17 @@ def allCompanyList():
     return data
 
 
+
+
 @app.route('/rank')
 def companylistRank():
     data = companylist_rank()
     return data
 
+
+
+
+# 모든 회사 정보와 랜덤 회사 정보 가져오는 라우트
 # @app.route('/companylist')
 # def allCompanyList():
 #     data = all_company_name('all')
@@ -40,6 +46,7 @@ def companylistRank():
 #     data = all_company_name('random')
 #     return data
 
+"""
 
 @app.route('/<code>')
 def info(code):
