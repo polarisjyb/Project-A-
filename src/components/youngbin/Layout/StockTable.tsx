@@ -6,7 +6,7 @@ import { Link, Navigate } from "react-router-dom";
 const StockList = styled.div`
   width: 1480px;
   height: 1215px;
-  background: #E4E4E4;
+  background: #e4e4e4;
   border-radius: 20px;
   font-family: "GmarketSansMedium";
   a:hover,
@@ -20,7 +20,6 @@ const StockList = styled.div`
     color: #a00;
     font-weight: 600;
   }
-
   & > table {
     width: 100%;
     padding: 50px 0px;
