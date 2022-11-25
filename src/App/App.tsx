@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { Reset } from "styled-reset";
 import Header from "@/components/youngbin/Layout/Header";
 import Main from "@/components/youngbin/Layout/Main";
 import ResultPage from "@/components/hwayeon/ResultPage";
