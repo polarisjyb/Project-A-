@@ -6,10 +6,21 @@ import ReusultPage from "@/components/hwayeon/ResultPage";
 
 const StockList = styled.div`
   width: 1480px;
-  height: 1215px;
   background: #e4e4e4;
   border-radius: 20px;
   font-family: "GmarketSansMedium";
+  a:hover,
+  a:visited,
+  a:link,
+  a:active {
+    color: #4c506b;
+    text-decoration: none;
+    width: 250px;
+  }
+  a:hover {
+    color: #a00;
+  }
+
   & > table {
     width: 100%;
     margin: 50px 0px;
@@ -17,6 +28,7 @@ const StockList = styled.div`
     & > thead {
       & > tr {
         & > th {
+          width: 250px;
           font-size: 32px;
           font-weight: 500;
           line-height: 24px;
@@ -24,12 +36,13 @@ const StockList = styled.div`
       }
     }
     & > tbody {
+      font-size: 24px;
+      text-align: center;
       & > tr {
         margin-bottom: 20px;
         & > td {
           width: 250px;
           font-size: 24px;
-          text-align: center;
           color: #4c506b;
         }
       }
@@ -85,8 +98,18 @@ const StockTable = () => {
   if (data === undefined) {
     return <h1>데이터 로딩에 실패했습니다.</h1>;
   }
+  interface dataType {
+    close: number;
+    code: string;
+    day: string;
+    high: number;
+    low: number;
+    market: string;
+    name: string;
+    open: number;
+    volume: number;
+  }
 
-  const url = `/code/${data[0].code}`;
   return (
     <StockList>
       <table>
@@ -106,7 +129,7 @@ const StockTable = () => {
             return (
               <tr key={item}>
                 <td>{idx + 1}</td>
-                <Link to={url}>
+                <Link to={`/code/${item[0].code}`}>
                   <td>{item[0].name}</td>
                 </Link>
                 <td>{item[0].open}</td>

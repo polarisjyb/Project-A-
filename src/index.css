@@ -22,10 +22,3 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
-a,
-a:link,
-a:active,
-a:visited {
-  text-decoration: none;
-}
