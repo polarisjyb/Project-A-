@@ -1,9 +1,11 @@
-import styled from "styled-components";
-import Week from "../Chart/week";
-import Month from "../Chart/month";
-import ThreeMonth from "../Chart/threeMonth";
-import Year from "../Chart/Year";
 import { useState } from "react";
+import styled from "styled-components";
+
+import StockGraph from "./StockGraph";
+import CandleChartWeek from "../minho/CandleChartWeek";
+import CandleChartMonth from "../minho/CandleChartMonth";
+import CandleChartQuarter from "../minho/CandleChartQuarter";
+import CandleChartYear from "../minho/CandleChartYear";
 
 const Main = styled.div`
   width: 1180px;
@@ -48,11 +50,13 @@ const Main = styled.div`
     height: 100%;
   }
 `;
+
 const selectComponent: any = {
-  week: <Week />,
-  month: <Month />,
-  threeMonth: <ThreeMonth />,
-  year: <Year />,
+  week: <CandleChartWeek />,
+  month: <CandleChartMonth />,
+  threeMonth: <CandleChartQuarter />,
+  year: <CandleChartYear />,
+
 };
 
 const button = [
@@ -86,17 +90,50 @@ Main안에 div박스에 그래프를 원하는 날짜별로 볼 수 있는 카�
 날짜별로 클릭할때마다 캔들차트가 컴포넌트 변경
 */
 
-const StockGraphMain = () => {
+const StockGraphMain = () => {   
+
+  const selectComponent: any = {
+    CandleChartWeek: <CandleChartWeek />,
+    CandleChartMonth: <CandleChartMonth />,
+    CandleChartQuarter: <CandleChartQuarter />,
+    CandleChartYear: <CandleChartYear />,
+  };
+
+  const button: any = [
+    {
+      id: 1,
+      text: "일주일",
+      name: "CandleChartWeek",
+    },
+    {
+      id: 2,
+      text: "한달",
+      name: "CandleChartMonth",
+    },
+    {
+      id: 3,
+      text: "3개월",
+      name: "CandleChartQuarter",
+    },
+    {
+      id: 4,
+      text: "1년",
+      name: "CandleChartYear",
+    },
+  ];
+  
+
   const [content, setContent] = useState("week");
   const click = (e: any) => {
     const { name } = e.target;
     setContent(name);
   };
+
   return (
     <>
       <Main>
         <div>
-          {button.map((data) => {
+          {button.map((data: any) => {
             return (
               <button onClick={click} name={data.name} key={data.id}>
                 {data.text}
@@ -104,7 +141,11 @@ const StockGraphMain = () => {
             );
           })}
         </div>
+        
+        {/* <StockGraph></StockGraph> */}
+
         {content && <div>{selectComponent[content]}</div>}
+
       </Main>
     </>
   );

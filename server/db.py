@@ -96,7 +96,7 @@ def yj_strategy(code):
     conn.close()
     return result
 
-def data_for_chart(chart):
+def data_for_chart_w(chart):
     conn = dbconn()
     cur = conn.cursor()
     # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
@@ -108,6 +108,46 @@ def data_for_chart(chart):
     results = cur.fetchmany(42)
     conn.close()
     return results
+
+def data_for_chart_m(chart):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    cur.execute(sql)
+    company = cur.fetchone()
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    cur.execute(sql)
+    results = cur.fetchmany(7)
+    conn.close()
+    return results
+
+def data_for_chart_q(chart):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    cur.execute(sql)
+    company = cur.fetchone()
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    cur.execute(sql)
+    results = cur.fetchmany(21)
+    conn.close()
+    return results
+
+def data_for_chart_y(chart):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    cur.execute(sql)
+    company = cur.fetchone()
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    cur.execute(sql)
+    results = cur.fetchmany(72)
+    conn.close()
+    return results
+
 
 # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
 """
