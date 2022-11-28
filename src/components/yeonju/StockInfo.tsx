@@ -28,6 +28,7 @@ const StockBox1 = styled.div`
     & > h1 {
       padding-right: 15px;
       font-size: 36px;
+      font-weight: 600;
     }
     & > h2 {
       font-size: 32px;
