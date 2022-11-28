@@ -1,5 +1,10 @@
+import { useState } from "react";
 import styled from "styled-components";
 import StockGraph from "./StockGraph";
+import CandleChartWeek from "../minho/CandleChartWeek";
+import CandleChartMonth from "../minho/CandleChartMonth";
+import CandleChartQuarter from "../minho/CandleChartQuarter";
+import CandleChartYear from "../minho/CandleChartYear";
 
 // 메인안에 p태그로 날짜별로 이동할 수 있도록 해주었다
 const Main = styled.div`
@@ -39,6 +44,39 @@ Main안에 div박스에 그래프를 원하는 날짜별로 볼 수 있는 카�
 날짜별로 클릭할때마다 캔들차트가 컴포넌트 변경
 */
 const StockGraphMain = () => {
+  const [content, setContent] = useState();
+
+  const handleClickButton = (e: any) => {
+    const { name } = e.target;
+    setContent(name);
+  };
+
+  const selectComponent = {
+    Week: <CandleChartWeek />,
+    Month: <CandleChartMonth />,    
+    Quarter: <CandleChartQuarter />,
+    Year: <CandleChartYear />,
+  };
+
+  const button = [
+    {
+      id: "week",
+      name: "week",
+      value: "week"
+    },
+    {
+      id: "month",
+      name: "month",
+      value: "month"
+    },
+    {
+      id: "quarter",
+      name: "quarter",
+      value: "quarter"
+    },
+    
+  ]
+  
   return (
     <>
       <Main>
@@ -48,6 +86,7 @@ const StockGraphMain = () => {
           <p>3개월</p>
           <p>1년</p>
         </div>
+        
         <StockGraph></StockGraph>
       </Main>
     </>
