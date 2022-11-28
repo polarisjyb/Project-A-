@@ -28,6 +28,7 @@ const StockBox1 = styled.div`
     & > h1 {
       padding-right: 15px;
       font-size: 36px;
+      font-weight: 600;
     }
     & > h2 {
       font-size: 32px;
@@ -71,6 +72,15 @@ const StockBox2 = styled.div`
 /*
 주식의 정보 종가 / 종가별 증감 표시
 시가 / 고가 / 저가 / 종가 표시
+*/
+
+/*
+페이지의 랜더링이 데이터를 불러오는 것보다 빨라, 
+데이터를 불러오는 시간동안 loading이라는 값이 출력되게 했는데,
+데이터를 불러오는 순간 lodading에 false 값을 주어 출력이 멈추고 데이터를 출력 시키도록 설정해놨다.
+
+데이터를 불러오는 기준은 데이터의 배열이 1개이상이므로,
+데이터의 배열이 0보다 커질때, 데이터를 불러왔다고 인식하게 해주었다.
 */
 
 const StockInfo = ({ stockData }: any) => {

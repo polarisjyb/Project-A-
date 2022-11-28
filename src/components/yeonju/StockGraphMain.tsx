@@ -1,12 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
+
 import StockGraph from "./StockGraph";
 import CandleChartWeek from "../minho/CandleChartWeek";
 import CandleChartMonth from "../minho/CandleChartMonth";
 import CandleChartQuarter from "../minho/CandleChartQuarter";
 import CandleChartYear from "../minho/CandleChartYear";
 
-// 메인안에 p태그로 날짜별로 이동할 수 있도록 해주었다
 const Main = styled.div`
   width: 1180px;
   height: 550px;
@@ -14,12 +14,14 @@ const Main = styled.div`
   flex-direction: column;
   align-items: center;
   font-family: "GmarketSansMedium";
+  padding-top: 30px;
   & > div:nth-child(1) {
     width: inherit;
     height: 60px;
     display: flex;
     justify-content: space-between;
-    & > p {
+
+    & > button {
       display: flex;
       justify-content: center;
       align-items: flex-end;
@@ -27,14 +29,56 @@ const Main = styled.div`
       height: 50px;
       border-bottom: 2px solid darkgrey;
       font-size: 20px;
-      padding-bottom: 10px;
+      padding-bottom: 8px;
+
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      border-bottom: 1px solid black;
+      background: none;
+      font-family: "GmarketSansMedium";
+      cursor: pointer;
     }
-    & > p:nth-child(1) {
+
+    & > button:nth-child(1) {
       border-bottom-color: gray;
       border-bottom-width: 3px;
     }
   }
+  & > div:nth-child(2) {
+    width: 100%;
+    height: 100%;
+  }
 `;
+const selectComponent = {
+  week: <CandleChartWeek />,
+  month: <CandleChartMonth />,
+  threeMonth: <CandleChartQuarter />,
+  year: <CandleChartYear />,
+};
+
+const button = [
+  {
+    id: 1,
+    text: "일주일",
+    name: "week",
+  },
+  {
+    id: 2,
+    text: "한달",
+    name: "month",
+  },
+  {
+    id: 3,
+    text: "3개월",
+    name: "threeMonth",
+  },
+  {
+    id: 4,
+    text: "1년",
+    name: "year",
+  },
+];
 
 // 그래프를 보여주는 메인 페이지
 /* 
@@ -43,51 +87,63 @@ Main안에 div박스에 그래프를 원하는 날짜별로 볼 수 있는 카�
 그래프는 캔들차트 컴포넌트에서 가져온다. 
 날짜별로 클릭할때마다 캔들차트가 컴포넌트 변경
 */
-const StockGraphMain = () => {
-  const [content, setContent] = useState();
 
-  const handleClickButton = (e: any) => {
+const StockGraphMain = () => {   
+
+  const selectComponent: any = {
+    CandleChartWeek: <CandleChartWeek />,
+    CandleChartMonth: <CandleChartMonth />,
+    CandleChartQuarter: <CandleChartQuarter />,
+    CandleChartYear: <CandleChartYear />,
+  };
+
+  const button: any = [
+    {
+      id: 1,
+      text: "일주일",
+      name: "CandleChartWeek",
+    },
+    {
+      id: 2,
+      text: "한달",
+      name: "CandleChartMonth",
+    },
+    {
+      id: 3,
+      text: "3개월",
+      name: "CandleChartQuarter",
+    },
+    {
+      id: 4,
+      text: "1년",
+      name: "CandleChartYear",
+    },
+  ];
+  
+
+  const [content, setContent] = useState("week");
+  const click = (e: any) => {
     const { name } = e.target;
     setContent(name);
   };
 
-  const selectComponent = {
-    Week: <CandleChartWeek />,
-    Month: <CandleChartMonth />,    
-    Quarter: <CandleChartQuarter />,
-    Year: <CandleChartYear />,
-  };
-
-  const button = [
-    {
-      id: "week",
-      name: "week",
-      value: "week"
-    },
-    {
-      id: "month",
-      name: "month",
-      value: "month"
-    },
-    {
-      id: "quarter",
-      name: "quarter",
-      value: "quarter"
-    },
-    
-  ]
-  
   return (
     <>
       <Main>
         <div>
-          <p>일주일</p>
-          <p>1개월</p>
-          <p>3개월</p>
-          <p>1년</p>
+          {button.map((data: any) => {
+            return (
+              <button onClick={click} name={data.name} key={data.id}>
+                {data.text}
+              </button>
+            );
+          })}
         </div>
         
-        <StockGraph></StockGraph>
+        {/* <StockGraph></StockGraph> */}
+
+        {content && <div>{selectComponent[content]}</div>}
+
       </Main>
     </>
   );
