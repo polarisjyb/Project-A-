@@ -48,7 +48,7 @@ const Main = styled.div`
     height: 100%;
   }
 `;
-const selectComponent = {
+const selectComponent: any = {
   week: <Week />,
   month: <Month />,
   threeMonth: <ThreeMonth />,
