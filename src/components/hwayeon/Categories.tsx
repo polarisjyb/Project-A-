@@ -27,7 +27,6 @@ const categories = [
 const CategoriesBlock = styled.div`
   display: flex;
   width: 1480px;
-
   @media screen and (max-width: 768px) {
     width: 100%;
     overflow-x: auto;
@@ -54,12 +53,10 @@ const Category = styled.div`
   line-height: 70px;
   cursor: pointer;
   text-decoration: none;
-
   &:hover {
     background-color: #000;
     color: #fff;
   }
-
   &.active {
     font-weight: 600;
     border-bottom: 2px solid #000;

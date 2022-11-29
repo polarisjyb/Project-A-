@@ -1,9 +1,5 @@
-import styled from "styled-components";
-import Week from "../Chart/Week";
-import Month from "../Chart/Month";
-import ThreeMonth from "../Chart/ThreeMonth";
-import Year from "../Chart/Year";
 import { useState } from "react";
+import styled from "styled-components";
 
 import StockGraph from "./StockGraph";
 import CandleChartWeek from "../minho/CandleChartWeek";
@@ -41,6 +37,7 @@ const Main = styled.div`
       border-bottom: 1px solid black;
       background: none;
       font-family: "GmarketSansMedium";
+      cursor: pointer;
     }
 
     & > button:nth-child(1) {
@@ -96,13 +93,14 @@ Main안에 div박스에 그래프를 원하는 날짜별로 볼 수 있는 카�
 const StockGraphMain = () => {   
 
   const selectComponent: any = {
-    CandleChartWeek: <CandleChartWeek />,
-    CandleChartMonth: <CandleChartMonth />,
-    CandleChartQuarter: <CandleChartQuarter />,
-    CandleChartYear: <CandleChartYear />,
+    week: <CandleChartWeek />,
+    month: <CandleChartMonth />,
+    threeMonth: <CandleChartQuarter />,
+    year: <CandleChartYear />,
+  
   };
-
-  const button: any = [
+  
+  const button = [
     {
       id: 1,
       text: "일주일",
@@ -124,6 +122,35 @@ const StockGraphMain = () => {
       name: "CandleChartYear",
     },
   ];
+  // const selectComponent: any = {
+  //   CandleChartWeek: <CandleChartWeek />,
+  //   CandleChartMonth: <CandleChartMonth />,
+  //   CandleChartQuarter: <CandleChartQuarter />,
+  //   CandleChartYear: <CandleChartYear />,
+  // };
+
+  // const button: any = [
+  //   {
+  //     id: 1,
+  //     text: "일주일",
+  //     name: "CandleChartWeek",
+  //   },
+  //   {
+  //     id: 2,
+  //     text: "한달",
+  //     name: "CandleChartMonth",
+  //   },
+  //   {
+  //     id: 3,
+  //     text: "3개월",
+  //     name: "CandleChartQuarter",
+  //   },
+  //   {
+  //     id: 4,
+  //     text: "1년",
+  //     name: "CandleChartYear",
+  //   },
+  // ];
   
 
   const [content, setContent] = useState("week");
@@ -144,10 +171,11 @@ const StockGraphMain = () => {
             );
           })}
         </div>
-
+        
         {/* <StockGraph></StockGraph> */}
 
         {content && <div>{selectComponent[content]}</div>}
+
       </Main>
     </>
   );

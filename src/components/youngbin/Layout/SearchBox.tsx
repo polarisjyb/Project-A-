@@ -56,7 +56,7 @@ const Search = ({ placeholder }: { placeholder: any }) => {
   const arr: any = [];
   const [searchData, setSearchData] = useState(arr);
   
-  console.log(SearchList);
+  // console.log(SearchList);
   
   useEffect(() => {
     fetch(`http://127.0.0.1:5000/companylist`)

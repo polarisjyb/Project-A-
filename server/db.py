@@ -112,7 +112,6 @@ def yj_strategy(code):
 
 yj_strategy('000020')
 
-
 def data_for_chart_w(chart):
     conn = dbconn()
     cur = conn.cursor()
