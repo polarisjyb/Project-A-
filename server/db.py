@@ -24,7 +24,9 @@ def code_to_data(code):
     # 입력받은 코드와 일치하는 테이블명 조회
     cur.execute(sql)
     company = cur.fetchone()
-    sql2 = 'SELECT companylist.code, name, market, open, high, low, close, volume, day FROM ' + company["TABLE_NAME"] + ' AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC'
+    sql2 = 'SELECT companylist.code, name, market, open, high, low, close, volume, day FROM ' + \
+        company["TABLE_NAME"] + \
+        ' AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC'
     # companylist
     cur.execute(sql2)
     results = cur.fetchmany(100)
@@ -108,11 +110,6 @@ def yj_strategy(code):
         return [name, "매도"]
 
 
-<<<<<<< HEAD
-=======
-yj_strategy('000020')
-
->>>>>>> 1fc5ae9b7b3aad86c9e1ef5455a01abb934ba731
 def data_for_chart_w(chart):
     conn = dbconn()
     cur = conn.cursor()
@@ -207,7 +204,6 @@ def companylist_rank():
 
         # 테이블에서 CODE 라는 컬럼 삭제
         # sqlNext = f' ALTER TABLE {market}_{code}_m DROP code '
-
 
         # 2번 최신 일자, 전일자( 2022-01-28 일과 2022-01-27일 ) 사이에 있는 day 값의 code가 companylist의 code와 일치하는 행을 합쳐서 그 행의 정보를 가져옵니다.
         sqlNext = f'SELECT companylist.code AS code, market, name, open, high, low, close, volume, day FROM {market}_{code}_d AS api INNER JOIN companylist ON companylist.code = api.code WHERE day BETWEEN date("2022-01-27") AND date("2022-01-28")+1 ORDER BY day DESC LIMIT 2'

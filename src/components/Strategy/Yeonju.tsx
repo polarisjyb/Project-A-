@@ -32,7 +32,7 @@ const Main = styled.div`
       & > p:nth-child(2) {
         font-size: 64px;
         padding-right: 20px;
-        color: #0f9d58;
+        color: green;
         font-weight: 600;
       }
       & > p:nth-child(3) {
