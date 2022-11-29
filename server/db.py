@@ -16,7 +16,6 @@ def dbconn():
     )
     return conn
 
-
 def code_to_data(code):
     conn = dbconn()
     cur = conn.cursor()
@@ -24,8 +23,8 @@ def code_to_data(code):
     # 입력받은 코드와 일치하는 테이블명 조회
     cur.execute(sql)
     company = cur.fetchone()
-    sql2 = f'SELECT companylist.code, name, market, open, high, low, close, volume, day FROM ' +company["TABLE_NAME"] + ' AS a INNER JOIN aitrading_db.companylist ON companylist.code = a.code ORDER BY DAY DESC'
-    # 테이블에 등록된 날짜가 가장 최근 것부터 불러온다
+    sql2 = 'SELECT companylist.code, name, market, open, high, low, close, volume, day FROM ' + company["TABLE_NAME"] + ' AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC'
+    # companylist
     cur.execute(sql2)
     results = cur.fetchmany(100)
     conn.close()
@@ -87,14 +86,32 @@ def stock_info(code):
 def yj_strategy(code):
     conn = dbconn()
     cur = conn.cursor()
-    sql1 = f'SELECT companylist.code, name ,volume, day FROM aitrading_db.kospi_{code}_m AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 5;'
+    sql1 = f'SELECT companylist.code, name, volume,day FROM aitrading_db.kospi_{code}_m AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 5;'
+
     #  companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
     # code, name, volume, day를 불러온다.
     # 조건은 day기준으로 다섯개만 불러온다.
     cur.execute(sql1)
     result = cur.fetchall()
     conn.close()
-    return result
+
+    volume = []
+    for key in result:
+        print(key)
+        volume.append(key.get('volume'))
+        name = key.get('name')
+    print(name)
+    # 가장 최신의 평균량(2월)은 사용하지 않아서 배열에서 제거
+    del volume[0]
+    average = volume[1] + volume[2] + volume[3] / 3
+    if (average <= volume[0]):
+        return [name, "매수"]
+    else:
+        return [name, "매도"]
+
+
+yj_strategy('000020')
+
 
 def data_for_chart_w(chart):
     conn = dbconn()
@@ -150,6 +167,18 @@ def data_for_chart_y(chart):
 
 
 # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
+"""
+    1. 회사
+    2. 금일 종목
+    3. 전일 종목
+    회사 = [{알파}, {브라보}]
+    금일 = [{A}, {B}]
+    전일 = [{1}, {2}]
+    
+    결과 = [{알파, A, 1}], [{브라보, B, 2}]
+"""
+
+
 """
     1. 회사
     2. 금일 종목

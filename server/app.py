@@ -3,7 +3,6 @@ from flask_cors import CORS
 from db import code_to_data, code_to_name, all_company_name, companylist_rank, stock_info, yj_strategy, data_for_chart_w, data_for_chart_m, data_for_chart_q, data_for_chart_y
 from analysis import proposal_result
 
-
 app = Flask(__name__)
 CORS(app)
 app.config['JSON_AS_ASCII'] = False
@@ -12,7 +11,6 @@ app.config['JSON_AS_ASCII'] = False
 @app.route('/')
 def main():
     return 'Hello, World!'
-
 
 @app.route('/<code>')
 def get_data(code):
@@ -30,7 +28,6 @@ def allCompanyList():
 def companylistRank():
     data = companylist_rank()
     return data
-
 
 # 모든 회사 정보와 랜덤 회사 정보 가져오는 라우트
 # @app.route('/companylist')

@@ -27,7 +27,6 @@ const categories = [
 const CategoriesBlock = styled.div`
   display: flex;
   width: 1480px;
-  height: 70px;
 
   @media screen and (max-width: 768px) {
     width: 100%;
