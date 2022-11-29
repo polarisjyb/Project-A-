@@ -8,19 +8,19 @@ const categories = [
   },
   {
     name: "yeongbin",
-    text: "전략별",
+    text: "전략 분석",
   },
   {
     name: "yeonju",
-    text: "전략별",
+    text: "거래량 분석",
   },
   {
     name: "minho",
-    text: "전략별",
+    text: "전략 분석",
   },
   {
     name: "hwayeon",
-    text: "전략별",
+    text: "종합지수 분석",
   },
 ];
 
@@ -49,15 +49,17 @@ const Category = styled.div`
   border-left: 1px solid #000;
   border-right: 1px solid #000;
   font-family: "GmarketSansMedium";
-  font-size: 1.125rem;
+  font-size: 1.3rem;
   text-align: center;
   line-height: 70px;
   cursor: pointer;
   text-decoration: none;
+
   &:hover {
     background-color: #000;
     color: #fff;
   }
+
   &.active {
     font-weight: 600;
     border-bottom: 2px solid #000;
