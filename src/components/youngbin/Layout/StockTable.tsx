@@ -3,13 +3,13 @@ import axios from "axios";
 import styled from "styled-components";
 import { Link, Navigate } from "react-router-dom";
 
+
 const StockList = styled.div`
   width: 1480px;
   height: 1215px;
   background: #e4e4e4;
   border-radius: 20px;
   font-family: "GmarketSansMedium";
-
   a:hover,
   a:visited,
   a:link,
@@ -47,6 +47,17 @@ const StockList = styled.div`
   }
 `;
 
+// export interface StockObject {
+//   close: string;
+//   day: string;
+//   high: string;
+//   low: string;
+//   market: string;
+//   name: string;
+//   open: string;
+//   volume: string;
+//   [index: number]: any;
+// }
 export interface Companylist {
   close: string;
   code: string;

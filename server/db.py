@@ -25,6 +25,7 @@ def code_to_data(code):
     cur.execute(sql)
     company = cur.fetchone()
     sql2 = 'SELECT * FROM ' + company["TABLE_NAME"] + ' ORDER BY DAY DESC'
+
     # 테이블에 등록된 날짜가 가장 최근 것부터 불러온다
     cur.execute(sql2)
     results = cur.fetchmany(100)
@@ -127,8 +128,6 @@ def data_for_chart_w(chart):
     conn.close()
     return results
 
-<<<<<<< HEAD
-=======
 def data_for_chart_m(chart):
     conn = dbconn()
     cur = conn.cursor()
@@ -168,10 +167,9 @@ def data_for_chart_y(chart):
     conn.close()
     return results
 
->>>>>>> 75c0b605825a3b9ead793b273bc8080b85e5ad9d
+    # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
 
-# 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
-"""
+    """ 
     1. 회사
     2. 금일 종목
     3. 전일 종목
@@ -180,7 +178,7 @@ def data_for_chart_y(chart):
     전일 = [{1}, {2}]
     
     결과 = [{알파, A, 1}], [{브라보, B, 2}]
-"""
+    """
 
 
 def companylist_rank():
