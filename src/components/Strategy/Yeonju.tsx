@@ -23,7 +23,7 @@ const Main = styled.div`
     & > div:nth-child(3) {
       display: flex;
       align-items: center;
-      height: 80px;
+      height: 90px;
 
       & > p:nth-child(1) {
         font-size: 55px;
