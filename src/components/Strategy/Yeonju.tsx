@@ -77,7 +77,7 @@ const Yeonju = () => {
   if (recommend === undefined) {
     return <h1>데이터 로딩에 실패했습니다.</h1>;
   }
-  console.log(recommend);
+  //console.log(recommend);
 
   return (
     <Main>
