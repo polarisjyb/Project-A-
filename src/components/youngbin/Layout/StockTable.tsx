@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const StockList = styled.div`
   width: 1480px;
   height: auto;
   background: #e4e4e4;
   border-radius: 20px;
-  font-family: "GmarketSansMedium";
   & > table {
     width: 100%;
-    margin: 50px 0px;
+    padding: 50px 0px;
     border-spacing: 15px;
     & > thead {
       & > tr {
@@ -19,15 +17,13 @@ const StockList = styled.div`
           width: 250px;
           font-size: 32px;
           font-weight: 500;
-          line-height: 24px;
         }
       }
     }
     & > tbody {
-      text-align: center;
       & > tr {
         margin-bottom: 20px;
-        & > a {
+        & > td {
           width: 250px;
           font-size: 24px;
           text-align: center;
@@ -35,27 +31,14 @@ const StockList = styled.div`
           text-decoration: none;
         }
         & > td {
-          width: 250px;
           font-size: 24px;
-          text-align: center;
           color: #4c506b;
-        }
       }
     }
   }
-`;
-// export interface StockObject {
-//   close: string;
-//   day: string;
-//   high: string;
-//   low: string;
-//   market: string;
-//   name: string;
-//   open: string;
-//   volume: string;
-//   [index: number]: any;
-// }
-export interface Companylist {
+
+`
+export interface StockObject {
   close: string;
   code: string;
   day: string;
@@ -68,10 +51,9 @@ export interface Companylist {
 }
 
 const StockTable = () => {
-  // const [StockCode, setSTockCode] = useState<string>("000440");
-  // const [data, setData] = useState<StockObject[]>([]);
-  const [data, setData] = useState<Companylist[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [StockCode, setSTockCode] = useState<string>('000440');
+  const [data, setData] = useState<StockObject[]>([]);
+  let test = []
   useEffect(() => {
     const getDatas = async () => {
       try {
@@ -109,22 +91,21 @@ const StockTable = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item: any, index) => {
-            return (
+          {data.map((item:any) => {
+
+            return(
               <tr key={item}>
-                  <td>{index + 1}</td>
-                  <Link to={`/code/${item[0].code}`}>
-                    <td>{item[0].name}</td>
-                  </Link>
-                  <td>{item[0].open}</td>
-                  <td>{item[0].high}</td>
-                  <td>{item[0].low}</td>
-                  <td>{item[0].close}</td>
-                  <td>{item[0].volume}</td>
-                
+                <td>1</td>
+                <td>삼성전자</td>
+                <td>{item[0].open}</td>
+                <td>{item[0].high}</td>
+                <td>{item[0].low}</td>
+                <td>{item[0].close}</td>
+                <td>{item[0].volume}</td>
               </tr>
-            );
-          })}
+            )
+          })
+          }
         </tbody>
       </table>
     </StockList>

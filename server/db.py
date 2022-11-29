@@ -24,9 +24,9 @@ def code_to_data(code):
     # 입력받은 코드와 일치하는 테이블명 조회
     cur.execute(sql)
     company = cur.fetchone()
-    sql = 'SELECT * FROM ' + company["TABLE_NAME"] + ' ORDER BY DAY DESC'
+    sql2 = f'SELECT companylist.code, name, market, open, high, low, close, volume, day FROM ' +company["TABLE_NAME"] + ' AS a INNER JOIN aitrading_db.companylist ON companylist.code = a.code ORDER BY DAY DESC'
     # 테이블에 등록된 날짜가 가장 최근 것부터 불러온다
-    cur.execute(sql)
+    cur.execute(sql2)
     results = cur.fetchmany(100)
     conn.close()
     return results
@@ -48,12 +48,108 @@ def all_company_name():
     sql = 'SELECT * FROM `aitrading_db`.`companylist`'
     cur.execute(sql)
     results = cur.fetchall()
+
+# def all_company_name(code):
+#     conn = dbconn()
+#     cur = conn.cursor()
+#     if code == 'all':
+#         sql = 'SELECT name, code FROM `aitrading_db`.`companyList`'
+#         cur.execute(sql)
+#         results = cur.fetchall()
+#     elif code == 'random':
+#         sql = 'SELECT name, code FROM `aitrading_db`.`companyList` WHERE market = "KOSPI" ORDER BY RAND()'
+#         cur.execute(sql)
+#         results = cur.fetchmany(100)
+#     else:
+#         sql = f'SELECT name, code FROM `aitrading_db`.`companyList` WHERE code LIKE "%{code}%"'
+#         cur.execute(sql)
+#         results = cur.fetchmay(100)
+
     conn.close()
     return results
 
+# code 입력시 /code 페이지에 해당 코드의 주식데이터 출력
+
+
+def stock_info(code):
+    conn = dbconn()
+    cur = conn.cursor()
+    sql1 = f'SELECT companylist.code, name , market, open, high, low, close, volume, day  FROM aitrading_db.kospi_{code}_d AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 2;'
+    # companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
+    # code, name, market, open, high, low, close, volume, day를 불러온다.
+    # 조건은 최신순으로 두개만 불러온다.
+    cur.execute(sql1)
+    result = cur.fetchall()
+    conn.close()
+    return result
+
+
+def yj_strategy(code):
+    conn = dbconn()
+    cur = conn.cursor()
+    sql1 = f'SELECT companylist.code, name ,volume, day FROM aitrading_db.kospi_{code}_m AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 5;'
+    #  companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
+    # code, name, volume, day를 불러온다.
+    # 조건은 day기준으로 다섯개만 불러온다.
+    cur.execute(sql1)
+    result = cur.fetchall()
+    conn.close()
+    return result
+
+def data_for_chart_w(chart):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_d"'
+    cur.execute(sql)
+    company = cur.fetchone()
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    cur.execute(sql)
+    results = cur.fetchmany(42)
+    conn.close()
+    return results
+
+def data_for_chart_m(chart):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    cur.execute(sql)
+    company = cur.fetchone()
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    cur.execute(sql)
+    results = cur.fetchmany(7)
+    conn.close()
+    return results
+
+def data_for_chart_q(chart):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    cur.execute(sql)
+    company = cur.fetchone()
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    cur.execute(sql)
+    results = cur.fetchmany(21)
+    conn.close()
+    return results
+
+def data_for_chart_y(chart):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    cur.execute(sql)
+    company = cur.fetchone()
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    cur.execute(sql)
+    results = cur.fetchmany(72)
+    conn.close()
+    return results
+
+
 # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
-
-
 """
     1. 회사
     2. 금일 종목
@@ -71,8 +167,8 @@ def companylist_rank():
     cur = conn.cursor()
     sql = 'SELECT market, code, name FROM `aitrading_db`.`companylist`'
     cur.execute(sql)
-    results = cur.fetchmany(100)
-    print(results)
+    results = cur.fetchmany(50)
+    # print(results)
     # 주가 종목의 최신 일자, 전일자 정보 ( 시가, 고가, 저가, 종가, day, code )
     rankArray = []
 
@@ -88,6 +184,10 @@ def companylist_rank():
         # 각 d(day)로 끝나는 테이블에 CODE 라는 컬럼을 추가해서 그 안에 테이블 명 에 있는 code 값을 모든 행에 대입한다.
         # ex) kospi_000100_d 라는 테이블에 CODE 컬럼 추가 및 그 CODE 컬럼 안에 테이블 명 코드, 000100을 추가.
         # sqlNext = f' ALTER TABLE {market}_{code}_d ADD code VARCHAR(15) DEFAULT "{code}" '
+
+        # 테이블에서 CODE 라는 컬럼 삭제
+        # sqlNext = f' ALTER TABLE {market}_{code}_m DROP code '
+
 
         # 2번 최신 일자, 전일자( 2022-01-28 일과 2022-01-27일 ) 사이에 있는 day 값의 code가 companylist의 code와 일치하는 행을 합쳐서 그 행의 정보를 가져옵니다.
         sqlNext = f'SELECT companylist.code AS code, market, name, open, high, low, close, volume, day FROM {market}_{code}_d AS api INNER JOIN companylist ON companylist.code = api.code WHERE day BETWEEN date("2022-01-27") AND date("2022-01-28")+1 ORDER BY day DESC LIMIT 2'
@@ -121,7 +221,7 @@ def companylist_rank():
     # str 형식으로 가져오기
     # return str(rankArray)
     test = jsonify(rankArray)
-    print(test)
+    # print(test)
     return test
 
     # str 형식으로 가져오기
@@ -161,4 +261,5 @@ def companylist_rank():
     #     #         print(j)
     #     # stockArray.append(j)
     # print(rankArray)
+
     # conn.commit()
