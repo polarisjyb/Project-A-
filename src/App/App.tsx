@@ -13,12 +13,12 @@ const App = () => {
     <Routes>
       <Route element={<Header></Header>}>
         <Route path="/" element={<Main></Main>} />
-
-        <Route path="/code" element={<ResultPage></ResultPage>}>
-          <Route path="/code/yeongbin" element={<Hwayeon></Hwayeon>} />
-          <Route path="/code/yeonju" element={<Hwayeon></Hwayeon>} />
-          <Route path="/code/minho" element={<Hwayeon></Hwayeon>} />
-          <Route path="/code/hwayeon" element={<Hwayeon></Hwayeon>} />
+        <Route path="/code/:key" element={<ResultPage />}>
+          <Route path="/code/:key/" element={<MainStrategy></MainStrategy>} />
+          <Route path="/code/:key/yeongbin" element={<Youngbin></Youngbin>} />
+          <Route path="/code/:key/yeonju" element={<Yeonju></Yeonju>} />
+          <Route path="/code/:key/minho" element={<Minho></Minho>} />
+          <Route path="/code/:key/hwayeon" element={<Hwayeon></Hwayeon>} />
         </Route>
       </Route>
     </Routes>
