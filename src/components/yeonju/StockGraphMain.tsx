@@ -51,36 +51,7 @@ const Main = styled.div`
   }
 `;
 
-const selectComponent: any = {
-  week: <CandleChartWeek />,
-  month: <CandleChartMonth />,
-  threeMonth: <CandleChartQuarter />,
-  year: <CandleChartYear />,
 
-};
-
-const button = [
-  {
-    id: 1,
-    text: "일주일",
-    name: "week",
-  },
-  {
-    id: 2,
-    text: "한달",
-    name: "month",
-  },
-  {
-    id: 3,
-    text: "3개월",
-    name: "threeMonth",
-  },
-  {
-    id: 4,
-    text: "1년",
-    name: "year",
-  },
-];
 
 // 그래프를 보여주는 메인 페이지
 /* 
@@ -91,36 +62,65 @@ Main안에 div박스에 그래프를 원하는 날짜별로 볼 수 있는 카�
 */
 
 const StockGraphMain = () => {   
-
   const selectComponent: any = {
-    CandleChartWeek: <CandleChartWeek />,
-    CandleChartMonth: <CandleChartMonth />,
-    CandleChartQuarter: <CandleChartQuarter />,
-    CandleChartYear: <CandleChartYear />,
+    week: <CandleChartWeek />,
+    month: <CandleChartMonth />,
+    threeMonth: <CandleChartQuarter />,
+    year: <CandleChartYear />,
+  
   };
-
-  const button: any = [
+  
+  const button = [
     {
       id: 1,
       text: "일주일",
-      name: "CandleChartWeek",
+      name: "week",
     },
     {
       id: 2,
       text: "한달",
-      name: "CandleChartMonth",
+      name: "month",
     },
     {
       id: 3,
       text: "3개월",
-      name: "CandleChartQuarter",
+      name: "threeMonth",
     },
     {
       id: 4,
       text: "1년",
-      name: "CandleChartYear",
+      name: "year",
     },
   ];
+  // const selectComponent: any = {
+  //   CandleChartWeek: <CandleChartWeek />,
+  //   CandleChartMonth: <CandleChartMonth />,
+  //   CandleChartQuarter: <CandleChartQuarter />,
+  //   CandleChartYear: <CandleChartYear />,
+  // };
+
+  // const button: any = [
+  //   {
+  //     id: 1,
+  //     text: "일주일",
+  //     name: "CandleChartWeek",
+  //   },
+  //   {
+  //     id: 2,
+  //     text: "한달",
+  //     name: "CandleChartMonth",
+  //   },
+  //   {
+  //     id: 3,
+  //     text: "3개월",
+  //     name: "CandleChartQuarter",
+  //   },
+  //   {
+  //     id: 4,
+  //     text: "1년",
+  //     name: "CandleChartYear",
+  //   },
+  // ];
   
 
   const [content, setContent] = useState("week");
