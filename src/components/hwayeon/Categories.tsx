@@ -49,7 +49,6 @@ const CategoriesBlock = styled.div`
 const Category = styled.div`
   font-family: "GmarketSansMedium";
   font-size: 1.125rem;
-  cursor: pointer;
   white-space: pre;
   text-decoration: none;
   color: inherit;

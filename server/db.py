@@ -88,20 +88,17 @@ def yj_strategy(code):
     conn = dbconn()
     cur = conn.cursor()
     sql1 = f'SELECT companylist.code, name, volume,day FROM aitrading_db.kospi_{code}_m AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 5;'
-
     #  companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
     # code, name, volume, day를 불러온다.
     # 조건은 day기준으로 다섯개만 불러온다.
     cur.execute(sql1)
     result = cur.fetchall()
     conn.close()
-
     volume = []
     for key in result:
         print(key)
         volume.append(key.get('volume'))
         name = key.get('name')
-    print(name)
     # 가장 최신의 평균량(2월)은 사용하지 않아서 배열에서 제거
     del volume[0]
     average = volume[1] + volume[2] + volume[3] / 3
@@ -109,9 +106,6 @@ def yj_strategy(code):
         return [name, "매수"]
     else:
         return [name, "매도"]
-
-
-yj_strategy('000020')
 
 
 def data_for_chart_w(chart):
@@ -127,8 +121,7 @@ def data_for_chart_w(chart):
     conn.close()
     return results
 
-<<<<<<< HEAD
-=======
+
 def data_for_chart_m(chart):
     conn = dbconn()
     cur = conn.cursor()
@@ -141,6 +134,7 @@ def data_for_chart_m(chart):
     results = cur.fetchmany(7)
     conn.close()
     return results
+
 
 def data_for_chart_q(chart):
     conn = dbconn()
@@ -155,6 +149,7 @@ def data_for_chart_q(chart):
     conn.close()
     return results
 
+
 def data_for_chart_y(chart):
     conn = dbconn()
     cur = conn.cursor()
@@ -168,7 +163,6 @@ def data_for_chart_y(chart):
     conn.close()
     return results
 
->>>>>>> 75c0b605825a3b9ead793b273bc8080b85e5ad9d
 
 # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
 """

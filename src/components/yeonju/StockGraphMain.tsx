@@ -41,11 +41,14 @@ const Main = styled.div`
       border-bottom: 1px solid black;
       background: none;
       font-family: "GmarketSansMedium";
-    }
-
-    & > button:nth-child(1) {
-      border-bottom-color: gray;
-      border-bottom-width: 3px;
+      &:active,
+      &:hover,
+      &:focus,
+      &:disabled {
+        cursor: pointer;
+        border-bottom-color: gray;
+        border-bottom-width: 3px;
+      }
     }
   }
   & > div:nth-child(2) {
