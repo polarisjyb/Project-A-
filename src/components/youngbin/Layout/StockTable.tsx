@@ -3,7 +3,6 @@ import axios from "axios";
 import styled from "styled-components";
 import { Link, Navigate } from "react-router-dom";
 
-
 const StockList = styled.div`
   width: 1480px;
   background: #e4e4e4;

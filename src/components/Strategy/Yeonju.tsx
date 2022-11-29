@@ -23,7 +23,7 @@ const Main = styled.div`
     & > div:nth-child(3) {
       display: flex;
       align-items: center;
-      height: 80px;
+      height: 90px;
 
       & > p:nth-child(1) {
         font-size: 55px;
@@ -32,7 +32,7 @@ const Main = styled.div`
       & > p:nth-child(2) {
         font-size: 64px;
         padding-right: 20px;
-        color: #0f9d58;
+        color: green;
         font-weight: 600;
       }
       & > p:nth-child(3) {
@@ -77,7 +77,7 @@ const Yeonju = () => {
   if (recommend === undefined) {
     return <h1>데이터 로딩에 실패했습니다.</h1>;
   }
-  console.log(recommend);
+  //console.log(recommend);
 
   return (
     <Main>

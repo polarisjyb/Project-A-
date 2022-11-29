@@ -49,10 +49,15 @@ const Category = styled.div`
   border-left: 1px solid #000;
   border-right: 1px solid #000;
   font-family: "GmarketSansMedium";
+<<<<<<< HEAD
+  font-size: 1.125rem;
+  white-space: pre;
+=======
   font-size: 1.3rem;
   text-align: center;
   line-height: 70px;
   cursor: pointer;
+>>>>>>> 87a31e2b83c9ec63164a1e6611164960e7d46dae
   text-decoration: none;
 
   &:hover {

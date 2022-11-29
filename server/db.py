@@ -24,7 +24,9 @@ def code_to_data(code):
     # 입력받은 코드와 일치하는 테이블명 조회
     cur.execute(sql)
     company = cur.fetchone()
-    sql2 = 'SELECT companylist.code, name, market, open, high, low, close, volume, day FROM ' + company["TABLE_NAME"] + ' AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC'
+    sql2 = 'SELECT companylist.code, name, market, open, high, low, close, volume, day FROM ' + \
+        company["TABLE_NAME"] + \
+        ' AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC'
     # companylist
     cur.execute(sql2)
     results = cur.fetchmany(100)
@@ -88,20 +90,17 @@ def yj_strategy(code):
     conn = dbconn()
     cur = conn.cursor()
     sql1 = f'SELECT companylist.code, name, volume,day FROM aitrading_db.kospi_{code}_m AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 5;'
-
     #  companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
     # code, name, volume, day를 불러온다.
     # 조건은 day기준으로 다섯개만 불러온다.
     cur.execute(sql1)
     result = cur.fetchall()
     conn.close()
-
     volume = []
     for key in result:
         print(key)
         volume.append(key.get('volume'))
         name = key.get('name')
-    print(name)
     # 가장 최신의 평균량(2월)은 사용하지 않아서 배열에서 제거
     del volume[0]
     average = volume[1] + volume[2] + volume[3] / 3
@@ -110,8 +109,6 @@ def yj_strategy(code):
     else:
         return [name, "매도"]
 
-
-yj_strategy('000020')
 
 def data_for_chart_w(chart):
     conn = dbconn()
@@ -126,6 +123,7 @@ def data_for_chart_w(chart):
     conn.close()
     return results
 
+
 def data_for_chart_m(chart):
     conn = dbconn()
     cur = conn.cursor()
@@ -139,6 +137,7 @@ def data_for_chart_m(chart):
     conn.close()
     return results
 
+
 def data_for_chart_q(chart):
     conn = dbconn()
     cur = conn.cursor()
@@ -151,6 +150,7 @@ def data_for_chart_q(chart):
     results = cur.fetchmany(21)
     conn.close()
     return results
+
 
 def data_for_chart_y(chart):
     conn = dbconn()
@@ -204,7 +204,6 @@ def companylist_rank():
 
         # 테이블에서 CODE 라는 컬럼 삭제
         # sqlNext = f' ALTER TABLE {market}_{code}_m DROP code '
-
 
         # 2번 최신 일자, 전일자( 2022-01-28 일과 2022-01-27일 ) 사이에 있는 day 값의 code가 companylist의 code와 일치하는 행을 합쳐서 그 행의 정보를 가져옵니다.
         sqlNext = f'SELECT companylist.code AS code, market, name, open, high, low, close, volume, day FROM {market}_{code}_d AS api INNER JOIN companylist ON companylist.code = api.code WHERE day BETWEEN date("2022-01-27") AND date("2022-01-28")+1 ORDER BY day DESC LIMIT 2'
