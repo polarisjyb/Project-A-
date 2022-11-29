@@ -39,9 +39,8 @@ const Main = styled.div`
   }
 `;
 
-
 const Hwayeon = () => {
-  const [resultData, SetResultData] = useState([]);
+  const [resultData, SetResultData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
@@ -65,12 +64,18 @@ const Hwayeon = () => {
     return <h1>데이터 로딩에 실패했습니다.</h1>;
   }
 
-  console.log(resultData);
+  let result:never[] = [];
+  result.push(resultData);
 
   return (
     <Main>
-      {resultData}
+      {result[0] === "매수" ? (
+        <p>매수를 추천합니다!</p>
+      ) : (
+        <p>매도를 추천합니다!</p>
+      )}
     </Main>
   );
 };
+
 export default Hwayeon;

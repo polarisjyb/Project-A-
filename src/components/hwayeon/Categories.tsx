@@ -26,13 +26,9 @@ const categories = [
 
 const CategoriesBlock = styled.div`
   display: flex;
-  justify-content: space-around;
-  padding: 1rem;
   width: 1480px;
-  margin: 0 auto;
-  border-top: 2px solid #000;
-  border-left: 2px solid #000;
-  border-right: 2px solid #000;
+  height: 70px;
+
   @media screen and (max-width: 768px) {
     width: 100%;
     overflow-x: auto;
@@ -47,12 +43,18 @@ const CategoriesBlock = styled.div`
 `;
 
 const Category = styled.div`
+  width: 296px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
   font-family: "GmarketSansMedium";
   font-size: 1.125rem;
+  text-align: center;
+  line-height: 70px;
   cursor: pointer;
-  white-space: pre;
   text-decoration: none;
-  color: inherit;
   &:hover {
     background-color: #000;
     color: #fff;
