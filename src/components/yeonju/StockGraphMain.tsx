@@ -1,11 +1,6 @@
 import styled from "styled-components";
-import Week from "../Chart/Week";
-import Month from "../Chart/Month";
-import ThreeMonth from "../Chart/ThreeMonth";
-import Year from "../Chart/Year";
 import { useState } from "react";
 
-import StockGraph from "./StockGraph";
 import CandleChartWeek from "../minho/CandleChartWeek";
 import CandleChartMonth from "../minho/CandleChartMonth";
 import CandleChartQuarter from "../minho/CandleChartQuarter";
@@ -41,6 +36,7 @@ const Main = styled.div`
       border-bottom: 1px solid black;
       background: none;
       font-family: "GmarketSansMedium";
+
       &:active,
       &:hover,
       &:focus,
@@ -56,13 +52,6 @@ const Main = styled.div`
     height: 100%;
   }
 `;
-
-const selectComponent = {
-  week: <Week />,
-  month: <Month />,
-  threeMonth: <ThreeMonth />,
-  year: <Year />,
-};
 
 // 그래프를 보여주는 메인 페이지
 /* 
@@ -102,12 +91,6 @@ const StockGraphMain = () => {
       name: "year",
     },
   ];
-  // const selectComponent: any = {
-  //   CandleChartWeek: <CandleChartWeek />,
-  //   CandleChartMonth: <CandleChartMonth />,
-  //   CandleChartQuarter: <CandleChartQuarter />,
-  //   CandleChartYear: <CandleChartYear />,
-  // };
 
   // const button: any = [
   //   {
