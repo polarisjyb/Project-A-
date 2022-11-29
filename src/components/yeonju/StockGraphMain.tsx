@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import styled from "styled-components";
+=======
+>>>>>>> 1fc5ae9b7b3aad86c9e1ef5455a01abb934ba731
 import { useState } from "react";
+import styled from "styled-components";
 
 import CandleChartWeek from "../minho/CandleChartWeek";
 import CandleChartMonth from "../minho/CandleChartMonth";
@@ -36,6 +40,11 @@ const Main = styled.div`
       border-bottom: 1px solid black;
       background: none;
       font-family: "GmarketSansMedium";
+<<<<<<< HEAD
+=======
+      cursor: pointer;
+    }
+>>>>>>> 1fc5ae9b7b3aad86c9e1ef5455a01abb934ba731
 
       &:active,
       &:hover,
@@ -53,6 +62,10 @@ const Main = styled.div`
   }
 `;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1fc5ae9b7b3aad86c9e1ef5455a01abb934ba731
 // 그래프를 보여주는 메인 페이지
 /* 
 Main안에 div박스에 그래프를 원하는 날짜별로 볼 수 있는 카테고리 버튼을 만들었다
@@ -61,14 +74,16 @@ Main안에 div박스에 그래프를 원하는 날짜별로 볼 수 있는 카�
 날짜별로 클릭할때마다 캔들차트가 컴포넌트 변경
 */
 
-const StockGraphMain = () => {
+const StockGraphMain = () => {   
+  
   const selectComponent: any = {
     week: <CandleChartWeek />,
     month: <CandleChartMonth />,
     threeMonth: <CandleChartQuarter />,
     year: <CandleChartYear />,
+  
   };
-
+  
   const button = [
     {
       id: 1,
@@ -114,6 +129,7 @@ const StockGraphMain = () => {
   //     name: "CandleChartYear",
   //   },
   // ];
+  
 
   const [content, setContent] = useState("week");
   const click = (e: any) => {
@@ -133,10 +149,11 @@ const StockGraphMain = () => {
             );
           })}
         </div>
-
+        
         {/* <StockGraph></StockGraph> */}
 
         {content && <div>{selectComponent[content]}</div>}
+
       </Main>
     </>
   );

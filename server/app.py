@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from db import code_to_data, code_to_name, all_company_name, companylist_rank, stock_info, yj_strategy, data_for_chart_w, data_for_chart_m, data_for_chart_q, data_for_chart_y
+from analysis import proposal_result
 
 app = Flask(__name__)
 CORS(app)
@@ -11,21 +12,21 @@ app.config['JSON_AS_ASCII'] = False
 def main():
     return 'Hello, World!'
 
-# @app.route('/<code>')
-# def get_data(code):
-#     name = code_to_name(code)
-#     data = code_to_data(code)
-#     return [name, data]
+@app.route('/<code>')
+def get_data(code):
+    data = code_to_data(code)
+    return data
+
 
 @app.route('/companylist')
 def allCompanyList():
     data = all_company_name()
     return data
 
+
 @app.route('/rank')
 def companylistRank():
     data = companylist_rank()
-    
     return data
 
 # 모든 회사 정보와 랜덤 회사 정보 가져오는 라우트
@@ -75,6 +76,12 @@ def code_q(chart):
 def code_y(chart):
     data = data_for_chart_y(chart)
     return data
+
+@app.route('/<code>/result')
+def result(code):
+    data = proposal_result(code)
+    return data
+
 
 if __name__ == '__main__':
     app.run(debug=True)
