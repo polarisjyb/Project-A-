@@ -8,31 +8,26 @@ const categories = [
   },
   {
     name: "yeongbin",
-    text: "전략별",
+    text: "전략 분석",
   },
   {
     name: "yeonju",
-    text: "전략별",
+    text: "거래량 분석",
   },
   {
     name: "minho",
-    text: "전략별",
+    text: "전략 분석",
   },
   {
     name: "hwayeon",
-    text: "전략별",
+    text: "종합지수 분석",
   },
 ];
 
 const CategoriesBlock = styled.div`
   display: flex;
-  justify-content: space-around;
-  padding: 1rem;
   width: 1480px;
-  margin: 0 auto;
-  border-top: 2px solid #000;
-  border-left: 2px solid #000;
-  border-right: 2px solid #000;
+
   @media screen and (max-width: 768px) {
     width: 100%;
     overflow-x: auto;
@@ -47,12 +42,18 @@ const CategoriesBlock = styled.div`
 `;
 
 const Category = styled.div`
+  width: 296px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
   font-family: "GmarketSansMedium";
-  font-size: 1.125rem;
+  font-size: 1.3rem;
+  text-align: center;
+  line-height: 70px;
   cursor: pointer;
-  white-space: pre;
   text-decoration: none;
-  color: inherit;
 
   &:hover {
     background-color: #000;
