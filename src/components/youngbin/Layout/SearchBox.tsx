@@ -11,6 +11,7 @@ const SearchBox = styled.div`
   width: 1287px;
   padding-bottom: 100px;
 `;
+
 // 검색창 Input 텍스트 입력창
 const SearchInputs = styled.div`
   background: #f5f5f5;
