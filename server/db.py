@@ -114,7 +114,7 @@ def yj_strategy(code):
 yj_strategy('000020')
 
 
-def data_for_chart(chart):
+def data_for_chart_w(chart):
     conn = dbconn()
     cur = conn.cursor()
     # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
@@ -127,6 +127,48 @@ def data_for_chart(chart):
     conn.close()
     return results
 
+<<<<<<< HEAD
+=======
+def data_for_chart_m(chart):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    cur.execute(sql)
+    company = cur.fetchone()
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    cur.execute(sql)
+    results = cur.fetchmany(7)
+    conn.close()
+    return results
+
+def data_for_chart_q(chart):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    cur.execute(sql)
+    company = cur.fetchone()
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    cur.execute(sql)
+    results = cur.fetchmany(21)
+    conn.close()
+    return results
+
+def data_for_chart_y(chart):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    cur.execute(sql)
+    company = cur.fetchone()
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    cur.execute(sql)
+    results = cur.fetchmany(72)
+    conn.close()
+    return results
+
+>>>>>>> 75c0b605825a3b9ead793b273bc8080b85e5ad9d
 
 # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
 """
@@ -146,7 +188,7 @@ def companylist_rank():
     cur = conn.cursor()
     sql = 'SELECT market, code, name FROM `aitrading_db`.`companylist`'
     cur.execute(sql)
-    results = cur.fetchmany(100)
+    results = cur.fetchmany(50)
     # print(results)
     # 주가 종목의 최신 일자, 전일자 정보 ( 시가, 고가, 저가, 종가, day, code )
     rankArray = []
