@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Week from "../Chart/week";
-import Month from "../Chart/month";
-import ThreeMonth from "../Chart/threeMonth";
+import Week from "../Chart/Week";
+import Month from "../Chart/Month";
+import ThreeMonth from "../Chart/ThreeMonth";
 import Year from "../Chart/Year";
 import { useState } from "react";
 
@@ -35,7 +35,6 @@ const Main = styled.div`
       border-bottom: 1px solid black;
       background: none;
       font-family: "GmarketSansMedium";
-      cursor: pointer;
     }
 
     & > button:nth-child(1) {
@@ -48,6 +47,9 @@ const Main = styled.div`
     height: 100%;
   }
 `;
+
+interface component {}
+
 const selectComponent = {
   week: <Week />,
   month: <Month />,
@@ -86,7 +88,7 @@ Main안에 div박스에 그래프를 원하는 날짜별로 볼 수 있는 카�
 날짜별로 클릭할때마다 캔들차트가 컴포넌트 변경
 */
 
-const StockGraphMain = () => {
+const StockGraphMain = (): React.ReactElement => {
   const [content, setContent] = useState("week");
   const click = (e: any) => {
     const { name } = e.target;
