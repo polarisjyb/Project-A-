@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { Link, Navigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 const StockList = styled.div`
   width: 1480px;
   border-radius: 20px;
@@ -41,6 +40,21 @@ const StockList = styled.div`
         }
       }
     }
+  }
+`;
+
+export const Loading = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & > img {
+    width: 30%;
+    height: 30%;
+  }
+  & > h1 {
+    font-family: GmarketSansMedium;
+    font-size: 50px;
   }
 `;
 
@@ -85,7 +99,12 @@ const StockTable = () => {
   }, []);
 
   if (loading) {
-    return <h1>로딩중입니다!</h1>;
+    return (
+      <Loading>
+        <img src="/img/loading.gif" alt="loading"></img>
+        <h1>로딩중입니다</h1>
+      </Loading>
+    );
   }
 
   if (data === undefined) {

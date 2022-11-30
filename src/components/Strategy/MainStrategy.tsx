@@ -75,6 +75,21 @@ const Result = styled.div`
 const Equl = styled.div`
   font-size: 32px;
 `;
+
+const Loading = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & > img {
+    width: 20%;
+    height: 20%;
+  }
+  & > h1 {
+    font-family: GmarketSansMedium;
+    font-size: 50px;
+  }
+`;
 const MainStrategy = () => {
   const [allStrategy, setallStrategy] = useState();
   const [loading, setLoading] = useState(true);
@@ -91,7 +106,12 @@ const MainStrategy = () => {
   }, []);
 
   if (loading) {
-    return <h1>로딩중입니다!</h1>;
+    return (
+      <Loading>
+        <img src="/img/loading.gif" alt="loading"></img>
+        <h1>로딩중입니다</h1>
+      </Loading>
+    );
   }
 
   if (allStrategy === undefined) {
