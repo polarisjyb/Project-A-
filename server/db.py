@@ -105,9 +105,9 @@ def yj_strategy(code):
     del volume[0]
     average = volume[1] + volume[2] + volume[3] / 3
     if (average <= volume[0]):
-        return [name, "매수"]
+        return "매수"
     else:
-        return [name, "매도"]
+        return "매도"
 
 
 def data_for_chart_w(chart):
@@ -174,7 +174,7 @@ def data_for_chart_y(chart):
     회사 = [{알파}, {브라보}]
     금일 = [{A}, {B}]
     전일 = [{1}, {2}]
-    
+
     결과 = [{알파, A, 1}], [{브라보, B, 2}]
 """
 
@@ -245,20 +245,20 @@ def companylist_rank():
 
     """
         #  영빈 생각
-        
+
         # 1번 {market}_{code}_d 모든 테이블에 RECENT 컬럼을 추가 한다.
         # sqlNext = f'ALTER TABLE {market}_{code}_d ADD COLUMN RECENT VARCHAR(1)'
-        
+
         # 2번 {market}_{code}_d 모든 테이블의 컬럼에 있는 가장 큰 NO의 RECENT 컬럼에 1을 추가한다. ( 가장 최신 일자가 NO가 가장 큼 )
         # sqlNext = f'UPDATE {market}_{code}_d SET RECENT = "1" WHERE NO = (SELECT MAX(NO) FROM {market}_{code}_d)'
-        
+
         # 3번 {market}_{code}_d 모든 테이블의 컬럼에 있는 NO가 가장 크지 않은 컬럼들의 RECENT 컬럼에 2을 추가한다. ( 가장 최신 일자 제외 모든 일자의 RECENT 값에 2가 들어감 )
         # 문제점: 중간 일자의 주가 정보( 시가, 고가, 저가, 종가, 거래량 등 )을 가져오기가 힘듦.
         # sqlNext = f'UPDATE {market}_{code}_d SET RECENT = "2" WHERE NO != (SELECT MAX(NO) FROM {market}_{code}_d)'
-        
+
         # 4번 {market}_{code}_d 모든 테이블의 RECENT 컬럼 값이 1인 행 (가로) 을 가져온다. ( 최신 일자 )
         # sqlNext = f' SELECT day, open, high, low, close, volume, RECENT FROM {market}_{code}_d WHERE RECENT = "1" '
-        
+
         # 3번 {market}_{code}_d 모든 테이블의 RECENT 컬럼 값이 2인 행 (가로) 을 가져오는데 내림차 순으로 1개의 행만 가져온다. ( 최신 전일자 )
         # sqlNext = f' SELECT day, open, high, low, close, volume, RECENT FROM {market}_{code}_d WHERE RECENT = "2" ORDER BY NO DESC LIMIT 1 '
     """
@@ -279,3 +279,51 @@ def companylist_rank():
     # print(rankArray)
 
     # conn.commit()
+
+
+# 화연님 결과
+def calculate_avg(code):
+    datas = code_to_data(code)
+    temp = []
+    # print(len(datas))
+    for i in range(len(datas)):
+        avg = (datas[i]['open'] + datas[i]['high'] +
+               datas[i]['low'] + datas[i]['close']) / 4
+        temp.append(avg)
+    return (sum(temp)/100)
+
+
+def today_price(code):
+    datas = code_to_data(code)
+    return datas[0]['open']
+
+
+def proposal_result(code):
+    averge_value = calculate_avg(code)
+    today = today_price(code)
+    # print(averge_value)
+    # print(today)
+    high = averge_value + (averge_value * 0.01)
+    # low = averge_value - (averge_value * 0.01)
+    if today >= high:
+        return "매수"
+    else:
+        return "매도"
+
+
+def all_strategy(code):
+    maesu = 0
+    maedo = 0
+    if (yj_strategy(code) == "매수"):
+        maesu = maesu + 1
+    else:
+        maedo = maedo + 1
+    if (proposal_result(code) == "매수"):
+        maesu = maesu + 1
+    else:
+        maedo = maedo + 1
+    print("결과값", maesu, maedo)
+    return [maesu, maedo]
+
+
+# all_strategy('000020')

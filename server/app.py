@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
-from db import code_to_data, code_to_name, all_company_name, companylist_rank, stock_info, yj_strategy, data_for_chart_w, data_for_chart_m, data_for_chart_q, data_for_chart_y
-from analysis import proposal_result
+from db import code_to_data, code_to_name, all_company_name, companylist_rank, stock_info, data_for_chart_w, data_for_chart_m, data_for_chart_q, data_for_chart_y
+from analysis import proposal_result, yj_strategy, all_strategy
 
 app = Flask(__name__)
 CORS(app)
@@ -11,6 +11,7 @@ app.config['JSON_AS_ASCII'] = False
 @app.route('/')
 def main():
     return 'Hello, World!'
+
 
 @app.route('/<code>')
 def get_data(code):
@@ -57,29 +58,40 @@ def yj(code):
     data = yj_strategy(code)
     return data
 
+
 @app.route('/chart_w/<chart>')
 def code_w(chart):
     data = data_for_chart_w(chart)
     return data
+
 
 @app.route('/chart_m/<chart>')
 def code_m(chart):
     data = data_for_chart_m(chart)
     return data
 
+
 @app.route('/chart_q/<chart>')
 def code_q(chart):
     data = data_for_chart_q(chart)
     return data
+
 
 @app.route('/chart_y/<chart>')
 def code_y(chart):
     data = data_for_chart_y(chart)
     return data
 
+
 @app.route('/<code>/result')
 def result(code):
     data = proposal_result(code)
+    return data
+
+
+@app.route('/<code>/allstrategy')
+def strategy(code):
+    data = all_strategy(code)
     return data
 
 
