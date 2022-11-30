@@ -58,17 +58,18 @@ def yj_strategy(code):
 
 # 전체 전략코드
 def all_strategy(code):
-    maesu = 0
-    maedo = 0
-    if (yj_strategy(code) == "매수"):
-        maesu = maesu + 1
-    else:
-        maedo = maedo + 1
-    if (proposal_result(code) == "매수"):
-        maesu = maesu + 1
-    else:
-        maedo = maedo + 1
-    print("결과값", maesu, maedo)
-    return [maesu, maedo]
+    def strategy(deff):
+        maesu = 0
+        maedo = 0
+        if (deff == "매수"):
+            maesu = maesu + 1
+        else:
+            maedo = maesu + 1
+        return [maesu, maedo]
+    st1 = strategy(yj_strategy(code))
+    st2 = strategy(proposal_result(code))
+    allSt = [st1[i] + st2[i] for i in range(len(st1))]
+    return allSt
 
-# print(proposal_result('003100'))
+
+# print(all_strategy('000020'))
