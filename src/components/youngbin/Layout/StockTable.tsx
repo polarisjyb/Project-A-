@@ -5,6 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 
 const StockList = styled.div`
   width: 1480px;
+
   border-radius: 20px;
   font-family: "GmarketSansMedium";
   a:hover,
@@ -43,7 +44,6 @@ const StockList = styled.div`
     }
   }
 `;
-
 // export interface StockObject {
 //   close: string;
 //   day: string;
@@ -55,6 +55,7 @@ const StockList = styled.div`
 //   volume: string;
 //   [index: number]: any;
 // }
+
 export interface Companylist {
   close: string;
   code: string;

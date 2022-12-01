@@ -16,7 +16,6 @@ def dbconn():
     )
     return conn
 
-
 def code_to_data(code):
     conn = dbconn()
     cur = conn.cursor()
@@ -203,6 +202,18 @@ def data_for_chart_y(chart):
 
 
 # 주식 종목 최신 일자 시가 고가 종가 저가 거래량 데이터 출력
+"""
+    1. 회사
+    2. 금일 종목
+    3. 전일 종목
+    회사 = [{알파}, {브라보}]
+    금일 = [{A}, {B}]
+    전일 = [{1}, {2}]
+    
+    결과 = [{알파, A, 1}], [{브라보, B, 2}]
+"""
+
+
 """
     1. 회사
     2. 금일 종목
