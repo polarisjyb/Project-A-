@@ -105,7 +105,8 @@ def all_strategy(code):
         return [maesu, maedo]
     st1 = strategy(yj_strategy(code))
     st2 = strategy(proposal_result(code))
-    allSt = [st1[i] + st2[i] for i in range(len(st1))]
+    st3 = strategy(yb_strategy(code))
+    allSt = [st1[i] + st2[i] + st3[i] for i in range(len(st1))]
     return allSt
 
 
