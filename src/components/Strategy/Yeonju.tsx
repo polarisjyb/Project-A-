@@ -23,19 +23,15 @@ const Main = styled.div`
     & > div:nth-child(3) {
       display: flex;
       align-items: center;
-      height: 80px;
+      height: 90px;
 
       & > p:nth-child(1) {
-        font-size: 55px;
-        padding-right: 20px;
-      }
-      & > p:nth-child(2) {
         font-size: 64px;
         padding-right: 20px;
-        color: #0f9d58;
+        color: green;
         font-weight: 600;
       }
-      & > p:nth-child(3) {
+      & > p:nth-child(2) {
         font-size: 55px;
       }
     }
@@ -77,16 +73,17 @@ const Yeonju = () => {
   if (recommend === undefined) {
     return <h1>데이터 로딩에 실패했습니다.</h1>;
   }
-  console.log(recommend);
+  //console.log(recommend);
 
   return (
     <Main>
       <div>
         <p>지난 3개월의 평균거래량과 최근 한달의 거래량을 비교했을때</p>
-        <p>최근 한달의 거래량이 증가했으므로</p>
+        <p>
+          최근 한달의 거래량이 {recommend === "매수" ? "증가" : "감소"}했으므로
+        </p>
         <div>
-          <p>{recommend[0]}</p>
-          <p>{recommend[1]}</p>
+          <p>{recommend}</p>
           <p>를</p>
         </div>
         <div>

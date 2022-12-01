@@ -23,7 +23,9 @@ def code_to_data(code):
     # 입력받은 코드와 일치하는 테이블명 조회
     cur.execute(sql)
     company = cur.fetchone()
-    sql2 = 'SELECT companylist.code, name, market, open, high, low, close, volume, day FROM ' + company["TABLE_NAME"] + ' AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC'
+    sql2 = 'SELECT companylist.code, name, market, open, high, low, close, volume, day FROM ' + \
+        company["TABLE_NAME"] + \
+        ' AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC'
     # companylist
     cur.execute(sql2)
     results = cur.fetchmany(100)
@@ -81,37 +83,7 @@ def stock_info(code):
     result = cur.fetchall()
     conn.close()
     return result
-
-
-def yj_strategy(code):
-    conn = dbconn()
-    cur = conn.cursor()
-    sql1 = f'SELECT companylist.code, name, volume,day FROM aitrading_db.kospi_{code}_m AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 5;'
-
-    #  companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
-    # code, name, volume, day를 불러온다.
-    # 조건은 day기준으로 다섯개만 불러온다.
-    cur.execute(sql1)
-    result = cur.fetchall()
-    conn.close()
-
-    volume = []
-    for key in result:
-        print(key)
-        volume.append(key.get('volume'))
-        name = key.get('name')
-    print(name)
-    # 가장 최신의 평균량(2월)은 사용하지 않아서 배열에서 제거
-    del volume[0]
-    average = volume[1] + volume[2] + volume[3] / 3
-    if (average <= volume[0]):
-        return [name, "매수"]
-    else:
-        return [name, "매도"]
-
-
-yj_strategy('000020')
-
+    
 def data_for_chart_w(chart):
     conn = dbconn()
     cur = conn.cursor()
@@ -124,6 +96,7 @@ def data_for_chart_w(chart):
     results = cur.fetchmany(42)
     conn.close()
     return results
+
 
 def data_for_chart_m(chart):
     conn = dbconn()
@@ -138,6 +111,7 @@ def data_for_chart_m(chart):
     conn.close()
     return results
 
+
 def data_for_chart_q(chart):
     conn = dbconn()
     cur = conn.cursor()
@@ -150,6 +124,7 @@ def data_for_chart_q(chart):
     results = cur.fetchmany(21)
     conn.close()
     return results
+
 
 def data_for_chart_y(chart):
     conn = dbconn()
@@ -173,22 +148,9 @@ def data_for_chart_y(chart):
     회사 = [{알파}, {브라보}]
     금일 = [{A}, {B}]
     전일 = [{1}, {2}]
-    
+
     결과 = [{알파, A, 1}], [{브라보, B, 2}]
 """
-
-
-"""
-    1. 회사
-    2. 금일 종목
-    3. 전일 종목
-    회사 = [{알파}, {브라보}]
-    금일 = [{A}, {B}]
-    전일 = [{1}, {2}]
-    
-    결과 = [{알파, A, 1}], [{브라보, B, 2}]
-"""
-
 
 def companylist_rank():
     conn = dbconn()
@@ -215,7 +177,6 @@ def companylist_rank():
 
         # 테이블에서 CODE 라는 컬럼 삭제
         # sqlNext = f' ALTER TABLE {market}_{code}_m DROP code '
-
 
         # 2번 최신 일자, 전일자( 2022-01-28 일과 2022-01-27일 ) 사이에 있는 day 값의 code가 companylist의 code와 일치하는 행을 합쳐서 그 행의 정보를 가져옵니다.
         sqlNext = f'SELECT companylist.code AS code, market, name, open, high, low, close, volume, day FROM {market}_{code}_d AS api INNER JOIN companylist ON companylist.code = api.code WHERE day BETWEEN date("2022-01-27") AND date("2022-01-28")+1 ORDER BY day DESC LIMIT 2'
@@ -257,20 +218,20 @@ def companylist_rank():
 
     """
         #  영빈 생각
-        
+
         # 1번 {market}_{code}_d 모든 테이블에 RECENT 컬럼을 추가 한다.
         # sqlNext = f'ALTER TABLE {market}_{code}_d ADD COLUMN RECENT VARCHAR(1)'
-        
+
         # 2번 {market}_{code}_d 모든 테이블의 컬럼에 있는 가장 큰 NO의 RECENT 컬럼에 1을 추가한다. ( 가장 최신 일자가 NO가 가장 큼 )
         # sqlNext = f'UPDATE {market}_{code}_d SET RECENT = "1" WHERE NO = (SELECT MAX(NO) FROM {market}_{code}_d)'
-        
+
         # 3번 {market}_{code}_d 모든 테이블의 컬럼에 있는 NO가 가장 크지 않은 컬럼들의 RECENT 컬럼에 2을 추가한다. ( 가장 최신 일자 제외 모든 일자의 RECENT 값에 2가 들어감 )
         # 문제점: 중간 일자의 주가 정보( 시가, 고가, 저가, 종가, 거래량 등 )을 가져오기가 힘듦.
         # sqlNext = f'UPDATE {market}_{code}_d SET RECENT = "2" WHERE NO != (SELECT MAX(NO) FROM {market}_{code}_d)'
-        
+
         # 4번 {market}_{code}_d 모든 테이블의 RECENT 컬럼 값이 1인 행 (가로) 을 가져온다. ( 최신 일자 )
         # sqlNext = f' SELECT day, open, high, low, close, volume, RECENT FROM {market}_{code}_d WHERE RECENT = "1" '
-        
+
         # 3번 {market}_{code}_d 모든 테이블의 RECENT 컬럼 값이 2인 행 (가로) 을 가져오는데 내림차 순으로 1개의 행만 가져온다. ( 최신 전일자 )
         # sqlNext = f' SELECT day, open, high, low, close, volume, RECENT FROM {market}_{code}_d WHERE RECENT = "2" ORDER BY NO DESC LIMIT 1 '
     """
@@ -291,3 +252,6 @@ def companylist_rank():
     # print(rankArray)
 
     # conn.commit()
+
+
+# all_strategy('000020')

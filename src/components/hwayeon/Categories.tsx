@@ -8,7 +8,7 @@ const categories = [
   },
   {
     name: "yeongbin",
-    text: "전략 분석",
+    text: "평균 주가 분석",
   },
   {
     name: "yeonju",
@@ -49,6 +49,7 @@ const Category = styled.div`
   border-left: 1px solid #000;
   border-right: 1px solid #000;
   font-family: "GmarketSansMedium";
+  white-space: pre;
   font-size: 1.3rem;
   text-align: center;
   line-height: 70px;
