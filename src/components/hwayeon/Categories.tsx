@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { NavLink, useLinkClickHandler } from "react-router-dom";
+import { useState } from "react";
 
 const categories = [
   {
@@ -71,6 +71,7 @@ const Category = styled.div`
 `;
 
 const Categories = ({ click }: any) => {
+
   return (
     <CategoriesBlock>
       {categories.map((c) => (
