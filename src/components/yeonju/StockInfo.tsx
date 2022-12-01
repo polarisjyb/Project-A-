@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import { Loading_h1 } from "./Loading";
 // 메인 크기 지정
 const MainBox = styled.div`
   height: 140px;
@@ -69,12 +69,7 @@ const StockBox2 = styled.div`
     }
   }
 `;
-const Loading = styled.h1`
-  font-family: "GmarketSansMedium";
-  font-size: 40px;
-  text-align: center;
-  padding: 100px 0 100px 0;
-`;
+
 /*
 주식의 정보 종가 / 종가별 증감 표시
 시가 / 고가 / 저가 / 종가 표시
@@ -98,7 +93,7 @@ const StockInfo = ({ stockData }: any) => {
   }, [stockData]);
 
   if (loading) {
-    return <Loading>로딩중입니다</Loading>;
+    return <Loading_h1 />;
   }
 
   if (stockData === undefined) {

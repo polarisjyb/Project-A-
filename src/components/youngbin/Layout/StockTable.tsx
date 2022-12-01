@@ -43,18 +43,21 @@ const StockList = styled.div`
     }
   }
 `;
+export const Loading = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & > img {
+    width: 30%;
+    height: 30%;
+  }
+  & > h1 {
+    font-family: GmarketSansMedium;
+    font-size: 50px;
+  }
+`;
 
-// export interface StockObject {
-//   close: string;
-//   day: string;
-//   high: string;
-//   low: string;
-//   market: string;
-//   name: string;
-//   open: string;
-//   volume: string;
-//   [index: number]: any;
-// }
 export interface Companylist {
   close: string;
   code: string;

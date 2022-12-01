@@ -1,4 +1,9 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+
+
 const Youngbin = () => {
-  return <h1>영빈전략페이지 입니다</h1>;
+  return <h1>ㅇㅇ</h1>;
 };
 export default Youngbin;

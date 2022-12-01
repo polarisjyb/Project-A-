@@ -16,7 +16,6 @@ def dbconn():
     )
     return conn
 
-
 def code_to_data(code):
     conn = dbconn()
     cur = conn.cursor()
@@ -84,8 +83,7 @@ def stock_info(code):
     result = cur.fetchall()
     conn.close()
     return result
-
-
+    
 def data_for_chart_w(chart):
     conn = dbconn()
     cur = conn.cursor()
@@ -153,7 +151,6 @@ def data_for_chart_y(chart):
 
     결과 = [{알파, A, 1}], [{브라보, B, 2}]
 """
-
 
 def companylist_rank():
     conn = dbconn()
