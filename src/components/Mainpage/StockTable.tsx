@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Loading_img } from "@/components/yeonju/Loading";
+import { Loading_img } from "@/components/Common/Loading";
 const StockList = styled.div`
   width: 1480px;
   border-radius: 20px;

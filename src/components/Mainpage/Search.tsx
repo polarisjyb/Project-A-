@@ -50,29 +50,31 @@ const SearchIcon = styled.div`
 const DataResult = styled.div``;
 
 const Search = ({ placeholder }: { placeholder: any }) => {
-  
-  const [SearchList, setSearchList] = useState('');
+  const [SearchList, setSearchList] = useState("");
   const [loading, setLoading] = useState(true);
   const arr: any = [];
   const [searchData, setSearchData] = useState(arr);
-  
+
   // console.log(SearchList);
-  
+
   useEffect(() => {
     fetch(`http://127.0.0.1:5000/companylist`)
-    .then((res) => res.json())
-    .then((res: any) => {
-      setSearchData(res)
-      console.log(res)
-    });
+      .then((res) => res.json())
+      .then((res: any) => {
+        setSearchData(res);
+        console.log(res);
+      });
   }, []);
-  
+
   const onChange = (e: any) => {
     setSearchList(e.target.value);
   };
 
   const filter = searchData.filter((list: any) => {
-    return list.name.replace(' ', '').toLocaleLowerCase().includes(SearchList.replace(' ', '').toLocaleLowerCase());
+    return list.name
+      .replace(" ", "")
+      .toLocaleLowerCase()
+      .includes(SearchList.replace(" ", "").toLocaleLowerCase());
   });
 
   // useEffect(() => {
@@ -82,30 +84,33 @@ const Search = ({ placeholder }: { placeholder: any }) => {
   //       setLoading(false);
   //       setSearchData(response.data)
   //       console.log(response.data);
-        
+
   //     } catch (err) {
   //       console.log(err);
   //     }
   //   };
   //   getDatas();
   // }, []);
-  
-  
-  
+
   return (
     <SearchBox>
       <SearchInputs>
         <SearchIcon>
           <BsSearch size="40" />
         </SearchIcon>
-        <input type="text" value={SearchList} placeholder={placeholder} onChange={onChange}/>
-          <div>
-            {/* {filter.map((item: any) => (
+        <input
+          type="text"
+          value={SearchList}
+          placeholder={placeholder}
+          onChange={onChange}
+        />
+        <div>
+          {/* {filter.map((item: any) => (
                 // <Link key={item.code} to={`/Detail/${item.code}`}>
               <div>{item.name}</div>
                 // </Link>
             ))} */}
-          </div>
+        </div>
       </SearchInputs>
     </SearchBox>
   );

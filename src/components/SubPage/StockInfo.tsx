@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Loading_h1 } from "./Loading";
+import { Loading_h1 } from "../Common/Loading";
 // 메인 크기 지정
 const MainBox = styled.div`
   height: 140px;

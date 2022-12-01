@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { Loading_img } from "@/components/yeonju/Loading";
+import { Loading_img } from "../Common/Loading";
 const Main = styled.div`
   width: 1180px;
   height: 450px;

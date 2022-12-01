@@ -3,8 +3,8 @@ import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import StockInfo from "../yeonju/StockInfo";
-import StockGraphMain from "../yeonju/StockGraphMain";
+import StockInfo from "./StockInfo";
+import StockGraphMain from "./StockGraphMain";
 
 const Main = styled.div`
   width: 1480px;
