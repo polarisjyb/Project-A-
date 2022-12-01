@@ -2,7 +2,7 @@ from db import code_to_data;
 
 def calculate_avg(code):
     datas = code_to_data(code)
-    temp = [];
+    temp = []
     # print(len(datas))
     for i in range (len(datas)):
         avg = (datas[i]['open'] + datas[i]['high'] + datas[i]['low'] + datas[i]['close']) / 4 
