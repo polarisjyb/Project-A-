@@ -1,8 +1,6 @@
-from db import code_to_data, dbconn
+from db import code_to_data, dbconn, algorithm_avg, algorithm_year;
 
 # 화연님 전략코드
-
-
 def calculate_avg(code):
     datas = code_to_data(code)
     temp = []
@@ -30,7 +28,6 @@ def proposal_result(code):
         return ("매수")
     else:
         return ("매도")
-
 
 # 연주 전략코드
 def yj_strategy(code):
@@ -92,6 +89,70 @@ def yb_strategy(code):
     else:
         return ["매도"]
 
+#  민호 전략
+def reco_trading(code):
+    avg = algorithm_avg(code)
+    allD = algorithm_year(code)
+    count_open = 0
+    count_close = 0
+    count_high = 0
+    count_low = 0
+
+    for index, value in enumerate(allD):
+        # print(index)
+        # print(allD[index])
+        # print(index, value)
+
+        if value["OPEN"] >= avg["avg_open"]:
+            count_open += 1
+        else: 
+            count_open -= 1
+        
+        if value["CLOSE"] >= avg["avg_close"]:
+            count_close += 1
+        else: 
+            count_close -= 1
+
+        if value["HIGH"] >= avg["avg_high"]:
+            count_high += 1
+        else: 
+            count_high -= 1
+        
+        if value["LOW"] >= avg["avg_low"]:
+            count_low += 1
+        else: 
+            count_low -= 1
+        
+    percentOpen = count_open /len(allD) * 100
+    percentClose = count_close/len(allD) * 100
+    percentLow = count_high/len(allD) * 100
+    percentHigh = count_high/len(allD) * 100
+
+    count_sum = 2
+    if percentOpen >= 80: 
+        count_sum += 1
+    else:
+        count_sum -= 1
+    
+    if percentClose >= 80: 
+        count_sum += 1
+    else:
+        count_sum -= 1
+    
+    if percentLow >= 80: 
+        count_sum += 1
+    else:
+        count_sum -= 1
+
+    if percentHigh >= 80: 
+        count_sum += 1
+    else:
+        count_sum -= 1
+    
+    if count_sum >= 2:
+        return ["매수"]
+    else :
+        return ["매도"]
 
 # 전체 전략코드
 def all_strategy(code):
@@ -106,8 +167,12 @@ def all_strategy(code):
     st1 = strategy(yj_strategy(code))
     st2 = strategy(proposal_result(code))
     st3 = strategy(yb_strategy(code))
-    allSt = [st1[i] + st2[i] + st3[i] for i in range(len(st1))]
+    st4 = strategy(reco_trading(code))
+    allSt = [st1[i] + st2[i] + st3[i] + st4[i] for i in range(len(st1))]
     return allSt
 
-
 # print(all_strategy('000020'))
+# print(proposal_result('003100')) 
+
+
+
