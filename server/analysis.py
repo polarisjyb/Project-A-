@@ -57,6 +57,8 @@ def yj_strategy(code):
 
 # 영빈 전략
 # 최근 1주일 동안의 시, 고, 종, 저 가격의 평균 값이 분기 단위 (3개월) 시가, 고가, 종가, 저가의 평균 값과 같거나 0.01% 이상 높으면 매수, 낮으면 매도를 추천한다.
+
+
 def yb_strategy(code):
     conn = dbconn()
     cur = conn.cursor()
@@ -66,31 +68,33 @@ def yb_strategy(code):
     sql2 = f'SELECT companylist.code, name, open, high, low, close, day FROM aitrading_db.kospi_{code}_d AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 7;'
     cur.execute(sql2)
     result2 = cur.fetchall()
-    
+
     # 최근 1주일
     priceWeek = []
-    for i in range (len(result2)) :
-        weekAverage = (result2[i]['open'] + result2[i]['high'] + result2[i]['low'] + result2[i]['close']) / 4
-    
+    for i in range(len(result2)):
+        weekAverage = (result2[i]['open'] + result2[i]['high'] +
+                       result2[i]['low'] + result2[i]['close']) / 4
+
     priceWeek.append(weekAverage)
-    
+
     print(priceWeek[0])
-    
+
     # 분기
     priceQuarter = []
-    for i in range (len(result)) :
-        QuarteAaverage = (result[i]['open'] + result[i]['high'] + result[i]['low'] + result[i]['close']) / 4
-        
+    for i in range(len(result)):
+        QuarteAaverage = (result[i]['open'] + result[i]
+                          ['high'] + result[i]['low'] + result[i]['close']) / 4
+
     priceQuarter.append(QuarteAaverage)
     # print(round(priceQuarter))
     print(priceQuarter[0])
-    
+
     conn.close()
-    
-    if (priceWeek[0] >= ( priceQuarter[0] + priceQuarter[0] * 0.01 )):
-        return ["매수"]
+
+    if (priceWeek[0] >= (priceQuarter[0] + priceQuarter[0] * 0.01)):
+        return "매수"
     else:
-        return ["매도"]
+        return "매도"
 
 
 # 전체 전략코드
@@ -105,7 +109,8 @@ def all_strategy(code):
         return [maesu, maedo]
     st1 = strategy(yj_strategy(code))
     st2 = strategy(proposal_result(code))
-    allSt = [st1[i] + st2[i] for i in range(len(st1))]
+    st3 = strategy(yb_strategy(code))
+    allSt = [st1[i] + st2[i] + st3[i] for i in range(len(st1))]
     return allSt
 
 
