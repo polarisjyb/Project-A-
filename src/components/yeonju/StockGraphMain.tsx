@@ -52,6 +52,7 @@ const Main = styled.div`
   }
 `;
 
+
 // 그래프를 보여주는 메인 페이지
 /* 
 Main안에 div박스에 그래프를 원하는 날짜별로 볼 수 있는 카테고리 버튼을 만들었다
@@ -61,13 +62,15 @@ Main안에 div박스에 그래프를 원하는 날짜별로 볼 수 있는 카�
 */
 
 const StockGraphMain = () => {
+  
   const selectComponent: any = {
     week: <CandleChartWeek />,
     month: <CandleChartMonth />,
     threeMonth: <CandleChartQuarter />,
     year: <CandleChartYear />,
+  
   };
-
+  
   const button = [
     {
       id: 1,
@@ -90,7 +93,7 @@ const StockGraphMain = () => {
       name: "year",
     },
   ];
-
+  
   // const button: any = [
   //   {
   //     id: 1,

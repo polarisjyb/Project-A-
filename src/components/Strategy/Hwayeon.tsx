@@ -4,36 +4,22 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const Main = styled.div`
-  width: 1180px;
-  height: 450px;
-  padding: 50px 0 50px 0;
   font-family: GmarketSansMedium;
-  font-size: 30px;
+  font-size: 35px;
   & > div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    & p {
-      font-size: 32px;
-    }
     & > div {
       display: flex;
       padding-top: 20px;
       align-items: center;
-      & > img {
-        width: 145px;
-        height: 145px;
+      & > p:nth-child(1) {
+        font-size: 80px;
+        color: green;
       }
-      & > div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        & > p:nth-child(1) {
-          font-size: 80px;
-        }
-        & > p:nth-child(2) {
-          font-size: 48px;
-        }
+      & > p:nth-child(2) {
+        font-size: 48px;
       }
     }
   }
@@ -69,11 +55,14 @@ const Hwayeon = () => {
 
   return (
     <Main>
-      {result[0] === "매수" ? (
-        <p>매수를 추천합니다!</p>
-      ) : (
-        <p>매도를 추천합니다!</p>
-      )}
+      <div>
+        <p>최근 100일간의 종합지수 분석 결과</p>
+        <p>오늘 가격이 0.1% 이상 증가 하였으므로</p>
+        <div>
+          <p>{result}</p>
+          <p>를 추천합니다.</p>
+        </div>
+      </div>
     </Main>
   );
 };

@@ -189,8 +189,7 @@ def algorithm_year(code):
     sql = f'SELECT OPEN, HIGH, LOW, CLOSE FROM {company["TABLE_NAME"]} WHERE DAY > (NOW() - INTERVAL 6 YEAR) ORDER BY NO'
     cur.execute(sql)
     results = cur.fetchall()    
-    conn.close()
-       
+    conn.close()       
     return results
 
 

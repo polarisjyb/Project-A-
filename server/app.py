@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-from db import code_to_data, code_to_name, all_company_name, companylist_rank, stock_info, yj_strategy, data_for_chart_w, data_for_chart_m, data_for_chart_q, data_for_chart_y, algorithm_avg, algorithm_year
-from analysis import proposal_result, reco_trading
 
+from db import code_to_data, code_to_name, all_company_name, companylist_rank, stock_info, data_for_chart_w, data_for_chart_m, data_for_chart_q, data_for_chart_y, algorithm_avg, algorithm_year
+from analysis import proposal_result, yj_strategy, all_strategy, yb_strategy, reco_trading
 
 
 app = Flask(__name__)
@@ -13,6 +13,7 @@ app.config['JSON_AS_ASCII'] = False
 @app.route('/')
 def main():
     return 'Hello, World!'
+
 
 @app.route('/<code>')
 def get_data(code):
@@ -59,29 +60,38 @@ def yj(code):
     data = yj_strategy(code)
     return data
 
+@app.route('/yb/<code>')
+def yb(code):
+    data = yb_strategy(code)
+    return data
+
 @app.route('/chart_w/<chart>')
 def code_w(chart):
     data = data_for_chart_w(chart)
     return data
+
 
 @app.route('/chart_m/<chart>')
 def code_m(chart):
     data = data_for_chart_m(chart)
     return data
 
+
 @app.route('/chart_q/<chart>')
 def code_q(chart):
     data = data_for_chart_q(chart)
     return data
+
 
 @app.route('/chart_y/<chart>')
 def code_y(chart):
     data = data_for_chart_y(chart)
     return data
 
-@app.route('/trading/<code>')
-def al_trading(code):
-    data = reco_trading(code)
+
+@app.route('/<code>/result')
+def result(code):
+    data = proposal_result(code)
     return data
 
 @app.route('/al_avg/<code>')
@@ -93,6 +103,17 @@ def al_avg(code):
 def al_y(code):
     data = algorithm_year(code)
     return data
+
+@app.route('/reco_trading/<code>')
+def al_trading(code):
+    data = reco_trading(code)
+    return data
+
+@app.route('/<code>/allstrategy')
+def strategy(code):
+    data = all_strategy(code)
+    return data
+
 
 if __name__ == '__main__':
     app.run(debug=True)

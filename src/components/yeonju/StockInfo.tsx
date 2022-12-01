@@ -69,6 +69,12 @@ const StockBox2 = styled.div`
     }
   }
 `;
+const Loading = styled.h1`
+  font-family: "GmarketSansMedium";
+  font-size: 40px;
+  text-align: center;
+  padding: 100px 0 100px 0;
+`;
 /*
 주식의 정보 종가 / 종가별 증감 표시
 시가 / 고가 / 저가 / 종가 표시
@@ -92,7 +98,7 @@ const StockInfo = ({ stockData }: any) => {
   }, [stockData]);
 
   if (loading) {
-    return <h1>로딩중입니다</h1>;
+    return <Loading>로딩중입니다</Loading>;
   }
 
   if (stockData === undefined) {
