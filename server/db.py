@@ -24,11 +24,11 @@ def code_to_data(code):
     # 입력받은 코드와 일치하는 테이블명 조회
     cur.execute(sql)
     company = cur.fetchone()
-    sql2 = 'SELECT companylist.code, name, market, open, high, low, close, volume, day FROM ' + \
+    sql = 'SELECT companylist.code, name, market, open, high, low, close, volume, day FROM ' + \
         company["TABLE_NAME"] + \
         ' AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC'
     # companylist
-    cur.execute(sql2)
+    cur.execute(sql)
     results = cur.fetchmany(100)
     conn.close()
     return results
@@ -159,10 +159,38 @@ def data_for_chart_y(chart):
     sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
     cur.execute(sql)
     company = cur.fetchone()
-    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(DAY, "%Y-%m-%d") as DAY FROM {company["TABLE_NAME"]} ORDER BY day DESC'
     cur.execute(sql)
     results = cur.fetchmany(72)
     conn.close()
+    return results
+
+def algorithm_avg(code):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{code}_d"'
+    cur.execute(sql)
+    company = cur.fetchone()
+
+    sql = f'SELECT round(AVG(OPEN)) AS avg_open, round(AVG(HIGH)) AS avg_high, round(AVG(low)) AS avg_low, round(AVG(close)) AS avg_close FROM {company["TABLE_NAME"]} ORDER BY no'
+    cur.execute(sql)     
+    results = cur.fetchone()    
+    return results
+
+def algorithm_year(code):
+    conn = dbconn()
+    cur = conn.cursor()
+    # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{code}_d"'
+    cur.execute(sql)
+    company = cur.fetchone()
+
+    sql = f'SELECT OPEN, HIGH, LOW, CLOSE FROM {company["TABLE_NAME"]} WHERE DAY > (NOW() - INTERVAL 6 YEAR) ORDER BY NO'
+    cur.execute(sql)
+    results = cur.fetchall()    
+    conn.close()
+       
     return results
 
 
