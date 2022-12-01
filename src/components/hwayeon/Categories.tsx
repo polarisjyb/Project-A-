@@ -16,7 +16,7 @@ const categories = [
   },
   {
     name: "minho",
-    text: "전략 분석",
+    text: "등락률 분석",
   },
   {
     name: "hwayeon",
