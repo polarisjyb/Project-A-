@@ -9,6 +9,8 @@ import StockGraphMain from "../yeonju/StockGraphMain";
 const Main = styled.div`
   width: 1480px;
   border: 1px solid black;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
   padding: 60px 150px 60px 150px;
   display: flex;
   flex-direction: column;
