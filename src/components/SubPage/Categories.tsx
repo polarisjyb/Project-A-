@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { NavLink, useLinkClickHandler } from "react-router-dom";
+import React, { useState } from "react";
 
 const categories = [
   {
     name: "",
-    text: "종합 검색",
+    text: "종합 결과",
   },
   {
     name: "yeongbin",
-    text: "평균 주가 분석",
+    text: "평균주가 분석",
   },
   {
     name: "yeonju",
@@ -72,6 +72,7 @@ const Category = styled.div`
 `;
 
 const Categories = ({ click }: any) => {
+
   return (
     <CategoriesBlock>
       {categories.map((c) => (
