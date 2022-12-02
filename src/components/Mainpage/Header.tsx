@@ -1,6 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
 import styled from "styled-components";
-import Search from "./SearchBox";
 
 const HeaderBox = styled.div`
   width: 100%;
@@ -16,12 +15,11 @@ const HeaderBox = styled.div`
       cursor: pointer;
       color: ${({ theme }) => theme.orange};
     }
+    & > img {
+      width: 135px;
+      height: 140px;
+    }
   }
-`;
-
-const HeaderLogo = styled.img`
-  width: 135px;
-  height: 140px;
 `;
 
 const Header = () => {
@@ -29,10 +27,9 @@ const Header = () => {
     <>
       <HeaderBox>
         <Link to="/">
-          <HeaderLogo src="/img/logo.png" alt="logo" />
+          <img src="/img/logo.png" alt="logo" />
         </Link>
       </HeaderBox>
-      <Search placeholder="Enter a Stock Name.." />
       <Outlet />
     </>
   );

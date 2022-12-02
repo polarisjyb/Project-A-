@@ -1,8 +1,7 @@
 import styled from "styled-components";
 // import Search from "./SearchBox";
 import StockTable from "./StockTable";
-import { Outlet } from "react-router-dom";
-
+import Search from "./Search";
 const MainBox = styled.div`
   width: 1480px;
 
@@ -13,13 +12,12 @@ const MainBox = styled.div`
 `;
 
 const Main = () => {
-  
   return (
     <>
       <MainBox>
+        <Search placeholder="Enter a Stock Name.."></Search>
         <StockTable></StockTable>
       </MainBox>
-      <Outlet />
     </>
   );
 };
