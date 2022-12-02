@@ -71,7 +71,15 @@ const Category = styled.div`
   }
 `;
 
+
+
 const Categories = ({ click }: any) => {
+  const [color, setColor] = useState({ backgound: "#333"});
+
+  // const tabColor = (name: ) => {
+
+  // }
+
 
   return (
     <CategoriesBlock>
@@ -79,7 +87,8 @@ const Categories = ({ click }: any) => {
         <Category
           key={c.name}
           onClick={() => {
-            click(c.name);
+            click(c.name)
+            // tabColor(c.name)
           }}
         >
           {c.text}

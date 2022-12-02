@@ -91,7 +91,8 @@ def yb_strategy(code):
     else:
         return ["매도"]
 
-#  민호 전략
+# 민호 전략
+# 각 종목의 전체기간 평균가를 최근 6년간 데이터와 비교해서 상승률이 80퍼센트 이상일 경우 매수 추천 아닐경우 매도추천
 def reco_trading(code):
     avg = algorithm_avg(code)
     allD = algorithm_year(code)
