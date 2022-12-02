@@ -27,9 +27,9 @@ def proposal_result(code):
     high = averge_value + (averge_value * 0.01)
     # low = averge_value - (averge_value * 0.01)
     if today >= high:
-        return ["증가", "매수"];
+        return ["증가", "매수"]
     else:
-        return ["감소", "매도"];
+        return ["감소", "매도"]
 
 # 연주 전략코드
 def yj_strategy(code):

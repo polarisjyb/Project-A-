@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
 const categories = [
   {
@@ -79,7 +79,7 @@ const Categories = ({ click }: any) => {
         <Category
           key={c.name}
           onClick={() => {
-            click(c.name);
+            click(c.name)
           }}
         >
           {c.text}
