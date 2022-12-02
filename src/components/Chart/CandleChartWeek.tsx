@@ -4,14 +4,11 @@ import { Chart } from "react-google-charts";
 import { useLocation } from "react-router-dom";
 import IntefaceCompany from "./InterfaceCompany";
 
-
-
-
 export default function CandleChart() {
   useLocation();
   // console.log(useLocation());
   const code = location.pathname.split("/")[2];
-  console.log(code);
+  // console.log(code);
   const [Data, setData] = useState([]);
 
   // useEffect(() => {
@@ -28,8 +25,8 @@ export default function CandleChart() {
   const fetchDatas = async () => {
     try {
       setData([]);
-      const res = await axios.get(`http://127.0.0.1:5000/chart/${code}`);
-      console.log(res.data);
+      const res = await axios.get(`http://127.0.0.1:5000/chart_w/${code}`);
+      //console.log(res.data);
       setData(res.data);
     } catch (e) {
       console.error(e);
@@ -41,9 +38,7 @@ export default function CandleChart() {
 
   // console.log(Data);
 
-  const chartData = [
-    ["Day", "저가", "고가", "종가", "고가"],
-  ];
+  const chartData = [["Day", "저가", "고가", "종가", "고가"]];
 
   // const chartData: any = [
   //   [
@@ -66,8 +61,8 @@ export default function CandleChart() {
     low: 0,
     close: 0,
     volume: 0,
-    day: ""
-  }
+    day: "",
+  };
   Data.map((i: typeof company, index) => {
     // console.log(index);
     // const avg: number = (i.open + i.close + i.high + i.low) / 4;
@@ -75,12 +70,13 @@ export default function CandleChart() {
     // const pushArr: any = [i.day, i.volume/10000, 0, i.volume, i.high, i.open, i.close, i.low, avg];
     if (index === 0) {
       chartData.push(pushArr);
-      console.log(index);
+      // console.log(index);
     } else if (index % 7 === 6) {
       chartData.push(pushArr);
-      console.log(index);
+      // console.log(index);
     }
   });
+
   //console.log(chartData);
 
   // const options = {
