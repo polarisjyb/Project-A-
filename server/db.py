@@ -159,7 +159,7 @@ def data_for_chart_y(chart):
     sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
     cur.execute(sql)
     company = cur.fetchone()
-    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(DAY, "%Y-%m-%d") as DAY FROM {company["TABLE_NAME"]} ORDER BY day DESC'
+    sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(DAY, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
     cur.execute(sql)
     results = cur.fetchmany(72)
     conn.close()

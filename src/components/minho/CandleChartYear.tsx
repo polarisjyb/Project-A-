@@ -40,6 +40,7 @@ export default function CandleChart() {
     const pushArr: any = [i.day, i.low, i.open, i.close, i.high];    
     if (index === 0) {
       chartData.push(pushArr);      
+      console.log(pushArr);
     } else if (index % 12 === 11) {
       chartData.push(pushArr);      
     }
