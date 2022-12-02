@@ -4,11 +4,11 @@ import { useState } from "react";
 const categories = [
   {
     name: "",
-    text: "종합 검색",
+    text: "종합 결과",
   },
   {
     name: "yeongbin",
-    text: "평균 주가 분석",
+    text: "평균주가 분석",
   },
   {
     name: "yeonju",
@@ -16,7 +16,7 @@ const categories = [
   },
   {
     name: "minho",
-    text: "전략 분석",
+    text: "등락률 분석",
   },
   {
     name: "hwayeon",
