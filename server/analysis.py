@@ -137,26 +137,18 @@ def reco_trading(code):
     percentLow = count_high/len(allD) * 100
     percentHigh = count_high/len(allD) * 100
 
-    count_sum = 2
+    count_sum = 0
     if percentOpen >= 80: 
-        count_sum += 1
-    else:
-        count_sum -= 1
+        count_sum += 1    
     
     if percentClose >= 80: 
-        count_sum += 1
-    else:
-        count_sum -= 1
+        count_sum += 1    
     
     if percentLow >= 80: 
-        count_sum += 1
-    else:
-        count_sum -= 1
+        count_sum += 1    
 
     if percentHigh >= 80: 
-        count_sum += 1
-    else:
-        count_sum -= 1
+        count_sum += 1    
     
     if count_sum >= 2:
         return ["매수"]
