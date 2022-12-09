@@ -73,7 +73,7 @@ export default function CandleChart() {
 
 
   Data.map((i: typeof company, index) => {
-    const pushArr: any = [i.day, i.low, i.open, i.close, i.high];
+    const pushArr: any = [i.day, i.open, i.high, i.low, i.close];
     series[0].data.push(pushArr);
   });
 

@@ -2,9 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import IntefaceCompany from "./InterfaceCompany";
-import styled from "styled-components";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
+import styled from "styled-components";
+
 
 export default function CandleChart() {
   const ChartDiv = styled.div`
@@ -72,7 +73,7 @@ export default function CandleChart() {
   // const chartData = [["Day", "저가", "고가", "종가", "고가"]];
 
   Data.map((i: typeof company, index) => {
-    const pushArr: any = [i.day, i.open, i.high, i.low, i.close];
+    const pushArr: any = [i.day, i.open, i.high, i.low, i.close]; // 날짜 , 시,고,저 ,종
     series[0].data.push(pushArr);
   });
 
@@ -81,7 +82,7 @@ export default function CandleChart() {
       <ReactApexChart
         options={options}
         series={series}
-        chartType="candlestick" />
+        type="candlestick" />
     </ChartDiv>
   );
 }

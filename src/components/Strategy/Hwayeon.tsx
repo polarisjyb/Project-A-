@@ -52,14 +52,15 @@ const Hwayeon = () => {
 
   let result:any[] = [];
   result.push(resultData);
+  console.log(result);
 
   return (
     <Main>
       <div>
         <p>최근 100일간의 종합지수 분석 결과</p>
-        <p>오늘 가격이 0.1% 이상 증가 하였으므로</p>
+        <p>오늘 가격이 0.1% 이상 {result[0][0]}하였으므로</p>
         <div>
-          <p>{result}</p>
+          <p>{result[0][1]}</p>
           <p>를 추천합니다.</p>
         </div>
       </div>

@@ -1,13 +1,15 @@
 from db import code_to_data, dbconn, algorithm_avg, algorithm_year;
 
-# 화연님 전략코드
+# 화연 전략코드
+# 최근 100일간의 시,고,저,종가의 평균값과 오늘의 시가를 비교
+# 1% 이상 증가하면 매수, 아니면 매도를 추천
 def calculate_avg(code):
     datas = code_to_data(code)
     temp = []
     # print(len(datas))
     for i in range(len(datas)):
         avg = (datas[i]['open'] + datas[i]['high'] +
-               datas[i]['low'] + datas[i]['close']) / 4
+        datas[i]['low'] + datas[i]['close']) / 4
         temp.append(avg)
     return (sum(temp)/100)
 
@@ -25,9 +27,9 @@ def proposal_result(code):
     high = averge_value + (averge_value * 0.01)
     # low = averge_value - (averge_value * 0.01)
     if today >= high:
-        return ("매수")
+        return ["증가", "매수"]
     else:
-        return ("매도")
+        return ["감소", "매도"]
 
 # 연주 전략코드
 def yj_strategy(code):
@@ -180,6 +182,3 @@ def all_strategy(code):
 
 # print(all_strategy('000020'))
 # print(proposal_result('003100')) 
-
-
-

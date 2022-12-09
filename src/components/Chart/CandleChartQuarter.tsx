@@ -7,6 +7,7 @@ import { ApexOptions } from "apexcharts";
 import styled from "styled-components";
 
 export default function CandleChart() {
+
   const ChartDiv = styled.div`
   width: 65%;
   height: 50%;
@@ -71,7 +72,7 @@ export default function CandleChart() {
   });
 
   Data.map((i: typeof company, index) => {
-    const pushArr: any = [i.day, i.low, i.open, i.close, i.high];
+    const pushArr: any = [i.day, i.open, i.high, i.low, i.close];
     series[0].data.push(pushArr);
   });
 
