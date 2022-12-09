@@ -54,25 +54,22 @@ const Main = styled.div`
 
 const Average = () => {
   const [recommend, setRecommend] = useState();
-  const [loading, setLoading] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
     let code = location.pathname.split("/")[2];
     const getData = async () => {
-      let res = await axios.get(`http://127.0.0.1:5000/yj/${code}`);
+      let res = await axios.get(`http://127.0.0.1:5000/yb/${code}`);
       setRecommend(res.data);
     };
     getData();
   }, []);
 
-  if (loading) {
-    return <Loading_img />;
-  }
+
 
   return (
     <Main>
-      <div>
+      {recommend === undefined ? <Loading_img /> :  <div>
         <p>최근 일주일의 평균주가와 분기단위의 평균주가 비교시</p>
         <p>
           일주일 평균주가가
@@ -87,7 +84,8 @@ const Average = () => {
           <p>추천합니다</p>
           <img src="/img/check.png" alt="check"></img>
         </div>
-      </div>
+      </div>}
+    
     </Main>
   );
 };
