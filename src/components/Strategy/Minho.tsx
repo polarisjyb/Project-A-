@@ -34,7 +34,7 @@ const Minho = () => {
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(`http://127.0.0.1:5000/reco_trading/${code}`);
-      console.log(response);
+      // console.log(response);
       SetResultData(response.data);
       setLoading(false);
     };

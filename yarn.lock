@@ -1628,9 +1628,6 @@
   "version" "1.0.0-next.21"
 
 "@remix-run/router@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.0.3.tgz#953b88c20ea00d0eddaffdc1b115c08474aa295d"
-  integrity sha512-ceuyTSs7PZ/tQqi19YZNBc5X7kj1f8p+4DIyrcIYFY9h+hd1OKm4RqtiWldR9eGEvIiJfsqwM4BsuCtRIuEw6Q==
   "integrity" "sha512-ceuyTSs7PZ/tQqi19YZNBc5X7kj1f8p+4DIyrcIYFY9h+hd1OKm4RqtiWldR9eGEvIiJfsqwM4BsuCtRIuEw6Q=="
   "resolved" "https://registry.npmjs.org/@remix-run/router/-/router-1.0.3.tgz"
   "version" "1.0.3"
@@ -1676,7 +1673,6 @@
   "integrity" "sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg=="
   "resolved" "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz"
   "version" "1.2.0"
->>>>>>>>> Temporary merge branch 2
 
 "@sinclair/typebox@^0.24.1":
   "integrity" "sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA=="
@@ -2628,6 +2624,18 @@
   dependencies:
     "normalize-path" "^3.0.0"
     "picomatch" "^2.0.4"
+
+"apexcharts@^3.18.0", "apexcharts@^3.36.3":
+  "integrity" "sha512-8/FXEs0ohXMff07Gv28XjhPwEJphIUdq2/wii/pcvi54Tw6z1mjrV8ydN8rlWi/ve8BAPBefJkLmRWv7UOBsLw=="
+  "resolved" "https://registry.npmjs.org/apexcharts/-/apexcharts-3.36.3.tgz"
+  "version" "3.36.3"
+  dependencies:
+    "svg.draggable.js" "^2.2.2"
+    "svg.easing.js" "^2.0.0"
+    "svg.filter.js" "^2.0.2"
+    "svg.pathmorphing.js" "^0.1.3"
+    "svg.resize.js" "^1.4.3"
+    "svg.select.js" "^3.0.1"
 
 "arg@^5.0.2":
   "integrity" "sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg=="
@@ -7561,7 +7569,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.8.1":
+"prop-types@^15.5.7", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -7649,6 +7657,13 @@
     "iconv-lite" "0.4.24"
     "unpipe" "1.0.0"
 
+"react-apexcharts@^1.4.0":
+  "integrity" "sha512-DrcMV4aAMrUG+n6412yzyATWEyCDWlpPBBhVbpzBC4PDeuYU6iF84SmExbck+jx5MUm4U5PM3/T307Mc3kzc9Q=="
+  "resolved" "https://registry.npmjs.org/react-apexcharts/-/react-apexcharts-1.4.0.tgz"
+  "version" "1.4.0"
+  dependencies:
+    "prop-types" "^15.5.7"
+
 "react-app-polyfill@^3.0.0":
   "integrity" "sha512-sZ41cxiU5llIB003yxxQBYrARBqe0repqPTTYBTmMqTz9szeBbE37BehCE891NZsmdZqqP+xWKdT3eo3vOzN8w=="
   "resolved" "https://registry.npmjs.org/react-app-polyfill/-/react-app-polyfill-3.0.0.tgz"
@@ -7691,17 +7706,10 @@
     "strip-ansi" "^6.0.1"
     "text-table" "^0.2.0"
 
-<<<<<<<<< Temporary merge branch 1
-react-dom@^18.2.0:
-  version "18.2.0"
-  resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
-  integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
-=========
 "react-dom@^18.2.0", "react-dom@>= 16.8.0", "react-dom@>=16.3.0", "react-dom@>=16.8":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   "version" "18.2.0"
->>>>>>>>> Temporary merge branch 2
   dependencies:
     "loose-envify" "^1.1.0"
     "scheduler" "^0.23.0"
@@ -7711,17 +7719,6 @@ react-dom@^18.2.0:
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.11.tgz"
   "version" "6.0.11"
 
-<<<<<<<<< Temporary merge branch 1
-react-google-charts@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/react-google-charts/-/react-google-charts-4.0.0.tgz"
-  integrity sha512-9OG0EkBb9JerKEPQYdhmAXnhGLzOdOHOPS9j7l+P1a3z1kcmq9mGDa7PUoX/VQUY4IjZl2/81nsO4o+1cuYsuw==
-
-react-icons@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.6.0.tgz"
-  integrity sha512-rR/L9m9340yO8yv1QT1QurxWQvWpbNHqVX0fzMln2HEb9TEIrQRGsqiNFQfiv9/JEUbyHmHPlNTB2LWm2Ttz0g==
-=========
 "react-google-charts@^4.0.0":
   "integrity" "sha512-9OG0EkBb9JerKEPQYdhmAXnhGLzOdOHOPS9j7l+P1a3z1kcmq9mGDa7PUoX/VQUY4IjZl2/81nsO4o+1cuYsuw=="
   "resolved" "https://registry.npmjs.org/react-google-charts/-/react-google-charts-4.0.0.tgz"
@@ -7731,19 +7728,12 @@ react-icons@^4.6.0:
   "integrity" "sha512-rR/L9m9340yO8yv1QT1QurxWQvWpbNHqVX0fzMln2HEb9TEIrQRGsqiNFQfiv9/JEUbyHmHPlNTB2LWm2Ttz0g=="
   "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-4.6.0.tgz"
   "version" "4.6.0"
->>>>>>>>> Temporary merge branch 2
 
 "react-is@^16.13.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
-<<<<<<<<< Temporary merge branch 1
-react-router-dom@^6.4.3:
-  version "6.4.3"
-  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.4.3.tgz#70093b5f65f85f1df9e5d4182eb7ff3a08299275"
-  integrity sha512-MiaYQU8CwVCaOfJdYvt84KQNjT78VF0TJrA17SIQgNHRvLnXDJO6qsFqq8F/zzB1BWZjCFIrQpu4QxcshitziQ==
-=========
 "react-is@^16.7.0":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -7768,24 +7758,10 @@ react-router-dom@^6.4.3:
   "integrity" "sha512-MiaYQU8CwVCaOfJdYvt84KQNjT78VF0TJrA17SIQgNHRvLnXDJO6qsFqq8F/zzB1BWZjCFIrQpu4QxcshitziQ=="
   "resolved" "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.4.3.tgz"
   "version" "6.4.3"
->>>>>>>>> Temporary merge branch 2
   dependencies:
     "@remix-run/router" "1.0.3"
     "react-router" "6.4.3"
 
-<<<<<<<<< Temporary merge branch 1
-react-router@6.4.3:
-  version "6.4.3"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.4.3.tgz#9ed3ee4d6e95889e9b075a5d63e29acc7def0d49"
-  integrity sha512-BT6DoGn6aV1FVP5yfODMOiieakp3z46P1Fk0RNzJMACzE7C339sFuHebfvWtnB4pzBvXXkHP2vscJzWRuUjTtA==
-  dependencies:
-    "@remix-run/router" "1.0.3"
-
-react@^18.2.0:
-  version "18.2.0"
-  resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
-  integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
-=========
 "react-router@6.4.3":
   "integrity" "sha512-BT6DoGn6aV1FVP5yfODMOiieakp3z46P1Fk0RNzJMACzE7C339sFuHebfvWtnB4pzBvXXkHP2vscJzWRuUjTtA=="
   "resolved" "https://registry.npmjs.org/react-router/-/react-router-6.4.3.tgz"
@@ -7848,11 +7824,10 @@ react@^18.2.0:
   optionalDependencies:
     "fsevents" "^2.3.2"
 
-"react@*", "react@^18.2.0", "react@>= 16", "react@>= 16.8.0", "react@>=16.3.0", "react@>=16.8":
+"react@*", "react@^18.2.0", "react@>= 16", "react@>= 16.8.0", "react@>=0.13", "react@>=16.3.0", "react@>=16.8":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
->>>>>>>>> Temporary merge branch 2
   dependencies:
     "loose-envify" "^1.1.0"
 
@@ -8152,7 +8127,7 @@ react@^18.2.0:
     "klona" "^2.0.4"
     "neo-async" "^2.6.2"
 
-"sass@^1.3.0", "sass@^1.56.1":
+"sass@^1.3.0":
   "integrity" "sha512-VpEyKpyBPCxE7qGDtOcdJ6fFbcpOM+Emu7uZLxVrkX8KVU/Dp5UF7WLvzqRuUhB6mqqQt1xffLoG+AndxTZrCQ=="
   "resolved" "https://registry.npmjs.org/sass/-/sass-1.56.1.tgz"
   "version" "1.56.1"
@@ -8734,6 +8709,61 @@ react@^18.2.0:
   "integrity" "sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ=="
   "resolved" "https://registry.npmjs.org/svg-parser/-/svg-parser-2.0.4.tgz"
   "version" "2.0.4"
+
+"svg.draggable.js@^2.2.2":
+  "integrity" "sha512-JzNHBc2fLQMzYCZ90KZHN2ohXL0BQJGQimK1kGk6AvSeibuKcIdDX9Kr0dT9+UJ5O8nYA0RB839Lhvk4CY4MZw=="
+  "resolved" "https://registry.npmjs.org/svg.draggable.js/-/svg.draggable.js-2.2.2.tgz"
+  "version" "2.2.2"
+  dependencies:
+    "svg.js" "^2.0.1"
+
+"svg.easing.js@^2.0.0":
+  "integrity" "sha512-//ctPdJMGy22YoYGV+3HEfHbm6/69LJUTAqI2/5qBvaNHZ9uUFVC82B0Pl299HzgH13rKrBgi4+XyXXyVWWthA=="
+  "resolved" "https://registry.npmjs.org/svg.easing.js/-/svg.easing.js-2.0.0.tgz"
+  "version" "2.0.0"
+  dependencies:
+    "svg.js" ">=2.3.x"
+
+"svg.filter.js@^2.0.2":
+  "integrity" "sha512-xkGBwU+dKBzqg5PtilaTb0EYPqPfJ9Q6saVldX+5vCRy31P6TlRCP3U9NxH3HEufkKkpNgdTLBJnmhDHeTqAkw=="
+  "resolved" "https://registry.npmjs.org/svg.filter.js/-/svg.filter.js-2.0.2.tgz"
+  "version" "2.0.2"
+  dependencies:
+    "svg.js" "^2.2.5"
+
+"svg.js@^2.0.1", "svg.js@^2.2.5", "svg.js@^2.4.0", "svg.js@^2.6.5", "svg.js@>=2.3.x":
+  "integrity" "sha512-ycbxpizEQktk3FYvn/8BH+6/EuWXg7ZpQREJvgacqn46gIddG24tNNe4Son6omdXCnSOaApnpZw6MPCBA1dODA=="
+  "resolved" "https://registry.npmjs.org/svg.js/-/svg.js-2.7.1.tgz"
+  "version" "2.7.1"
+
+"svg.pathmorphing.js@^0.1.3":
+  "integrity" "sha512-49HWI9X4XQR/JG1qXkSDV8xViuTLIWm/B/7YuQELV5KMOPtXjiwH4XPJvr/ghEDibmLQ9Oc22dpWpG0vUDDNww=="
+  "resolved" "https://registry.npmjs.org/svg.pathmorphing.js/-/svg.pathmorphing.js-0.1.3.tgz"
+  "version" "0.1.3"
+  dependencies:
+    "svg.js" "^2.4.0"
+
+"svg.resize.js@^1.4.3":
+  "integrity" "sha512-9k5sXJuPKp+mVzXNvxz7U0uC9oVMQrrf7cFsETznzUDDm0x8+77dtZkWdMfRlmbkEEYvUn9btKuZ3n41oNA+uw=="
+  "resolved" "https://registry.npmjs.org/svg.resize.js/-/svg.resize.js-1.4.3.tgz"
+  "version" "1.4.3"
+  dependencies:
+    "svg.js" "^2.6.5"
+    "svg.select.js" "^2.1.2"
+
+"svg.select.js@^2.1.2":
+  "integrity" "sha512-tH6ABEyJsAOVAhwcCjF8mw4crjXSI1aa7j2VQR8ZuJ37H2MBUbyeqYr5nEO7sSN3cy9AR9DUwNg0t/962HlDbQ=="
+  "resolved" "https://registry.npmjs.org/svg.select.js/-/svg.select.js-2.1.2.tgz"
+  "version" "2.1.2"
+  dependencies:
+    "svg.js" "^2.2.5"
+
+"svg.select.js@^3.0.1":
+  "integrity" "sha512-h5IS/hKkuVCbKSieR9uQCj9w+zLHoPh+ce19bBYyqF53g6mnPB8sAtIbe1s9dh2S2fCmYX2xel1Ln3PJBbK4kw=="
+  "resolved" "https://registry.npmjs.org/svg.select.js/-/svg.select.js-3.0.1.tgz"
+  "version" "3.0.1"
+  dependencies:
+    "svg.js" "^2.6.5"
 
 "svgo@^1.2.2":
   "integrity" "sha512-yhy/sQYxR5BkC98CY7o31VGsg014AKLEPxdfhora76l36hD9Rdy5NZA/Ocn6yayNPgSamYdtX2rFJdcv07AYVw=="

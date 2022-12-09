@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "@/components/youngbin/Layout/Header";
-import Main from "@/components/youngbin/Layout/Main";
-import ResultPage from "@/components/hwayeon/ResultPage";
+import Header from "@/components/Mainpage/Header";
+import Main from "@/components/Mainpage/Main";
+import ResultPage from "@/components/SubPage/ResultPage";
 import Hwayeon from "@/components/Strategy/Hwayeon";
 import MainStrategy from "@/components/Strategy/MainStrategy";
 import Yeonju from "@/components/Strategy/Yeonju";

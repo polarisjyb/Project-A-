@@ -8,7 +8,7 @@ const categories = [
   },
   {
     name: "yeongbin",
-    text: "전략 분석",
+    text: "평균 주가 분석",
   },
   {
     name: "yeonju",
@@ -16,7 +16,7 @@ const categories = [
   },
   {
     name: "minho",
-    text: "전략 분석",
+    text: "등락률 분석",
   },
   {
     name: "hwayeon",

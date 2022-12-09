@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Loading_img } from "@/components/Common/Loading";
 const StockList = styled.div`
   width: 1480px;
   border-radius: 20px;
@@ -42,7 +43,6 @@ const StockList = styled.div`
     }
   }
 `;
-
 export const Loading = styled.div`
   display: flex;
   flex-direction: column;
@@ -57,6 +57,7 @@ export const Loading = styled.div`
     font-size: 50px;
   }
 `;
+
 export interface Companylist {
   close: string;
   code: string;
@@ -78,7 +79,6 @@ const StockTable = () => {
         let response = await axios.get(`http://127.0.0.1:5000/rank`);
         setData(response.data);
         setLoading(false);
-        console.log(response);
       } catch (err) {
         console.log(err);
       }
@@ -87,12 +87,7 @@ const StockTable = () => {
   }, []);
 
   if (loading) {
-    return (
-      <Loading>
-        <img src="/img/loading.gif" alt="loading"></img>
-        <h1>로딩중입니다</h1>
-      </Loading>
-    );
+    return <Loading_img />;
   }
 
   if (data === undefined) {
@@ -104,7 +99,7 @@ const StockTable = () => {
       <table>
         <thead>
           <tr>
-            <th>순위</th>
+            <th>번호</th>
             <th>종목</th>
             <th>시가</th>
             <th>고가</th>

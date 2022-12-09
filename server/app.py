@@ -1,9 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 
-from db import code_to_data, code_to_name, all_company_name, companylist_rank, stock_info, data_for_chart_w, data_for_chart_m, data_for_chart_q, data_for_chart_y, algorithm_avg, algorithm_year
+from db import code_to_data, code_to_name, all_company_name, companylist_rank, stock_info, data_for_chart_w, data_for_chart_m, data_for_chart_q, data_for_chart_y,algorithm_year,algorithm_avg
 from analysis import proposal_result, yj_strategy, all_strategy, yb_strategy, reco_trading
-
 
 app = Flask(__name__)
 CORS(app)
@@ -87,7 +86,6 @@ def code_q(chart):
 def code_y(chart):
     data = data_for_chart_y(chart)
     return data
-
 
 @app.route('/<code>/result')
 def result(code):

@@ -4,6 +4,6 @@ import styled from "styled-components";
 
 
 const Youngbin = () => {
-  return <h1>ㅇㅇ</h1>;
+  return <h1>존버 요망</h1>;
 };
 export default Youngbin;
