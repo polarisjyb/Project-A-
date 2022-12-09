@@ -11,6 +11,7 @@ export const LoadingImg = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 50px;
   & > img {
     width: 30%;
     height: 30%;

@@ -2,11 +2,11 @@ import { Route, Routes } from "react-router-dom";
 import Header from "@/components/Mainpage/Header";
 import Main from "@/components/Mainpage/Main";
 import ResultPage from "@/components/SubPage/ResultPage";
-import Hwayeon from "@/components/Strategy/Hwayeon";
+import Average from "@/components/Strategy/Average";
 import MainStrategy from "@/components/Strategy/MainStrategy";
-import Yeonju from "@/components/Strategy/Yeonju";
-import Youngbin from "@/components/Strategy/Youngbin";
-import Minho from "@/components/Strategy/Minho";
+import Fluctuation from "@/components/Strategy/Fluctuation";
+import Overall from "@/components/Strategy/Overall";
+import Volume from "@/components/Strategy/Volume";
 
 const App = () => {
   return (
@@ -15,10 +15,13 @@ const App = () => {
         <Route path="/" element={<Main></Main>} />
         <Route path="/code/:key" element={<ResultPage />}>
           <Route path="/code/:key/" element={<MainStrategy></MainStrategy>} />
-          <Route path="/code/:key/yeongbin" element={<Youngbin></Youngbin>} />
-          <Route path="/code/:key/yeonju" element={<Yeonju></Yeonju>} />
-          <Route path="/code/:key/minho" element={<Minho></Minho>} />
-          <Route path="/code/:key/hwayeon" element={<Hwayeon></Hwayeon>} />
+          <Route path="/code/:key/Average" element={<Average></Average>} />
+          <Route
+            path="/code/:key/Fluctuation"
+            element={<Fluctuation></Fluctuation>}
+          />
+          <Route path="/code/:key/Overall" element={<Overall></Overall>} />
+          <Route path="/code/:key/Volume" element={<Volume></Volume>} />
         </Route>
       </Route>
     </Routes>

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { Loading_h1 } from "../Common/Loading";
+import { Loading_img } from "../Common/Loading";
 
 const Main = styled.div`
   width: 1180px;
@@ -52,8 +52,9 @@ const Main = styled.div`
   }
 `;
 
-const Yeonju = () => {
+const Volume = () => {
   const [recommend, setRecommend] = useState();
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
@@ -65,29 +66,29 @@ const Yeonju = () => {
     getData();
   }, []);
 
+  if (loading) {
+    return <Loading_img />;
+  }
+
   return (
     <Main>
-      {recommend === undefined ? (
-        <Loading_h1 />
-      ) : (
+      <div>
+        <p>지난 3개월의 평균거래량과 최근 한달의 거래량을 비교했을때</p>
+        <p>
+          최근 한달의 거래량이 {recommend === "매수" ? "증가" : "감소"}
+          했으므로
+        </p>
         <div>
-          <p>지난 3개월의 평균거래량과 최근 한달의 거래량을 비교했을때</p>
-          <p>
-            최근 한달의 거래량이 {recommend === "매수" ? "증가" : "감소"}
-            했으므로
-          </p>
-          <div>
-            <p>{recommend}</p>
-            <p>를</p>
-          </div>
-          <div>
-            <p>추천합니다</p>
-            <img src="/img/check.png" alt="check"></img>
-          </div>
+          <p>{recommend}</p>
+          <p>를</p>
         </div>
-      )}
+        <div>
+          <p>추천합니다</p>
+          <img src="/img/check.png" alt="check"></img>
+        </div>
+      </div>
     </Main>
   );
 };
 
-export default Yeonju;
+export default Volume;
