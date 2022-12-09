@@ -16,6 +16,7 @@ def dbconn():
     )
     return conn
 
+
 def code_to_data(code):
     conn = dbconn()
     cur = conn.cursor()
@@ -83,7 +84,32 @@ def stock_info(code):
     result = cur.fetchall()
     conn.close()
     return result
-    
+
+
+def yj_strategy(code):
+    conn = dbconn()
+    cur = conn.cursor()
+    sql1 = f'SELECT companylist.code, name, volume,day FROM aitrading_db.kospi_{code}_m AS api INNER JOIN aitrading_db.companylist ON companylist.code = api.code ORDER BY DAY DESC limit 5;'
+    #  companylist테이블의 코드와 aitrading_db 테이블의 데이터가 존재할때,
+    # code, name, volume, day를 불러온다.
+    # 조건은 day기준으로 다섯개만 불러온다.
+    cur.execute(sql1)
+    result = cur.fetchall()
+    conn.close()
+    volume = []
+    for key in result:
+        print(key)
+        volume.append(key.get('volume'))
+        name = key.get('name')
+    # 가장 최신의 평균량(2월)은 사용하지 않아서 배열에서 제거
+    del volume[0]
+    average = volume[1] + volume[2] + volume[3] / 3
+    if (average <= volume[0]):
+        return [name, "매수"]
+    else:
+        return [name, "매도"]
+
+
 def data_for_chart_w(chart):
     conn = dbconn()
     cur = conn.cursor()
@@ -93,7 +119,7 @@ def data_for_chart_w(chart):
     company = cur.fetchone()
     sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
     cur.execute(sql)
-    results = cur.fetchmany(42)
+    results = cur.fetchmany(7)
     conn.close()
     return results
 
@@ -102,12 +128,12 @@ def data_for_chart_m(chart):
     conn = dbconn()
     cur = conn.cursor()
     # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
-    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_d"'
     cur.execute(sql)
     company = cur.fetchone()
     sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
     cur.execute(sql)
-    results = cur.fetchmany(7)
+    results = cur.fetchmany(30)
     conn.close()
     return results
 
@@ -116,12 +142,12 @@ def data_for_chart_q(chart):
     conn = dbconn()
     cur = conn.cursor()
     # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
-    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_d"'
     cur.execute(sql)
     company = cur.fetchone()
     sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(day, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
     cur.execute(sql)
-    results = cur.fetchmany(21)
+    results = cur.fetchmany(90)
     conn.close()
     return results
 
@@ -130,12 +156,12 @@ def data_for_chart_y(chart):
     conn = dbconn()
     cur = conn.cursor()
     # sql = f'SELECT open,high,low,close,DATE_FORMAT(day, "%Y-%m-%d") as day FROM {code}'
-    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_m"'
+    sql = f'SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_NAME LIKE "%{chart}_d"'
     cur.execute(sql)
     company = cur.fetchone()
     sql = f'SELECT no, open, high, low, close, volume, DATE_FORMAT(DAY, "%Y-%m-%d") as day FROM {company["TABLE_NAME"]} ORDER BY day DESC'
     cur.execute(sql)
-    results = cur.fetchmany(72)
+    results = cur.fetchmany(300)
     conn.close()
     return results
 
@@ -175,9 +201,10 @@ def algorithm_year(code):
     회사 = [{알파}, {브라보}]
     금일 = [{A}, {B}]
     전일 = [{1}, {2}]
-
+    
     결과 = [{알파, A, 1}], [{브라보, B, 2}]
 """
+
 
 def companylist_rank():
     conn = dbconn()
@@ -245,20 +272,20 @@ def companylist_rank():
 
     """
         #  영빈 생각
-
+        
         # 1번 {market}_{code}_d 모든 테이블에 RECENT 컬럼을 추가 한다.
         # sqlNext = f'ALTER TABLE {market}_{code}_d ADD COLUMN RECENT VARCHAR(1)'
-
+        
         # 2번 {market}_{code}_d 모든 테이블의 컬럼에 있는 가장 큰 NO의 RECENT 컬럼에 1을 추가한다. ( 가장 최신 일자가 NO가 가장 큼 )
         # sqlNext = f'UPDATE {market}_{code}_d SET RECENT = "1" WHERE NO = (SELECT MAX(NO) FROM {market}_{code}_d)'
-
+        
         # 3번 {market}_{code}_d 모든 테이블의 컬럼에 있는 NO가 가장 크지 않은 컬럼들의 RECENT 컬럼에 2을 추가한다. ( 가장 최신 일자 제외 모든 일자의 RECENT 값에 2가 들어감 )
         # 문제점: 중간 일자의 주가 정보( 시가, 고가, 저가, 종가, 거래량 등 )을 가져오기가 힘듦.
         # sqlNext = f'UPDATE {market}_{code}_d SET RECENT = "2" WHERE NO != (SELECT MAX(NO) FROM {market}_{code}_d)'
-
+        
         # 4번 {market}_{code}_d 모든 테이블의 RECENT 컬럼 값이 1인 행 (가로) 을 가져온다. ( 최신 일자 )
         # sqlNext = f' SELECT day, open, high, low, close, volume, RECENT FROM {market}_{code}_d WHERE RECENT = "1" '
-
+        
         # 3번 {market}_{code}_d 모든 테이블의 RECENT 컬럼 값이 2인 행 (가로) 을 가져오는데 내림차 순으로 1개의 행만 가져온다. ( 최신 전일자 )
         # sqlNext = f' SELECT day, open, high, low, close, volume, RECENT FROM {market}_{code}_d WHERE RECENT = "2" ORDER BY NO DESC LIMIT 1 '
     """
@@ -279,6 +306,3 @@ def companylist_rank():
     # print(rankArray)
 
     # conn.commit()
-
-
-# all_strategy('000020')

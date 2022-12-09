@@ -27,9 +27,9 @@ def proposal_result(code):
     high = averge_value + (averge_value * 0.01)
     # low = averge_value - (averge_value * 0.01)
     if today >= high:
-        return ["증가", "매수"];
+        return ["증가", "매수"]
     else:
-        return ["감소", "매도"];
+        return ["감소", "매도"]
 
 # 연주 전략코드
 def yj_strategy(code):
@@ -96,7 +96,9 @@ def yb_strategy(code):
         return "매도"
 
 # 민호 전략
-# 각 종목의 전체기간 평균가를 최근 6년간 데이터와 비교해서 상승률이 80퍼센트 이상일 경우 매수 추천 아닐경우 매도추천
+# 각 종목의 시,고,종,저 데이터를 전체기간 평균가를 최근 6년간 일일 데이터와 비교를 해서 상승률이 80퍼센트 이상인 데이터가 2개 이상일 매수 추천 아닐경우 매도추천
+# 이유: 지난 6년간 평균가보다 높은 상승률이 지속이 된다면 그 회사는 꾸준히 성장을 하고있는 회사라 할 수 있다 그러므로 회사의 안정성이 보장됨을 의미한다.
+
 def reco_trading(code):
     avg = algorithm_avg(code)
     allD = algorithm_year(code)
@@ -135,26 +137,18 @@ def reco_trading(code):
     percentLow = count_high/len(allD) * 100
     percentHigh = count_high/len(allD) * 100
 
-    count_sum = 2
+    count_sum = 0
     if percentOpen >= 80: 
-        count_sum += 1
-    else:
-        count_sum -= 1
+        count_sum += 1    
     
     if percentClose >= 80: 
-        count_sum += 1
-    else:
-        count_sum -= 1
+        count_sum += 1    
     
     if percentLow >= 80: 
-        count_sum += 1
-    else:
-        count_sum -= 1
+        count_sum += 1    
 
     if percentHigh >= 80: 
-        count_sum += 1
-    else:
-        count_sum -= 1
+        count_sum += 1    
     
     if count_sum >= 2:
         return ["매수"]

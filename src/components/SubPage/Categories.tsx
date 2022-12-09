@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
 const categories = [
   {
@@ -7,19 +7,19 @@ const categories = [
     text: "종합 결과",
   },
   {
-    name: "yeongbin",
+    name: "Average",
     text: "평균주가 분석",
   },
   {
-    name: "yeonju",
+    name: "Volume",
     text: "거래량 분석",
   },
   {
-    name: "minho",
+    name: "Fluctuation",
     text: "등락률 분석",
   },
   {
-    name: "hwayeon",
+    name: "Overall",
     text: "종합지수 분석",
   },
 ];
@@ -74,7 +74,6 @@ const Category = styled.div`
 
 
 const Categories = ({ click }: any) => {
-
   return (
     <CategoriesBlock>
       {categories.map((c) => (

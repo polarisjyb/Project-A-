@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 
-from db import code_to_data, code_to_name, all_company_name, companylist_rank, stock_info, data_for_chart_w, data_for_chart_m, data_for_chart_q, data_for_chart_y
+from db import code_to_data, code_to_name, all_company_name, companylist_rank, stock_info, data_for_chart_w, data_for_chart_m, data_for_chart_q, data_for_chart_y,algorithm_year,algorithm_avg
 from analysis import proposal_result, yj_strategy, all_strategy, yb_strategy, reco_trading
 
 app = Flask(__name__)
@@ -92,11 +92,20 @@ def result(code):
     data = proposal_result(code)
     return data
 
-@app.route('/trading/<code>')
+@app.route('/al_avg/<code>')
 def al_avg(code):
-    data = reco_trading(code)
+    data = algorithm_avg(code)
     return data
 
+@app.route('/al_y/<code>')
+def al_y(code):
+    data = algorithm_year(code)
+    return data
+
+@app.route('/reco_trading/<code>')
+def al_trading(code):
+    data = reco_trading(code)
+    return data
 
 @app.route('/<code>/allstrategy')
 def strategy(code):
