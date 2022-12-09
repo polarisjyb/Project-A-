@@ -54,7 +54,6 @@ const Main = styled.div`
 
 const Volume = () => {
   const [recommend, setRecommend] = useState();
-  const [loading, setLoading] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
@@ -66,13 +65,10 @@ const Volume = () => {
     getData();
   }, []);
 
-  if (loading) {
-    return <Loading_img />;
-  }
 
   return (
     <Main>
-      <div>
+      { recommend === undefined ? <Loading_img /> : <div>
         <p>지난 3개월의 평균거래량과 최근 한달의 거래량을 비교했을때</p>
         <p>
           최근 한달의 거래량이 {recommend === "매수" ? "증가" : "감소"}
@@ -86,7 +82,8 @@ const Volume = () => {
           <p>추천합니다</p>
           <img src="/img/check.png" alt="check"></img>
         </div>
-      </div>
+      </div>}
+      
     </Main>
   );
 };
